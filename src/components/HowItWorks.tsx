@@ -42,24 +42,44 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section id="como-funciona" className="py-20 relative">
+    <section id="como-funciona" className="py-20 relative scroll-mt-20">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
-          <h2 className="text-4xl font-bold text-foreground mb-4">
-            Cómo funciona para cada uno
+        <div className="text-center mb-16 animate-fade-in">
+          <div className="inline-block mb-4">
+            <span className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold">
+              Cómo funciona
+            </span>
+          </div>
+          <h2 className="text-4xl lg:text-5xl font-bold text-foreground mb-4">
+            Un sistema simple para{" "}
+            <span className="text-transparent bg-clip-text bg-gradient-secondary">
+              tres actores
+            </span>
           </h2>
           <p className="text-xl text-muted-foreground max-w-2xl mx-auto">
-            Un sistema simple que conecta a tres actores principales
+            Conectando familias, acompañantes y personas mayores
           </p>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-8">
+        <div className="grid md:grid-cols-3 gap-8 relative">
+          {/* Connection lines between cards */}
+          <div className="hidden md:block absolute top-1/2 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/20 to-transparent -translate-y-1/2" />
+          
           {actors.map((actor, index) => {
             const Icon = actor.icon;
             return (
-              <Card key={index} className="glass-effect border-border hover:border-primary/50 transition-all group hover-lift animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+              <Card 
+                key={index} 
+                className="glass-effect border-border hover:border-primary/50 transition-all group hover-lift animate-fade-in relative z-10" 
+                style={{ animationDelay: `${index * 0.2}s` }}
+              >
                 <CardContent className="p-6 space-y-6 relative overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
+                  
+                  {/* Number badge */}
+                  <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-secondary rounded-full flex items-center justify-center shadow-glow-primary text-primary-foreground font-bold text-lg">
+                    {index + 1}
+                  </div>
                   <div className="space-y-2 relative z-10">
                     <div className={`w-14 h-14 rounded-xl bg-gradient-secondary flex items-center justify-center ${actor.iconColor} group-hover:shadow-glow-primary transition-all group-hover:scale-110 group-hover:rotate-3`}>
                       <Icon size={28} className="text-primary-foreground" />
