@@ -20,11 +20,11 @@ const Hero = () => {
         <div className="absolute bottom-1/4 right-1/2 w-3 h-3 bg-accent rounded-full animate-pulse-glow" style={{ animationDelay: "2.5s" }} />
       </div>
 
-      <div className="container mx-auto px-4 py-20 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container mx-auto px-6 lg:px-8 py-20 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
           {/* Left content */}
-          <div className="space-y-8 animate-fade-in">
-            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight">
+          <div className="space-y-8 animate-fade-in text-center lg:text-left">
+            <h1 className="text-4xl sm:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight">
               Companya: acompaña a quienes amas,{" "}
               <span className="text-transparent bg-clip-text bg-gradient-secondary glow-text">
                 estés donde estés
@@ -36,7 +36,7 @@ const Hero = () => {
               con personas mayores. Todo con trazabilidad web3, sin complicaciones para ellos.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 animate-slide-up" style={{ animationDelay: "0.2s" }}>
+            <div className="flex flex-col sm:flex-row gap-4 animate-slide-up justify-center lg:justify-start" style={{ animationDelay: "0.2s" }}>
               <Button size="lg" asChild className="shadow-glow-primary group hover-lift relative overflow-hidden">
                 <Link to="/acompanante">
                   <span className="relative z-10">Comenzar como acompañante</span>
@@ -49,20 +49,22 @@ const Hero = () => {
               </Button>
             </div>
 
-            <a 
-              href="#como-funciona" 
-              className="inline-flex items-center text-primary hover:text-primary/80 transition-colors group"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('como-funciona')?.scrollIntoView({ 
-                  behavior: 'smooth',
-                  block: 'start'
-                });
-              }}
-            >
-              <span className="font-medium">Ver cómo funciona</span>
-              <ArrowRight className="ml-2 group-hover:translate-y-1 transition-transform" size={16} />
-            </a>
+            <div className="flex justify-center lg:justify-start">
+              <a 
+                href="#como-funciona" 
+                className="inline-flex items-center text-primary hover:text-primary/80 transition-colors group"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('como-funciona')?.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                  });
+                }}
+              >
+                <span className="font-medium">Ver cómo funciona</span>
+                <ArrowRight className="ml-2 group-hover:translate-y-1 transition-transform" size={16} />
+              </a>
+            </div>
           </div>
 
           {/* Right visual - Enhanced Card */}
