@@ -34,13 +34,14 @@ const Comprar = () => {
       
       {/* Hero */}
       <section className="relative pt-32 pb-16 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-primary opacity-30" />
+        <div className="absolute inset-0 bg-gradient-primary" />
+        <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="max-w-4xl mx-auto text-center space-y-6">
-            <h1 className="text-5xl font-bold text-foreground">
+          <div className="max-w-4xl mx-auto text-center space-y-6 animate-fade-in">
+            <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground">
               Compra compañía real para{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-secondary">
+              <span className="text-transparent bg-clip-text bg-gradient-secondary glow-text">
                 quienes más te importan
               </span>
             </h1>
@@ -83,7 +84,7 @@ const Comprar = () => {
               </div>
             </div>
 
-            <Card className="bg-card border-border">
+            <Card className="glass-effect border-border shadow-elevated">
               <CardContent className="p-8">
                 {/* Step 1: Select ticket type */}
                 {step === 1 && (
@@ -100,23 +101,24 @@ const Comprar = () => {
                             key={ticket.id}
                             htmlFor={ticket.id}
                             className={cn(
-                              "relative cursor-pointer",
-                              selectedTicket === ticket.id && "ring-2 ring-primary"
+                              "relative cursor-pointer hover-lift",
+                              selectedTicket === ticket.id && "ring-2 ring-primary shadow-glow-primary"
                             )}
                           >
-                            <Card className="border-border hover:border-primary/50 transition-all">
-                              <CardContent className="p-6 space-y-3">
+                            <Card className="glass-effect border-border hover:border-primary/50 transition-all group">
+                              <CardContent className="p-6 space-y-3 relative overflow-hidden">
+                                <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
                                 {ticket.popular && (
-                                  <div className="absolute -top-3 right-4 bg-gradient-secondary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full shadow-glow-primary">
+                                  <div className="absolute -top-3 right-4 bg-gradient-secondary text-primary-foreground text-xs font-semibold px-3 py-1 rounded-full shadow-glow-primary animate-pulse">
                                     Más popular
                                   </div>
                                 )}
                                 <RadioGroupItem value={ticket.id} id={ticket.id} className="sr-only" />
-                                <div className="flex items-baseline justify-between">
+                                <div className="flex items-baseline justify-between relative z-10">
                                   <h3 className="font-semibold text-foreground">{ticket.visits}</h3>
                                   <span className="text-2xl font-bold text-primary">{ticket.price}</span>
                                 </div>
-                                <p className="text-sm text-muted-foreground">{ticket.description}</p>
+                                <p className="text-sm text-muted-foreground relative z-10">{ticket.description}</p>
                               </CardContent>
                             </Card>
                           </Label>
@@ -127,10 +129,11 @@ const Comprar = () => {
                     <Button 
                       onClick={() => setStep(2)} 
                       disabled={!selectedTicket}
-                      className="w-full shadow-glow-primary"
+                      className="w-full shadow-glow-primary hover-lift relative overflow-hidden group"
                       size="lg"
                     >
-                      Continuar
+                      <span className="relative z-10">Continuar</span>
+                      <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </Button>
                   </div>
                 )}
@@ -202,11 +205,12 @@ const Comprar = () => {
                     </Tabs>
 
                     <div className="flex gap-3">
-                      <Button variant="outline" onClick={() => setStep(1)} className="flex-1">
+                      <Button variant="outline" onClick={() => setStep(1)} className="flex-1 hover-lift glass-effect">
                         Atrás
                       </Button>
-                      <Button onClick={() => setStep(3)} className="flex-1 shadow-glow-primary">
-                        Continuar
+                      <Button onClick={() => setStep(3)} className="flex-1 shadow-glow-primary hover-lift relative overflow-hidden group">
+                        <span className="relative z-10">Continuar</span>
+                        <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </Button>
                     </div>
                   </div>
@@ -220,7 +224,7 @@ const Comprar = () => {
                       <p className="text-muted-foreground">Revisa los detalles antes de pagar</p>
                     </div>
 
-                    <div className="bg-muted/50 rounded-lg p-6 space-y-4">
+                    <div className="glass-effect rounded-lg p-6 space-y-4">
                       <div className="flex justify-between">
                         <span className="text-muted-foreground">Tipo de tiquetera</span>
                         <span className="font-semibold text-foreground">5 acompañamientos</span>
@@ -239,7 +243,7 @@ const Comprar = () => {
                       </div>
                     </div>
 
-                    <div className="bg-card border border-border rounded-lg p-6">
+                    <div className="glass-effect border border-border rounded-lg p-6">
                       <div className="space-y-4">
                         <div className="flex items-center space-x-3">
                           <Lock className="text-primary" size={20} />
@@ -257,11 +261,12 @@ const Comprar = () => {
                     </div>
 
                     <div className="flex gap-3">
-                      <Button variant="outline" onClick={() => setStep(2)} className="flex-1">
+                      <Button variant="outline" onClick={() => setStep(2)} className="flex-1 hover-lift glass-effect">
                         Atrás
                       </Button>
-                      <Button onClick={() => setStep(4)} className="flex-1 shadow-glow-primary">
-                        Ir al pago
+                      <Button onClick={() => setStep(4)} className="flex-1 shadow-glow-primary hover-lift relative overflow-hidden group">
+                        <span className="relative z-10">Ir al pago</span>
+                        <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </Button>
                     </div>
                   </div>
@@ -269,8 +274,8 @@ const Comprar = () => {
 
                 {/* Step 4: Payment (Success) */}
                 {step === 4 && (
-                  <div className="space-y-6 text-center py-8">
-                    <div className="w-20 h-20 bg-gradient-secondary rounded-full flex items-center justify-center mx-auto shadow-glow-primary">
+                  <div className="space-y-6 text-center py-8 animate-fade-in">
+                    <div className="w-20 h-20 bg-gradient-secondary rounded-full flex items-center justify-center mx-auto shadow-glow-primary animate-scale-in">
                       <CheckCircle className="text-primary-foreground" size={40} />
                     </div>
                     
@@ -281,7 +286,7 @@ const Comprar = () => {
                       </p>
                     </div>
 
-                    <div className="bg-muted/50 rounded-lg p-6 text-left space-y-3">
+                    <div className="glass-effect rounded-lg p-6 text-left space-y-3">
                       <p className="text-sm text-muted-foreground">
                         En los próximos días, se emitirá la tarjeta/talonario físico y coordinaremos 
                         con un acompañante Companya.
@@ -291,8 +296,11 @@ const Comprar = () => {
                       </p>
                     </div>
 
-                    <Button asChild className="shadow-glow-primary">
-                      <a href="/">Volver al inicio</a>
+                    <Button asChild className="shadow-glow-primary hover-lift relative overflow-hidden group">
+                      <a href="/">
+                        <span className="relative z-10">Volver al inicio</span>
+                        <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      </a>
                     </Button>
                   </div>
                 )}

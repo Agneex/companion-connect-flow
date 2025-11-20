@@ -44,9 +44,10 @@ const UseCases = () => {
           {cases.map((useCase, index) => {
             const Icon = useCase.icon;
             return (
-              <Card key={index} className="bg-card border-border hover:border-primary/50 transition-all group">
-                <CardContent className="p-6 space-y-6 flex flex-col h-full">
-                  <div className="w-14 h-14 rounded-xl bg-gradient-secondary flex items-center justify-center shadow-glow-primary group-hover:scale-110 transition-transform">
+              <Card key={index} className="glass-effect border-border hover:border-primary/50 transition-all group hover-lift animate-scale-in" style={{ animationDelay: `${index * 0.15}s` }}>
+                <CardContent className="p-6 space-y-6 flex flex-col h-full relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
+                  <div className="w-14 h-14 rounded-xl bg-gradient-secondary flex items-center justify-center shadow-glow-primary group-hover:scale-110 group-hover:rotate-6 transition-all relative z-10">
                     <Icon className="text-primary-foreground" size={28} />
                   </div>
 
@@ -62,11 +63,11 @@ const UseCases = () => {
                   <Button 
                     variant="outline" 
                     asChild 
-                    className="w-full group/btn"
+                    className="w-full group/btn hover-lift glass-effect relative z-10"
                   >
                     <Link to={useCase.href}>
                       {useCase.cta}
-                      <ArrowRight className="ml-2 group-hover/btn:translate-x-1 transition-transform" size={16} />
+                      <ArrowRight className="ml-2 group-hover/btn:translate-x-2 transition-transform" size={16} />
                     </Link>
                   </Button>
                 </CardContent>
