@@ -54,7 +54,7 @@ const Navigation = () => {
               className="shadow-glow-primary hover-lift relative overflow-hidden group h-11 px-6"
             >
               <Link to="/comprar">
-                <span className="relative z-10 font-semibold">Comprar tiquetera</span>
+                <span className="relative z-10 font-semibold">Comprar paper wallet</span>
                 <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Link>
             </Button>
@@ -103,7 +103,7 @@ const Navigation = () => {
                 className="w-full h-12 shadow-glow-primary relative overflow-hidden group"
               >
                 <Link to="/comprar" onClick={() => setIsOpen(false)}>
-                  <span className="relative z-10 font-semibold">Comprar tiquetera</span>
+                  <span className="relative z-10 font-semibold">Comprar paper wallet</span>
                   <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Link>
               </Button>

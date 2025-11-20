@@ -6,7 +6,7 @@ const Footer = () => {
     product: [
       { label: "Cómo funciona", href: "#como-funciona" },
       { label: "Soy acompañante", href: "/acompanante" },
-      { label: "Comprar tiquetera", href: "/comprar" },
+      { label: "Comprar paper wallet", href: "/comprar" },
       { label: "Seguridad", href: "#seguridad" }
     ],
     company: [

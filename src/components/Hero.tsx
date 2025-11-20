@@ -5,7 +5,7 @@ import qrCode from "@/assets/qr-code.png";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
+    <section className="relative min-h-[90vh] flex items-center pt-24 pb-32 overflow-hidden">
       {/* Background gradient with radial glow */}
       <div className="absolute inset-0 bg-gradient-primary" />
       <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
@@ -20,7 +20,7 @@ const Hero = () => {
         <div className="absolute bottom-1/4 right-1/2 w-3 h-3 bg-accent rounded-full animate-pulse-glow" style={{ animationDelay: "2.5s" }} />
       </div>
 
-      <div className="container mx-auto px-6 lg:px-8 py-20 relative z-10">
+      <div className="container mx-auto px-6 lg:px-12 xl:px-16 relative z-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center max-w-7xl mx-auto">
           {/* Left content */}
           <div className="space-y-8 animate-fade-in text-center lg:text-left">
@@ -31,8 +31,8 @@ const Hero = () => {
               </span>
             </h1>
             
-            <p className="text-xl text-muted-foreground leading-relaxed">
-              Compras una tiquetera de acompañamiento, un profesional la convierte en tiempo de calidad 
+            <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0">
+              Compras un paper wallet de acompañamiento, un profesional la convierte en tiempo de calidad 
               con personas mayores. Todo con trazabilidad web3, sin complicaciones para ellos.
             </p>
 
@@ -45,7 +45,7 @@ const Hero = () => {
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild className="hover-lift glass-effect">
-                <Link to="/comprar">Comprar una tiquetera</Link>
+                <Link to="/comprar">Comprar un paper wallet</Link>
               </Button>
             </div>
 
@@ -101,7 +101,7 @@ const Hero = () => {
                   </div>
 
                   <div className="space-y-2">
-                    <div className="text-sm text-muted-foreground">Tiquetera de acompañamiento</div>
+                    <div className="text-sm text-muted-foreground">Paper Wallet de acompañamiento</div>
                     <div className="flex items-center justify-between">
                       <div className="text-lg font-semibold text-foreground">5 visitas restantes</div>
                       <div className="flex space-x-1">

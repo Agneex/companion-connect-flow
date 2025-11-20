@@ -1,7 +1,19 @@
-import { CreditCard, Heart, Smartphone, Shield, MapPin, TrendingUp } from "lucide-react";
+import { CreditCard, Heart, Smartphone, Shield, MapPin, TrendingUp, ChevronDown } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { Collapsible, CollapsibleContent, CollapsibleTrigger } from "@/components/ui/collapsible";
+import { useState } from "react";
 
 const HowItWorks = () => {
+  const [openCards, setOpenCards] = useState<number[]>([0, 1, 2]);
+
+  const toggleCard = (index: number) => {
+    setOpenCards(prev => 
+      prev.includes(index) 
+        ? prev.filter(i => i !== index)
+        : [...prev, index]
+    );
+  };
+
   const actors = [
     {
       title: "Para tus padres, abuelos o adultos mayores",
@@ -9,7 +21,7 @@ const HowItWorks = () => {
       icon: Heart,
       iconColor: "text-accent",
       points: [
-        "Reciben una tarjeta o talonario Companya con un QR",
+        "Reciben una tarjeta o paper wallet Companya con un QR",
         "Solo tienen que mostrarla cuando un acompañante los visita",
         "Cada encuentro se registra y suma a su bienestar",
         "Sin que tengan que hacer nada digital"
@@ -29,11 +41,11 @@ const HowItWorks = () => {
     },
     {
       title: "Para ti, que cuidas a distancia",
-      subtitle: "Tiqueteras con trazabilidad real",
+      subtitle: "Paper wallets con trazabilidad real",
       icon: MapPin,
       iconColor: "text-secondary",
       points: [
-        "Entras al portal y compras una tiquetera para una persona concreta o para donar",
+        "Entras al portal y compras un paper wallet para una persona concreta o para donar",
         "Nosotros nos encargamos de emitir la tarjeta física y coordinar las actividades",
         "Puedes ver el uso de tus tickets: cuántas visitas se realizaron y su frecuencia",
         "Con impacto medible y transparente"
@@ -42,8 +54,8 @@ const HowItWorks = () => {
   ];
 
   return (
-    <section id="como-funciona" className="py-20 relative scroll-mt-20">
-      <div className="container mx-auto px-4">
+    <section id="como-funciona" className="py-24 lg:py-32 relative scroll-mt-20">
+      <div className="container mx-auto px-6 lg:px-12 xl:px-16">
         <div className="text-center mb-16 animate-fade-in">
           <div className="inline-block mb-4">
             <span className="px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-semibold">
@@ -68,42 +80,61 @@ const HowItWorks = () => {
           {actors.map((actor, index) => {
             const Icon = actor.icon;
             return (
-              <Card 
-                key={index} 
-                className="glass-effect border-border hover:border-primary/50 transition-all group hover-lift animate-fade-in relative z-10" 
-                style={{ animationDelay: `${index * 0.2}s` }}
+              <Collapsible
+                key={index}
+                open={openCards.includes(index)}
+                onOpenChange={() => toggleCard(index)}
               >
-                <CardContent className="p-6 space-y-6 relative overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
-                  
-                  {/* Number badge */}
-                  <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-secondary rounded-full flex items-center justify-center shadow-glow-primary text-primary-foreground font-bold text-lg">
-                    {index + 1}
-                  </div>
-                  <div className="space-y-2 relative z-10">
-                    <div className={`w-14 h-14 rounded-xl bg-gradient-secondary flex items-center justify-center ${actor.iconColor} group-hover:shadow-glow-primary transition-all group-hover:scale-110 group-hover:rotate-3`}>
-                      <Icon size={28} className="text-primary-foreground" />
+                <Card 
+                  className="glass-effect border-border hover:border-primary/50 transition-all group animate-fade-in relative z-10" 
+                  style={{ animationDelay: `${index * 0.2}s` }}
+                >
+                  <CardContent className="p-6 space-y-4 relative overflow-hidden">
+                    <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
+                    
+                    {/* Number badge */}
+                    <div className="absolute -top-3 -right-3 w-10 h-10 bg-gradient-secondary rounded-full flex items-center justify-center shadow-glow-primary text-primary-foreground font-bold text-lg">
+                      {index + 1}
                     </div>
-                    <h3 className="text-xl font-semibold text-foreground">
-                      {actor.title}
-                    </h3>
-                    <p className="text-sm text-primary font-medium">
-                      {actor.subtitle}
-                    </p>
-                  </div>
+                    
+                    <CollapsibleTrigger className="w-full">
+                      <div className="flex items-start justify-between space-x-4 relative z-10 cursor-pointer">
+                        <div className="flex items-start space-x-4 flex-1">
+                          <div className={`w-14 h-14 rounded-xl bg-gradient-secondary flex items-center justify-center ${actor.iconColor} group-hover:shadow-glow-primary transition-all flex-shrink-0`}>
+                            <Icon size={28} className="text-primary-foreground" />
+                          </div>
+                          <div className="space-y-2 text-left flex-1">
+                            <h3 className="text-lg font-semibold text-foreground">
+                              {actor.title}
+                            </h3>
+                            <p className="text-sm text-primary font-medium">
+                              {actor.subtitle}
+                            </p>
+                          </div>
+                        </div>
+                        <ChevronDown 
+                          className={`w-5 h-5 text-muted-foreground transition-transform flex-shrink-0 mt-1 ${
+                            openCards.includes(index) ? 'rotate-180' : ''
+                          }`}
+                        />
+                      </div>
+                    </CollapsibleTrigger>
 
-                  <ul className="space-y-3">
-                    {actor.points.map((point, i) => (
-                      <li key={i} className="flex items-start space-x-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                        <span className="text-sm text-muted-foreground leading-relaxed">
-                          {point}
-                        </span>
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+                    <CollapsibleContent>
+                      <ul className="space-y-3 mt-4">
+                        {actor.points.map((point, i) => (
+                          <li key={i} className="flex items-start space-x-2">
+                            <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+                            <span className="text-sm text-muted-foreground leading-relaxed">
+                              {point}
+                            </span>
+                          </li>
+                        ))}
+                      </ul>
+                    </CollapsibleContent>
+                  </CardContent>
+                </Card>
+              </Collapsible>
             );
           })}
         </div>
