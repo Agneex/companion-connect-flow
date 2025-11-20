@@ -13,7 +13,7 @@ const Acompanante = () => {
     },
     {
       icon: Calendar,
-      title: "Recibes asignaciones o atiendes a quienes traen paper wallets",
+      title: "Recibes asignaciones o atiendes a quienes traen tiqueteras",
       description: "Puedes ser parte de programas específicos o atender a quienes presenten su tarjeta Companya."
     },
     {

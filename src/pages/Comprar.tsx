@@ -15,14 +15,14 @@ const Comprar = () => {
   const [selectedTicket, setSelectedTicket] = useState("");
 
   const tickets = [
-    { id: "3", name: "Paper Wallet 3 acompañamientos", visits: "3 visitas", price: "€90", description: "Perfecto para comenzar" },
-    { id: "5", name: "Paper Wallet 5 acompañamientos", visits: "5 visitas", price: "€140", description: "Opción más popular", popular: true },
-    { id: "10", name: "Paper Wallet 10 acompañamientos", visits: "10 visitas", price: "€250", description: "Mejor valor" },
+    { id: "3", name: "Tiquetera 3 acompañamientos", visits: "3 visitas", price: "€90", description: "Perfecto para comenzar" },
+    { id: "5", name: "Tiquetera 5 acompañamientos", visits: "5 visitas", price: "€140", description: "Opción más popular", popular: true },
+    { id: "10", name: "Tiquetera 10 acompañamientos", visits: "10 visitas", price: "€250", description: "Mejor valor" },
     { id: "monthly", name: "Programa mensual", visits: "1 visita semanal", price: "€120/mes", description: "Acompañamiento continuo" }
   ];
 
   const steps = [
-    { number: 1, label: "Tipo de paper wallet" },
+    { number: 1, label: "Tipo de tiquetera" },
     { number: 2, label: "¿Para quién?" },
     { number: 3, label: "Resumen" },
     { number: 4, label: "Pago" }
@@ -46,7 +46,7 @@ const Comprar = () => {
               </span>
             </h1>
             <p className="text-xl text-muted-foreground">
-              Elige un programa, indica a quién va dirigido el paper wallet y nosotros nos encargamos 
+              Elige un programa, indica a quién va dirigida la tiquetera y nosotros nos encargamos 
               de que se transforme en tiempo de calidad con acompañantes verificados.
             </p>
           </div>
@@ -90,7 +90,7 @@ const Comprar = () => {
                 {step === 1 && (
                   <div className="space-y-6">
                     <div>
-                      <h2 className="text-2xl font-bold text-foreground mb-2">Selecciona el tipo de paper wallet</h2>
+                      <h2 className="text-2xl font-bold text-foreground mb-2">Selecciona el tipo de tiquetera</h2>
                       <p className="text-muted-foreground">Elige cuántos acompañamientos quieres incluir</p>
                     </div>
 
@@ -143,7 +143,7 @@ const Comprar = () => {
                   <div className="space-y-6">
                     <div>
                       <h2 className="text-2xl font-bold text-foreground mb-2">¿Para quién es?</h2>
-                      <p className="text-muted-foreground">Indica el destinatario del paper wallet</p>
+                      <p className="text-muted-foreground">Indica el destinatario de la tiquetera</p>
                     </div>
 
                     <Tabs defaultValue="family" className="w-full">
@@ -226,7 +226,7 @@ const Comprar = () => {
 
                     <div className="glass-effect rounded-lg p-6 space-y-4">
                       <div className="flex justify-between">
-                        <span className="text-muted-foreground">Tipo de paper wallet</span>
+                        <span className="text-muted-foreground">Tipo de tiquetera</span>
                         <span className="font-semibold text-foreground">5 acompañamientos</span>
                       </div>
                       <div className="flex justify-between">
@@ -288,7 +288,7 @@ const Comprar = () => {
 
                     <div className="glass-effect rounded-lg p-6 text-left space-y-3">
                       <p className="text-sm text-muted-foreground">
-                        En los próximos días, se emitirá el paper wallet físico y coordinaremos 
+                        En los próximos días, se emitirá la tarjeta/talonario físico y coordinaremos 
                         con un acompañante Companya.
                       </p>
                       <p className="text-sm text-muted-foreground">

@@ -2,7 +2,7 @@ import { Network, Lock, CheckCircle, Database } from "lucide-react";
 
 const Web3Trust = () => {
   return (
-    <section id="seguridad" className="py-24 lg:py-32 relative overflow-hidden">
+    <section id="seguridad" className="py-20 relative overflow-hidden">
       {/* Network visualization background */}
       <div className="absolute inset-0 opacity-10">
         <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -15,7 +15,7 @@ const Web3Trust = () => {
         </svg>
       </div>
 
-      <div className="container mx-auto px-6 lg:px-12 xl:px-16 relative z-10">
+      <div className="container mx-auto px-4 relative z-10">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold text-foreground mb-4">
@@ -38,7 +38,7 @@ const Web3Trust = () => {
                   <Database className="text-primary" size={28} />
                 </div>
                 <span className="text-xs text-center text-muted-foreground max-w-[100px]">
-                  Compra de paper wallet
+                  Compra de tiquetera
                 </span>
               </div>
 
@@ -73,7 +73,7 @@ const Web3Trust = () => {
           {/* Features grid */}
           <div className="grid md:grid-cols-2 gap-6 mb-8">
             {[
-              "Cada paper wallet se representa como un activo digital seguro",
+              "Cada tiquetera se representa como un activo digital seguro",
               "Cada acompañamiento registrado genera una prueba en la red (NFT) para el acompañante",
               "Esto permite trazabilidad, transparencia y menos riesgo de fraude",
               "El adulto mayor nunca tiene que entender nada de crypto"
