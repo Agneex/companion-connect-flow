@@ -8,15 +8,15 @@ const UseCases = () => {
     {
       icon: Globe,
       title: "Vivo en otro país, pero quiero estar presente",
-      description: "Compra una tiquetera, elige el número de acompañamientos, indica país/ciudad de tu familiar. Nosotros nos encargamos de la entrega física y coordinación local.",
-      cta: "Comprar tiquetera para mi familia",
+      description: "Compra un paper wallet, elige el número de acompañamientos, indica país/ciudad de tu familiar. Nosotros nos encargamos de la entrega física y coordinación local.",
+      cta: "Comprar paper wallet para mi familia",
       href: "/comprar?type=family"
     },
     {
       icon: Heart,
       title: "Quiero donar compañía a quien más lo necesita",
-      description: "Puedes comprar tiqueteras destinadas a fundaciones, municipios o programas específicos. Recibirás reportes agregados de impacto.",
-      cta: "Donar una tiquetera",
+      description: "Puedes comprar paper wallets destinados a fundaciones, municipios o programas específicos. Recibirás reportes agregados de impacto.",
+      cta: "Donar un paper wallet",
       href: "/comprar?type=donate"
     },
     {
@@ -29,8 +29,8 @@ const UseCases = () => {
   ];
 
   return (
-    <section className="py-20 bg-gradient-accent">
-      <div className="container mx-auto px-4">
+    <section className="py-24 lg:py-32 bg-gradient-accent">
+      <div className="container mx-auto px-6 lg:px-12 xl:px-16">
         <div className="text-center mb-16">
           <h2 className="text-4xl font-bold text-foreground mb-4">
             Casos de uso
