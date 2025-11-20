@@ -51,10 +51,11 @@ const Benefits = () => {
           {benefits.map((benefit, index) => {
             const Icon = benefit.icon;
             return (
-              <Card key={index} className="bg-card border-border hover:border-primary/50 transition-all">
-                <CardContent className="p-6 space-y-6">
-                  <div className="flex items-center space-x-3">
-                    <div className="w-12 h-12 rounded-lg bg-gradient-secondary flex items-center justify-center shadow-glow-primary">
+              <Card key={index} className="glass-effect border-border hover:border-primary/50 transition-all hover-lift animate-slide-up group" style={{ animationDelay: `${index * 0.1}s` }}>
+                <CardContent className="p-6 space-y-6 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
+                  <div className="flex items-center space-x-3 relative z-10">
+                    <div className="w-12 h-12 rounded-lg bg-gradient-secondary flex items-center justify-center shadow-glow-primary group-hover:scale-110 group-hover:rotate-6 transition-transform">
                       <Icon className="text-primary-foreground" size={24} />
                     </div>
                     <h3 className="text-lg font-semibold text-foreground">

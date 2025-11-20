@@ -30,11 +30,11 @@ const Web3Trust = () => {
           </div>
 
           {/* Network visualization */}
-          <div className="relative mb-12">
+          <div className="relative mb-12 animate-fade-in">
             <div className="flex items-center justify-center space-x-12 lg:space-x-24">
               {/* Node 1 */}
-              <div className="flex flex-col items-center space-y-3">
-                <div className="w-16 h-16 rounded-full bg-card border-2 border-primary flex items-center justify-center shadow-glow-primary">
+              <div className="flex flex-col items-center space-y-3 animate-scale-in" style={{ animationDelay: "0.2s" }}>
+                <div className="w-16 h-16 rounded-full glass-effect border-2 border-primary flex items-center justify-center shadow-glow-primary hover:scale-110 hover:rotate-12 transition-all cursor-pointer">
                   <Database className="text-primary" size={28} />
                 </div>
                 <span className="text-xs text-center text-muted-foreground max-w-[100px]">
@@ -46,8 +46,8 @@ const Web3Trust = () => {
               <div className="hidden lg:block w-24 h-0.5 bg-gradient-to-r from-primary via-accent to-secondary" />
 
               {/* Node 2 */}
-              <div className="flex flex-col items-center space-y-3">
-                <div className="w-16 h-16 rounded-full bg-card border-2 border-accent flex items-center justify-center shadow-glow-secondary">
+              <div className="flex flex-col items-center space-y-3 animate-scale-in" style={{ animationDelay: "0.4s" }}>
+                <div className="w-16 h-16 rounded-full glass-effect border-2 border-accent flex items-center justify-center shadow-glow-accent hover:scale-110 hover:rotate-12 transition-all cursor-pointer">
                   <Network className="text-accent" size={28} />
                 </div>
                 <span className="text-xs text-center text-muted-foreground max-w-[100px]">
@@ -59,8 +59,8 @@ const Web3Trust = () => {
               <div className="hidden lg:block w-24 h-0.5 bg-gradient-to-r from-secondary via-accent to-primary" />
 
               {/* Node 3 */}
-              <div className="flex flex-col items-center space-y-3">
-                <div className="w-16 h-16 rounded-full bg-card border-2 border-secondary flex items-center justify-center">
+              <div className="flex flex-col items-center space-y-3 animate-scale-in" style={{ animationDelay: "0.6s" }}>
+                <div className="w-16 h-16 rounded-full glass-effect border-2 border-secondary flex items-center justify-center shadow-glow-secondary hover:scale-110 hover:rotate-12 transition-all cursor-pointer">
                   <CheckCircle className="text-secondary" size={28} />
                 </div>
                 <span className="text-xs text-center text-muted-foreground max-w-[100px]">
@@ -78,17 +78,17 @@ const Web3Trust = () => {
               "Esto permite trazabilidad, transparencia y menos riesgo de fraude",
               "El adulto mayor nunca tiene que entender nada de crypto"
             ].map((feature, index) => (
-              <div key={index} className="flex items-start space-x-3 bg-card/30 rounded-lg p-4 border border-border/50">
-                <CheckCircle className="text-primary flex-shrink-0 mt-0.5" size={20} />
+              <div key={index} className="flex items-start space-x-3 glass-effect rounded-lg p-4 border border-border/50 hover-lift group animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                <CheckCircle className="text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" size={20} />
                 <span className="text-sm text-muted-foreground">{feature}</span>
               </div>
             ))}
           </div>
 
           {/* Technical note */}
-          <div className="bg-muted/50 rounded-lg p-6 border border-border">
+          <div className="glass-effect rounded-lg p-6 border border-border hover-lift group animate-slide-up" style={{ animationDelay: "0.4s" }}>
             <div className="flex items-start space-x-3">
-              <Lock className="text-primary flex-shrink-0 mt-1" size={20} />
+              <Lock className="text-primary flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" size={20} />
               <p className="text-sm text-muted-foreground">
                 <span className="font-semibold text-foreground">Seguridad técnica:</span> Usamos 
                 infraestructura web3 para asegurar que cada ticket y cada acompañamiento queden 

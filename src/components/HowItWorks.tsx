@@ -57,11 +57,12 @@ const HowItWorks = () => {
           {actors.map((actor, index) => {
             const Icon = actor.icon;
             return (
-              <Card key={index} className="bg-card/50 backdrop-blur border-border hover:border-primary/50 transition-all group">
-                <CardContent className="p-6 space-y-6">
-                  <div className="space-y-2">
-                    <div className={`w-14 h-14 rounded-xl bg-muted flex items-center justify-center ${actor.iconColor} group-hover:shadow-glow-primary transition-shadow`}>
-                      <Icon size={28} />
+              <Card key={index} className="glass-effect border-border hover:border-primary/50 transition-all group hover-lift animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                <CardContent className="p-6 space-y-6 relative overflow-hidden">
+                  <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-5 transition-opacity duration-300" />
+                  <div className="space-y-2 relative z-10">
+                    <div className={`w-14 h-14 rounded-xl bg-gradient-secondary flex items-center justify-center ${actor.iconColor} group-hover:shadow-glow-primary transition-all group-hover:scale-110 group-hover:rotate-3`}>
+                      <Icon size={28} className="text-primary-foreground" />
                     </div>
                     <h3 className="text-xl font-semibold text-foreground">
                       {actor.title}
