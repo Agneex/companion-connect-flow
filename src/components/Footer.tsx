@@ -26,7 +26,7 @@ const Footer = () => {
     <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-6 lg:px-8 py-16">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-8 mb-12 text-center md:text-left">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 lg:gap-10 mb-12 text-left">
           {/* Brand */}
           <div className="space-y-4">
             <div className="flex items-center space-x-2">
