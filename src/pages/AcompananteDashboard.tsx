@@ -41,8 +41,82 @@ const AcompananteDashboard = () => {
       return;
     }
 
-    // Load sessions from localStorage
-    const savedSessions = JSON.parse(localStorage.getItem("companion_sessions") || "[]");
+    // Load sessions from localStorage or create demo data
+    let savedSessions = JSON.parse(localStorage.getItem("companion_sessions") || "[]");
+    
+    // If no sessions exist, create demo sessions
+    if (savedSessions.length === 0) {
+      const demoSessions: Session[] = [
+        {
+          id: "1",
+          date: new Date(Date.now() - 2 * 24 * 60 * 60 * 1000).toISOString(),
+          silverName: "María González",
+          activity: "Acompañamiento a cita médica",
+          duration: 2.5,
+          nftAwarded: true,
+        },
+        {
+          id: "2",
+          date: new Date(Date.now() - 5 * 24 * 60 * 60 * 1000).toISOString(),
+          silverName: "José Martínez",
+          activity: "Compras en supermercado",
+          duration: 1.5,
+          nftAwarded: true,
+        },
+        {
+          id: "3",
+          date: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString(),
+          silverName: "Ana López",
+          activity: "Paseo por el parque",
+          duration: 2,
+          nftAwarded: true,
+        },
+        {
+          id: "4",
+          date: new Date(Date.now() - 10 * 24 * 60 * 60 * 1000).toISOString(),
+          silverName: "Carlos Rodríguez",
+          activity: "Videollamada con familia",
+          duration: 1,
+          nftAwarded: true,
+        },
+        {
+          id: "5",
+          date: new Date(Date.now() - 12 * 24 * 60 * 60 * 1000).toISOString(),
+          silverName: "María González",
+          activity: "Lectura y conversación",
+          duration: 1.5,
+          nftAwarded: true,
+        },
+        {
+          id: "6",
+          date: new Date(Date.now() - 15 * 24 * 60 * 60 * 1000).toISOString(),
+          silverName: "Roberto Silva",
+          activity: "Trámite bancario",
+          duration: 2,
+          nftAwarded: true,
+        },
+        {
+          id: "7",
+          date: new Date(Date.now() - 18 * 24 * 60 * 60 * 1000).toISOString(),
+          silverName: "Elena Torres",
+          activity: "Acompañamiento social",
+          duration: 2.5,
+          nftAwarded: true,
+        },
+        {
+          id: "8",
+          date: new Date(Date.now() - 20 * 24 * 60 * 60 * 1000).toISOString(),
+          silverName: "José Martínez",
+          activity: "Cita con especialista",
+          duration: 3,
+          nftAwarded: true,
+        },
+      ];
+      
+      savedSessions = demoSessions;
+      localStorage.setItem("companion_sessions", JSON.stringify(demoSessions));
+    }
+    
     setSessions(savedSessions);
 
     // Calculate stats
