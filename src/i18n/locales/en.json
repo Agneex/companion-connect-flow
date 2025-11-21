@@ -2,38 +2,38 @@
   "nav": {
     "howItWorks": "How it works",
     "companion": "I'm a companion",
-    "validate": "Check your pass",
+    "validate": "Check your paper wallet",
     "companies": "For companies & organizations",
     "security": "Security & Traceability",
     "faq": "FAQ",
     "companionAccess": "Companion login",
-    "validateTicket": "Check your pass"
+    "validateTicket": "Check your paper wallet"
   },
   "hero": {
     "title": "Real companionship for the ones who matter most",
     "subtitle": "Connect your loved ones with verified companions for day-to-day activities. Every visit gets recorded on blockchain for total transparency.",
     "ctaCompanion": "Start as a companion",
-    "ctaBuy": "Get a pass"
+    "ctaBuy": "Get a paper wallet"
   },
   "howItWorks": {
     "title": "How Companya works",
     "silver": {
       "title": "For the Silver (senior)",
-      "point1": "Zero apps, just your paper Companya pass",
-      "point2": "Your companion scans the QR at the start",
+      "point1": "Zero apps, just your paper wallet with QR codes",
+      "point2": "Your companion scans it at the start of each visit",
       "point3": "Enjoy the company hassle-free",
-      "point4": "Every visit gets logged automatically"
+      "point4": "Every visit gets logged automatically on-chain"
     },
     "companion": {
       "title": "For the companion",
       "point1": "Sign up and get verified",
-      "point2": "Get gigs or pick up available passes",
+      "point2": "Get gigs or pick up available paper wallets",
       "point3": "Scan the QR when you start each session",
       "point4": "Earn NFTs and rewards for your work"
     },
     "payer": {
       "title": "For the payer/donor",
-      "point1": "Buy passes with real traceability",
+      "point1": "Buy paper wallets with real traceability",
       "point2": "Give it to family or donate to someone in need",
       "point3": "Get usage reports and verification",
       "point4": "Everything's recorded on blockchain for transparency"
@@ -53,7 +53,7 @@
       "title": "For Families",
       "peace": "Peace of mind from afar",
       "care": "Verified professional care",
-      "tracking": "Tickets recorded on blockchain",
+      "tracking": "Paper wallets recorded on blockchain",
       "reports": "Detailed usage reports"
     },
     "seniors": {
@@ -68,9 +68,9 @@
     "title": "Built with trust tech",
     "subtitle": "The care journey for your loved one",
     "flow": {
-      "receive": "Get pass",
-      "receiveDesc": "Printed booklet",
-      "company": "Real company",
+      "receive": "Get paper wallet",
+      "receiveDesc": "Printed wallet booklet",
+      "company": "Real companionship",
       "companyDesc": "Verified visits",
       "peace": "Peace of mind",
       "peaceDesc": "All verified",
@@ -111,17 +111,17 @@
     "subtitle": "Companya adapts to different needs",
     "gift": {
       "title": "Meaningful gift",
-      "desc": "Gift real companionship to your loved ones, especially if you live far away. A gift that truly makes a difference.",
-      "cta": "Get a pass"
+      "desc": "Gift real companionship to your loved ones, especially if you live far away. Each paper wallet is loaded with verified visits that truly make a difference.",
+      "cta": "Get a paper wallet"
     },
     "donate": {
       "title": "Donation with impact",
-      "desc": "Donate companion passes to foundations and social programs. Every visit gets recorded for max transparency.",
+      "desc": "Donate paper wallets to foundations and social programs. Every visit gets recorded on-chain for max transparency.",
       "cta": "Donate now"
     },
     "corporate": {
       "title": "Corporate program",
-      "desc": "Integrate Companya into your employee or insured benefits program. Wellness with full traceability.",
+      "desc": "Integrate Companya paper wallets into your employee or insured benefits program. Wellness with full traceability.",
       "cta": "Get in touch"
     }
   },
