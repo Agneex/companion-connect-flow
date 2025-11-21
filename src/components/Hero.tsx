@@ -58,8 +58,8 @@ const Hero = () => {
                 <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
                 
                 {/* Sparkle effect */}
-                <div className="absolute top-4 right-4 md:top-6 md:right-6 text-primary animate-pulse z-10">
-                  <Sparkles size={20} className="md:w-6 md:h-6" />
+                <div className="absolute top-2 right-2 md:top-3 md:right-3 text-primary animate-pulse z-10">
+                  <Sparkles size={16} className="md:w-5 md:h-5" />
                 </div>
 
                 <img 
