@@ -48,28 +48,11 @@ const Hero = () => {
                 <Link to="/comprar">Comprar un pase</Link>
               </Button>
             </div>
-
-            <div className="flex justify-center pt-2">
-              <a 
-                href="#como-funciona" 
-                className="inline-flex items-center text-primary hover:text-primary/80 transition-colors group text-sm md:text-base"
-                onClick={(e) => {
-                  e.preventDefault();
-                  document.getElementById('como-funciona')?.scrollIntoView({ 
-                    behavior: 'smooth',
-                    block: 'start'
-                  });
-                }}
-              >
-                <span className="font-medium">Ver cómo funciona</span>
-                <ArrowRight className="ml-2 group-hover:translate-y-1 transition-transform" size={16} />
-              </a>
-            </div>
           </div>
 
           {/* Visual Card - Now Below Content */}
           <div className="relative animate-scale-in w-full" style={{ animationDelay: "0.3s" }}>
-            <div className="relative w-full max-w-2xl mx-auto">
+            <div className="relative w-full max-w-md md:max-w-lg mx-auto">
               {/* Floating pass card */}
               <div className="relative overflow-hidden rounded-xl md:rounded-2xl shadow-elevated hover-lift animate-float group">
                 <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
