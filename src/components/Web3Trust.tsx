@@ -121,11 +121,11 @@ const Web3Trust = () => {
                 </div>
                 <div className="text-center max-w-[100px] md:max-w-[120px]">
                   <span className="text-xs md:text-sm font-semibold text-foreground block">3. Tranquilidad</span>
-                  <span className="text-xs text-muted-foreground">Reportes en vivo</span>
+                  <span className="text-xs text-muted-foreground">Todo verificado</span>
                 </div>
                 {activeNode === 3 && (
                   <div className="absolute top-full mt-4 glass-effect border border-secondary/30 rounded-lg p-3 max-w-[200px] animate-fade-in z-20">
-                    <p className="text-xs text-muted-foreground">Ves cada visita registrada y sabes que tu familiar está bien cuidado</p>
+                    <p className="text-xs text-muted-foreground">Cada visita queda registrada de forma segura e inmutable para tu tranquilidad</p>
                   </div>
                 )}
               </div>
@@ -147,8 +147,8 @@ const Web3Trust = () => {
               },
               { 
                 icon: Lock, 
-                title: "Tú siempre informado",
-                description: "Ve el historial completo desde donde estés"
+                title: "Registro inmutable",
+                description: "Historial completo de visitas verificadas en blockchain"
               }
             ].map((feature, index) => {
               const Icon = feature.icon;
