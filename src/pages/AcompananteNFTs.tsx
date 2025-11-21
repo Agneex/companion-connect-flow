@@ -35,19 +35,59 @@ interface NFTMetadata {
   activity: string;
   location: string;
   duration: number;
-  rarity: "common" | "rare" | "epic" | "legendary";
+  category: "companionship" | "practical" | "digital";
+  impact: string;
   attributes: {
     trait_type: string;
     value: string;
   }[];
 }
 
+const impactCategories = {
+  companionship: {
+    name: "Compañía y Conexión",
+    color: "from-blue-400 to-cyan-500",
+    icon: "💙",
+    examples: [
+      "Conversación y escucha activa",
+      "Paseo por el parque",
+      "Acompañamiento para reducir soledad",
+      "Actividades recreativas",
+      "Juegos de mesa y entretenimiento"
+    ]
+  },
+  practical: {
+    name: "Ayuda Práctica",
+    color: "from-green-400 to-emerald-500",
+    icon: "🤝",
+    examples: [
+      "Acompañamiento a cita médica",
+      "Compras en supermercado",
+      "Trámites bancarios",
+      "Gestión de medicamentos",
+      "Acompañamiento a terapias"
+    ]
+  },
+  digital: {
+    name: "Apoyo Digital",
+    color: "from-purple-400 to-violet-500",
+    icon: "💻",
+    examples: [
+      "Ayuda con telemedicina",
+      "Configuración de aplicaciones",
+      "Videollamadas con familia",
+      "Uso de dispositivos móviles",
+      "Servicios digitales y banca online"
+    ]
+  }
+};
+
 const AcompananteNFTs = () => {
   const { isConnected, isCompanion, account } = useWeb3();
   const navigate = useNavigate();
   const [nfts, setNfts] = useState<NFTMetadata[]>([]);
   const [selectedNFT, setSelectedNFT] = useState<NFTMetadata | null>(null);
-  const [filter, setFilter] = useState<"all" | "common" | "rare" | "epic" | "legendary">("all");
+  const [filter, setFilter] = useState<"all" | "companionship" | "practical" | "digital">("all");
 
   useEffect(() => {
     if (!isConnected || !isCompanion) {
@@ -55,82 +95,142 @@ const AcompananteNFTs = () => {
       return;
     }
 
-    // Generate NFTs based on completed sessions
-    const sessions = JSON.parse(localStorage.getItem("companion_sessions") || "[]");
-    
-    const generatedNFTs: NFTMetadata[] = sessions.map((session: any, index: number) => {
-      // Determine rarity based on duration and type
-      let rarity: "common" | "rare" | "epic" | "legendary" = "common";
-      if (session.duration >= 3) rarity = "rare";
-      if (session.activity.includes("médica") || session.activity.includes("hospital")) rarity = "epic";
-      if (session.duration >= 4) rarity = "legendary";
-
-      return {
-        id: session.id,
-        tokenId: 1000 + index,
-        name: `Sesión de Acompañamiento #${1000 + index}`,
-        description: `NFT que certifica una sesión de acompañamiento realizada el ${format(new Date(session.date), "d 'de' MMMM, yyyy", { locale: es })}`,
-        image: generateNFTImage(rarity),
-        sessionDate: new Date(session.date),
-        silverName: session.silverName,
-        activity: session.activity,
+    // Generate demo NFTs with real impact examples
+    const demoNFTs: NFTMetadata[] = [
+      {
+        id: "1",
+        tokenId: 1001,
+        name: "Conversación y Escucha Activa",
+        description: "Sesión dedicada a reducir la soledad mediante conversación significativa y compañía.",
+        image: impactCategories.companionship.color,
+        sessionDate: new Date("2024-01-15"),
+        silverName: "María González",
+        activity: "Conversación y escucha activa",
         location: "Bogotá, Colombia",
-        duration: session.duration,
-        rarity,
+        duration: 2,
+        category: "companionship",
+        impact: "Reducción de sentimiento de soledad y mejora del bienestar emocional",
         attributes: [
-          { trait_type: "Actividad", value: session.activity },
-          { trait_type: "Duración", value: `${session.duration} horas` },
-          { trait_type: "Adulto Mayor", value: session.silverName },
-          { trait_type: "Rareza", value: rarity.charAt(0).toUpperCase() + rarity.slice(1) },
-          { trait_type: "Fecha", value: format(new Date(session.date), "MMMM yyyy", { locale: es }) },
+          { trait_type: "Categoría", value: "Compañía y Conexión" },
+          { trait_type: "Actividad", value: "Conversación y escucha activa" },
+          { trait_type: "Duración", value: "2 horas" },
+          { trait_type: "Impacto", value: "Bienestar emocional" },
         ],
-      };
-    });
+      },
+      {
+        id: "2",
+        tokenId: 1002,
+        name: "Acompañamiento a Cita Médica",
+        description: "Apoyo práctico en consulta médica, ayudando con transporte y comprensión de indicaciones.",
+        image: impactCategories.practical.color,
+        sessionDate: new Date("2024-01-18"),
+        silverName: "Carlos Ramírez",
+        activity: "Acompañamiento a cita médica",
+        location: "Hospital San José, Bogotá",
+        duration: 3,
+        category: "practical",
+        impact: "Acceso efectivo a servicios de salud y seguimiento médico adecuado",
+        attributes: [
+          { trait_type: "Categoría", value: "Ayuda Práctica" },
+          { trait_type: "Actividad", value: "Acompañamiento a cita médica" },
+          { trait_type: "Duración", value: "3 horas" },
+          { trait_type: "Impacto", value: "Acceso a salud" },
+        ],
+      },
+      {
+        id: "3",
+        tokenId: 1003,
+        name: "Ayuda con Telemedicina",
+        description: "Apoyo digital para conectarse con doctor vía videollamada y entender plataforma médica.",
+        image: impactCategories.digital.color,
+        sessionDate: new Date("2024-01-20"),
+        silverName: "Ana López",
+        activity: "Ayuda con telemedicina",
+        location: "Domicilio, Bogotá",
+        duration: 1.5,
+        category: "digital",
+        impact: "Inclusión digital y acceso a servicios médicos remotos",
+        attributes: [
+          { trait_type: "Categoría", value: "Apoyo Digital" },
+          { trait_type: "Actividad", value: "Ayuda con telemedicina" },
+          { trait_type: "Duración", value: "1.5 horas" },
+          { trait_type: "Impacto", value: "Inclusión digital" },
+        ],
+      },
+      {
+        id: "4",
+        tokenId: 1004,
+        name: "Compras en Supermercado",
+        description: "Ayuda práctica con compras semanales, asegurando nutrición adecuada y autonomía.",
+        image: impactCategories.practical.color,
+        sessionDate: new Date("2024-01-22"),
+        silverName: "Roberto Silva",
+        activity: "Compras en supermercado",
+        location: "Éxito Calle 80, Bogotá",
+        duration: 2,
+        category: "practical",
+        impact: "Autonomía en necesidades básicas y nutrición adecuada",
+        attributes: [
+          { trait_type: "Categoría", value: "Ayuda Práctica" },
+          { trait_type: "Actividad", value: "Compras en supermercado" },
+          { trait_type: "Duración", value: "2 horas" },
+          { trait_type: "Impacto", value: "Autonomía" },
+        ],
+      },
+      {
+        id: "5",
+        tokenId: 1005,
+        name: "Videollamada con Familia",
+        description: "Configuración y ayuda para conectarse con familiares que viven lejos mediante videollamada.",
+        image: impactCategories.digital.color,
+        sessionDate: new Date("2024-01-25"),
+        silverName: "Patricia Jiménez",
+        activity: "Videollamadas con familia",
+        location: "Domicilio, Bogotá",
+        duration: 1,
+        category: "digital",
+        impact: "Conexión familiar y reducción de aislamiento",
+        attributes: [
+          { trait_type: "Categoría", value: "Apoyo Digital" },
+          { trait_type: "Actividad", value: "Videollamadas con familia" },
+          { trait_type: "Duración", value: "1 hora" },
+          { trait_type: "Impacto", value: "Conexión familiar" },
+        ],
+      },
+      {
+        id: "6",
+        tokenId: 1006,
+        name: "Paseo por el Parque",
+        description: "Acompañamiento recreativo para actividad física y disfrute del aire libre.",
+        image: impactCategories.companionship.color,
+        sessionDate: new Date("2024-01-28"),
+        silverName: "Luis Martínez",
+        activity: "Paseo por el parque",
+        location: "Parque Simón Bolívar, Bogotá",
+        duration: 1.5,
+        category: "companionship",
+        impact: "Actividad física y bienestar mental",
+        attributes: [
+          { trait_type: "Categoría", value: "Compañía y Conexión" },
+          { trait_type: "Actividad", value: "Paseo por el parque" },
+          { trait_type: "Duración", value: "1.5 horas" },
+          { trait_type: "Impacto", value: "Actividad física" },
+        ],
+      },
+    ];
 
-    setNfts(generatedNFTs);
+    setNfts(demoNFTs);
   }, [isConnected, isCompanion, navigate]);
-
-  const generateNFTImage = (rarity: string) => {
-    // In production, these would be actual IPFS links or generated images
-    const colors = {
-      common: "from-blue-400 to-blue-600",
-      rare: "from-purple-400 to-purple-600",
-      epic: "from-pink-400 to-pink-600",
-      legendary: "from-yellow-400 to-orange-600",
-    };
-    return colors[rarity as keyof typeof colors];
-  };
-
-  const getRarityBadgeColor = (rarity: string) => {
-    const colors = {
-      common: "bg-blue-500/10 text-blue-500 border-blue-500/20",
-      rare: "bg-purple-500/10 text-purple-500 border-purple-500/20",
-      epic: "bg-pink-500/10 text-pink-500 border-pink-500/20",
-      legendary: "bg-yellow-500/10 text-yellow-500 border-yellow-500/20",
-    };
-    return colors[rarity as keyof typeof colors];
-  };
-
-  const getRarityIcon = (rarity: string) => {
-    const icons = {
-      common: "✦",
-      rare: "✦✦",
-      epic: "✦✦✦",
-      legendary: "★★★",
-    };
-    return icons[rarity as keyof typeof icons];
-  };
 
   const filteredNFTs = filter === "all" 
     ? nfts 
-    : nfts.filter(nft => nft.rarity === filter);
+    : nfts.filter(nft => nft.category === filter);
 
   const stats = {
     total: nfts.length,
-    common: nfts.filter(n => n.rarity === "common").length,
-    rare: nfts.filter(n => n.rarity === "rare").length,
-    epic: nfts.filter(n => n.rarity === "epic").length,
-    legendary: nfts.filter(n => n.rarity === "legendary").length,
+    companionship: nfts.filter(n => n.category === "companionship").length,
+    practical: nfts.filter(n => n.category === "practical").length,
+    digital: nfts.filter(n => n.category === "digital").length,
   };
 
   return (
@@ -164,35 +264,33 @@ const AcompananteNFTs = () => {
           </div>
 
           {/* Stats */}
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-3 mt-6">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-6">
             <Card className="glass-effect">
               <CardContent className="p-4 text-center">
+                <p className="text-3xl mb-1">🏆</p>
                 <p className="text-2xl font-bold text-foreground">{stats.total}</p>
-                <p className="text-xs text-muted-foreground">Total NFTs</p>
+                <p className="text-xs text-muted-foreground">Total de Impactos</p>
               </CardContent>
             </Card>
             <Card className="glass-effect border-blue-500/20">
               <CardContent className="p-4 text-center">
-                <p className="text-2xl font-bold text-blue-500">{stats.common}</p>
-                <p className="text-xs text-muted-foreground">Común ✦</p>
+                <p className="text-3xl mb-1">{impactCategories.companionship.icon}</p>
+                <p className="text-2xl font-bold text-blue-500">{stats.companionship}</p>
+                <p className="text-xs text-muted-foreground">Compañía</p>
+              </CardContent>
+            </Card>
+            <Card className="glass-effect border-green-500/20">
+              <CardContent className="p-4 text-center">
+                <p className="text-3xl mb-1">{impactCategories.practical.icon}</p>
+                <p className="text-2xl font-bold text-green-500">{stats.practical}</p>
+                <p className="text-xs text-muted-foreground">Ayuda Práctica</p>
               </CardContent>
             </Card>
             <Card className="glass-effect border-purple-500/20">
               <CardContent className="p-4 text-center">
-                <p className="text-2xl font-bold text-purple-500">{stats.rare}</p>
-                <p className="text-xs text-muted-foreground">Raro ✦✦</p>
-              </CardContent>
-            </Card>
-            <Card className="glass-effect border-pink-500/20">
-              <CardContent className="p-4 text-center">
-                <p className="text-2xl font-bold text-pink-500">{stats.epic}</p>
-                <p className="text-xs text-muted-foreground">Épico ✦✦✦</p>
-              </CardContent>
-            </Card>
-            <Card className="glass-effect border-yellow-500/20">
-              <CardContent className="p-4 text-center">
-                <p className="text-2xl font-bold text-yellow-500">{stats.legendary}</p>
-                <p className="text-xs text-muted-foreground">Legendario ★★★</p>
+                <p className="text-3xl mb-1">{impactCategories.digital.icon}</p>
+                <p className="text-2xl font-bold text-purple-500">{stats.digital}</p>
+                <p className="text-xs text-muted-foreground">Apoyo Digital</p>
               </CardContent>
             </Card>
           </div>
@@ -202,12 +300,11 @@ const AcompananteNFTs = () => {
       <main className="container mx-auto px-4 py-8">
         {/* Filters */}
         <Tabs defaultValue="all" className="mb-8" onValueChange={(v) => setFilter(v as any)}>
-          <TabsList className="grid grid-cols-5 w-full max-w-2xl mx-auto">
+          <TabsList className="grid grid-cols-4 w-full max-w-2xl mx-auto">
             <TabsTrigger value="all">Todos</TabsTrigger>
-            <TabsTrigger value="common">Común</TabsTrigger>
-            <TabsTrigger value="rare">Raro</TabsTrigger>
-            <TabsTrigger value="epic">Épico</TabsTrigger>
-            <TabsTrigger value="legendary">Legendario</TabsTrigger>
+            <TabsTrigger value="companionship">💙 Compañía</TabsTrigger>
+            <TabsTrigger value="practical">🤝 Práctica</TabsTrigger>
+            <TabsTrigger value="digital">💻 Digital</TabsTrigger>
           </TabsList>
         </Tabs>
 
@@ -217,7 +314,10 @@ const AcompananteNFTs = () => {
               <Award className="w-16 h-16 text-primary-foreground" />
             </div>
             <h3 className="text-2xl font-bold mb-3">
-              {filter === "all" ? "No tienes NFTs aún" : `No tienes NFTs ${filter}`}
+              {filter === "all" ? "No tienes NFTs aún" : `No tienes NFTs de ${
+                filter === "companionship" ? "Compañía" :
+                filter === "practical" ? "Ayuda Práctica" : "Apoyo Digital"
+              }`}
             </h3>
             <p className="text-muted-foreground mb-6 max-w-md mx-auto">
               Completa sesiones de acompañamiento para ganar NFTs que certifican tu trabajo
@@ -246,21 +346,21 @@ const AcompananteNFTs = () => {
                       nft.image,
                       "flex items-center justify-center group-hover:scale-110 transition-transform duration-500"
                     )}>
-                      <div className="text-center text-white">
-                        <Award className="w-20 h-20 mb-4 mx-auto animate-pulse" />
-                        <p className="text-4xl font-bold mb-2">#{nft.tokenId}</p>
-                        <p className="text-sm opacity-90 px-4">{nft.activity}</p>
+                      <div className="text-center text-white p-6">
+                        <div className="text-6xl mb-4">
+                          {impactCategories[nft.category].icon}
+                        </div>
+                        <Award className="w-16 h-16 mb-3 mx-auto" />
+                        <p className="text-3xl font-bold mb-2">#{nft.tokenId}</p>
+                        <p className="text-sm opacity-90 px-4 line-clamp-2">{nft.activity}</p>
                       </div>
                     </div>
                     
-                    {/* Rarity Badge */}
+                    {/* Category Badge */}
                     <Badge 
-                      className={cn(
-                        "absolute top-3 right-3",
-                        getRarityBadgeColor(nft.rarity)
-                      )}
+                      className="absolute top-3 right-3 bg-white/20 backdrop-blur-sm border-white/30"
                     >
-                      {getRarityIcon(nft.rarity)} {nft.rarity.charAt(0).toUpperCase() + nft.rarity.slice(1)}
+                      {impactCategories[nft.category].name}
                     </Badge>
 
                     {/* Sparkle Effect */}
@@ -346,10 +446,16 @@ const AcompananteNFTs = () => {
                       selectedNFT.image,
                       "flex items-center justify-center mb-4"
                     )}>
-                      <div className="text-center text-white">
-                        <Award className="w-32 h-32 mb-4 mx-auto" />
+                      <div className="text-center text-white p-8">
+                        <div className="text-8xl mb-6">
+                          {impactCategories[selectedNFT.category].icon}
+                        </div>
+                        <Award className="w-32 h-32 mb-6 mx-auto" />
                         <p className="text-6xl font-bold mb-4">#{selectedNFT.tokenId}</p>
-                        <p className="text-xl px-4">{selectedNFT.activity}</p>
+                        <p className="text-2xl px-4 mb-4">{selectedNFT.activity}</p>
+                        <Badge className="bg-white/20 backdrop-blur-sm border-white/30 text-white text-sm px-4 py-1">
+                          {impactCategories[selectedNFT.category].name}
+                        </Badge>
                       </div>
                     </div>
                     
@@ -369,7 +475,11 @@ const AcompananteNFTs = () => {
                   <div className="space-y-6">
                     <div>
                       <h3 className="font-semibold text-lg mb-3">Descripción</h3>
-                      <p className="text-muted-foreground">{selectedNFT.description}</p>
+                      <p className="text-muted-foreground mb-4">{selectedNFT.description}</p>
+                      <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                        <p className="text-sm font-semibold mb-1">💫 Impacto generado:</p>
+                        <p className="text-sm text-muted-foreground">{selectedNFT.impact}</p>
+                      </div>
                     </div>
 
                     <div>
