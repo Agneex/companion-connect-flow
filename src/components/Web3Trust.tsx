@@ -88,7 +88,7 @@ const Web3Trust = () => {
                   <Network className="text-accent transition-transform group-hover:scale-110" size={28} />
                 </div>
                 <div className="text-center max-w-[100px] md:max-w-[120px]">
-                  <span className="text-xs md:text-sm font-semibold text-foreground block">2. Sesión</span>
+                  <span className="text-xs md:text-sm font-semibold text-foreground block">2. Visita</span>
                   <span className="text-xs text-muted-foreground">Escaneo QR</span>
                 </div>
                 {activeNode === 2 && (
