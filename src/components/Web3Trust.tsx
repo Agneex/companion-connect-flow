@@ -161,10 +161,10 @@ const Web3Trust = () => {
                   <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 rounded-xl bg-gradient-secondary flex items-center justify-center group-hover:shadow-glow-primary transition-all group-hover:scale-110 group-hover:rotate-3">
                     <Icon className="text-primary-foreground" size={32} />
                   </div>
-                  <h3 className="text-lg md:text-xl font-semibold text-foreground mb-2">
+                  <h3 className="text-lg md:text-xl font-semibold text-foreground mb-2 min-h-[56px] flex items-center justify-center">
                     {feature.title}
                   </h3>
-                  <p className="text-sm text-muted-foreground">
+                  <p className="text-sm text-muted-foreground min-h-[48px] flex items-center justify-center">
                     {feature.description}
                   </p>
                 </div>
