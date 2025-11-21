@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, CreditCard, Users, Globe, Sparkles } from "lucide-react";
-import companyaPass from "@/assets/companya-pass-card.png";
+import companyaPass from "@/assets/companya-paper-pass.png";
 
 const Hero = () => {
   return (
