@@ -20,7 +20,6 @@ import {
   Heart,
   Activity,
   Users,
-  FileText,
   Navigation,
   Filter
 } from "lucide-react";
@@ -33,7 +32,6 @@ import { cn } from "@/lib/utils";
 import nftSocial from "@/assets/nft-social.png";
 import nftHealth from "@/assets/nft-health.png";
 import nftMobility from "@/assets/nft-mobility.png";
-import nftAdmin from "@/assets/nft-admin.png";
 import nftEmotional from "@/assets/nft-emotional.png";
 
 interface NFTMetadata {
@@ -47,7 +45,7 @@ interface NFTMetadata {
   activity: string;
   location: string;
   duration: number;
-  category: "social" | "health" | "mobility" | "admin" | "emotional";
+  category: "social" | "health" | "mobility" | "emotional";
   impact: string;
   attributes: {
     trait_type: string;
@@ -83,15 +81,6 @@ const impactCategories = {
     icon: Navigation,
     image: nftMobility,
   },
-  admin: {
-    name: "Gestión Administrativa",
-    color: "from-indigo-400 to-purple-500",
-    bgColor: "bg-indigo-500/10",
-    borderColor: "border-indigo-500/20",
-    textColor: "text-indigo-600",
-    icon: FileText,
-    image: nftAdmin,
-  },
   emotional: {
     name: "Apoyo Emocional",
     color: "from-pink-400 to-rose-500",
@@ -108,7 +97,7 @@ const AcompananteNFTs = () => {
   const navigate = useNavigate();
   const [nfts, setNfts] = useState<NFTMetadata[]>([]);
   const [selectedNFT, setSelectedNFT] = useState<NFTMetadata | null>(null);
-  const [filter, setFilter] = useState<"all" | "social" | "health" | "mobility" | "admin" | "emotional">("all");
+  const [filter, setFilter] = useState<"all" | "social" | "health" | "mobility" | "emotional">("all");
 
   const handleLogout = () => {
     disconnectWallet();
@@ -181,26 +170,6 @@ const AcompananteNFTs = () => {
           { trait_type: "Actividad", value: "Compras en supermercado" },
           { trait_type: "Duración", value: "2 horas" },
           { trait_type: "Impacto", value: "Autonomía" },
-        ],
-      },
-      {
-        id: "4",
-        tokenId: 1004,
-        name: "Trámite Bancario",
-        description: "Acompañamiento en gestiones bancarias, asegurando comprensión y seguridad en operaciones.",
-        image: impactCategories.admin.image,
-        sessionDate: new Date("2024-01-22"),
-        silverName: "Roberto Silva",
-        activity: "Trámite bancario",
-        location: "Banco de Bogotá, Centro",
-        duration: 1.5,
-        category: "admin",
-        impact: "Autonomía financiera y seguridad en transacciones",
-        attributes: [
-          { trait_type: "Categoría", value: "Gestión Administrativa" },
-          { trait_type: "Actividad", value: "Trámite bancario" },
-          { trait_type: "Duración", value: "1.5 horas" },
-          { trait_type: "Impacto", value: "Autonomía financiera" },
         ],
       },
       {
@@ -297,7 +266,6 @@ const AcompananteNFTs = () => {
     social: nfts.filter(n => n.category === "social").length,
     health: nfts.filter(n => n.category === "health").length,
     mobility: nfts.filter(n => n.category === "mobility").length,
-    admin: nfts.filter(n => n.category === "admin").length,
     emotional: nfts.filter(n => n.category === "emotional").length,
   };
 
@@ -340,7 +308,7 @@ const AcompananteNFTs = () => {
             </div>
 
             {/* Stats Summary */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
               <Card className="hover-scale border-primary/20">
                 <CardContent className="p-4 flex items-center gap-3">
                   <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
