@@ -3,11 +3,14 @@ import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, QrCode, Award, TrendingUp, Clock, CheckCircle2 } from "lucide-react";
+import { Calendar, QrCode, Award, TrendingUp, Clock, CheckCircle2, Wallet, ArrowDownToLine, CreditCard, Loader2 } from "lucide-react";
 import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Context";
 import { Link } from "react-router-dom";
+import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { Separator } from "@/components/ui/separator";
+import { toast } from "sonner";
 
 interface Session {
   id: string;
@@ -28,6 +31,9 @@ const AcompananteDashboard = () => {
     totalHours: 0,
     monthlyEarnings: 0,
   });
+  const [showFundsDialog, setShowFundsDialog] = useState(false);
+  const [isProcessing, setIsProcessing] = useState(false);
+  const [transactionStep, setTransactionStep] = useState<"idle" | "confirming" | "processing" | "success">("idle");
 
   useEffect(() => {
     if (!isConnected || !isCompanion) {
@@ -51,6 +57,56 @@ const AcompananteDashboard = () => {
   const handleLogout = () => {
     disconnectWallet();
     navigate("/");
+  };
+
+  const handleWithdraw = async () => {
+    setTransactionStep("confirming");
+    setIsProcessing(true);
+
+    // Simulate wallet confirmation
+    setTimeout(() => {
+      setTransactionStep("processing");
+      
+      // Simulate blockchain transaction
+      setTimeout(() => {
+        setTransactionStep("success");
+        setIsProcessing(false);
+        
+        toast.success("Retiro exitoso", {
+          description: `$${stats.monthlyEarnings} transferidos a tu wallet`,
+        });
+
+        setTimeout(() => {
+          setShowFundsDialog(false);
+          setTransactionStep("idle");
+        }, 2000);
+      }, 3000);
+    }, 2000);
+  };
+
+  const handleUse = async () => {
+    setTransactionStep("confirming");
+    setIsProcessing(true);
+
+    // Simulate wallet confirmation
+    setTimeout(() => {
+      setTransactionStep("processing");
+      
+      // Simulate blockchain transaction
+      setTimeout(() => {
+        setTransactionStep("success");
+        setIsProcessing(false);
+        
+        toast.success("Fondos utilizados", {
+          description: "Transacción completada exitosamente",
+        });
+
+        setTimeout(() => {
+          setShowFundsDialog(false);
+          setTransactionStep("idle");
+        }, 2000);
+      }, 3000);
+    }, 2000);
   };
 
   const recentSessions = sessions.slice(0, 5);
@@ -150,13 +206,27 @@ const AcompananteDashboard = () => {
               </CardContent>
             </Card>
 
-            <Card className="glass-effect border-primary/50">
+            <Card 
+              className="glass-effect border-primary/50 cursor-pointer hover:shadow-glow-primary transition-all"
+              onClick={() => setShowFundsDialog(true)}
+            >
               <CardContent className="p-6">
                 <div className="flex items-center justify-between mb-2">
-                  <span className="text-2xl">💰</span>
+                  <Wallet className="w-8 h-8 text-primary" />
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="text-xs text-primary hover:text-primary"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      setShowFundsDialog(true);
+                    }}
+                  >
+                    Ver fondos
+                  </Button>
                 </div>
                 <p className="text-3xl font-bold text-foreground mb-1">${stats.monthlyEarnings}</p>
-                <p className="text-sm text-muted-foreground">Ganado este mes</p>
+                <p className="text-sm text-muted-foreground">Fondos disponibles</p>
               </CardContent>
             </Card>
           </div>
@@ -239,6 +309,123 @@ const AcompananteDashboard = () => {
       </main>
 
       <Footer />
+
+      {/* Funds Management Dialog */}
+      <Dialog open={showFundsDialog} onOpenChange={setShowFundsDialog}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="flex items-center gap-2">
+              <Wallet className="w-5 h-5 text-primary" />
+              Gestionar Fondos
+            </DialogTitle>
+            <DialogDescription>
+              Retira tus ganancias a tu wallet o utilízalas en la plataforma
+            </DialogDescription>
+          </DialogHeader>
+
+          <div className="space-y-6 py-4">
+            {/* Balance Display */}
+            <div className="bg-gradient-secondary rounded-lg p-6 text-center">
+              <p className="text-sm text-primary-foreground/70 mb-2">Balance disponible</p>
+              <p className="text-4xl font-bold text-primary-foreground">${stats.monthlyEarnings}</p>
+              <p className="text-xs text-primary-foreground/60 mt-2">≈ {(stats.monthlyEarnings * 0.0003).toFixed(4)} ETH</p>
+            </div>
+
+            {transactionStep === "idle" && (
+              <>
+                {/* Quick Stats */}
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="text-center p-3 bg-muted rounded-lg">
+                    <p className="text-2xl font-bold text-foreground">{stats.totalSessions}</p>
+                    <p className="text-xs text-muted-foreground">Sesiones</p>
+                  </div>
+                  <div className="text-center p-3 bg-muted rounded-lg">
+                    <p className="text-2xl font-bold text-foreground">{stats.totalHours}h</p>
+                    <p className="text-xs text-muted-foreground">Horas totales</p>
+                  </div>
+                </div>
+
+                <Separator />
+
+                {/* Action Buttons */}
+                <div className="space-y-3">
+                  <Button 
+                    className="w-full shadow-glow-primary" 
+                    size="lg"
+                    onClick={handleWithdraw}
+                    disabled={stats.monthlyEarnings === 0}
+                  >
+                    <ArrowDownToLine className="w-5 h-5 mr-2" />
+                    Retirar a Wallet
+                  </Button>
+                  
+                  <Button 
+                    variant="outline" 
+                    className="w-full" 
+                    size="lg"
+                    onClick={handleUse}
+                    disabled={stats.monthlyEarnings === 0}
+                  >
+                    <CreditCard className="w-5 h-5 mr-2" />
+                    Utilizar en Plataforma
+                  </Button>
+                </div>
+
+                {/* Info */}
+                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
+                  <p className="text-xs text-blue-600 dark:text-blue-400">
+                    <strong>Gas estimado:</strong> ~0.0001 ETH (~$0.20)
+                    <br />
+                    <strong>Tiempo estimado:</strong> 30-60 segundos
+                  </p>
+                </div>
+              </>
+            )}
+
+            {transactionStep === "confirming" && (
+              <div className="text-center py-8">
+                <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto mb-4" />
+                <p className="font-semibold text-lg mb-2">Confirma en tu wallet</p>
+                <p className="text-sm text-muted-foreground">
+                  Revisa los detalles de la transacción en tu wallet y confirma
+                </p>
+              </div>
+            )}
+
+            {transactionStep === "processing" && (
+              <div className="text-center py-8">
+                <div className="relative w-16 h-16 mx-auto mb-4">
+                  <Loader2 className="w-16 h-16 text-primary animate-spin" />
+                  <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="w-8 h-8 bg-primary/20 rounded-full animate-pulse" />
+                  </div>
+                </div>
+                <p className="font-semibold text-lg mb-2">Procesando transacción</p>
+                <p className="text-sm text-muted-foreground mb-4">
+                  Tu transacción está siendo confirmada en la blockchain
+                </p>
+                <div className="bg-muted rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground font-mono">
+                    TX: 0x742d...5f0bEb
+                  </p>
+                </div>
+              </div>
+            )}
+
+            {transactionStep === "success" && (
+              <div className="text-center py-8">
+                <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <CheckCircle2 className="w-10 h-10 text-green-500" />
+                </div>
+                <p className="font-semibold text-lg mb-2">¡Transacción exitosa!</p>
+                <p className="text-sm text-muted-foreground">
+                  Tu operación ha sido completada con éxito
+                </p>
+              </div>
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
