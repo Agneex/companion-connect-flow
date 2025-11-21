@@ -240,7 +240,7 @@ const ValidarTiquetera = () => {
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={() => setContractId("COMP-2024-DEMO")}
+                  onClick={() => setContractId("0x742d35Cc6634C0532925a3b844Bc9e7595f0bEb")}
                   className="text-xs"
                 >
                   Usar ID Demo
