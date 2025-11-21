@@ -21,7 +21,7 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 relative z-10">
-        <div className="flex flex-col items-center gap-8 md:gap-12 max-w-7xl mx-auto">
+        <div className="flex flex-col items-center gap-10 md:gap-16 max-w-7xl mx-auto">
           {/* Main content */}
           <div className="space-y-6 md:space-y-8 animate-fade-in text-center w-full max-w-4xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight">
