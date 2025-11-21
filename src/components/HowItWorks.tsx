@@ -80,7 +80,7 @@ const HowItWorks = () => {
                   <div className="absolute -top-2 -right-2 md:-top-3 md:-right-3 w-8 h-8 md:w-10 md:h-10 bg-gradient-secondary rounded-full flex items-center justify-center shadow-glow-primary text-primary-foreground font-bold text-base md:text-lg">
                     {index + 1}
                   </div>
-                  <div className="space-y-2 relative z-10">
+                  <div className="space-y-2 relative z-10 min-h-[140px] md:min-h-[160px]">
                     <div className={`w-12 h-12 md:w-14 md:h-14 rounded-xl bg-gradient-secondary flex items-center justify-center ${actor.iconColor} group-hover:shadow-glow-primary transition-all group-hover:scale-110 group-hover:rotate-3`}>
                       <Icon size={24} className="md:w-7 md:h-7 text-primary-foreground" />
                     </div>
