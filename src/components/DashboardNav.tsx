@@ -41,27 +41,68 @@ const DashboardNav = ({ onLogout }: DashboardNavProps) => {
 
   return (
     <>
-      {/* Mobile Header */}
-      <div className="lg:hidden fixed top-16 left-0 right-0 z-40 bg-background border-b border-border">
-        <div className="container mx-auto px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-gradient-secondary rounded-lg flex items-center justify-center">
-              <span className="text-sm font-bold text-primary-foreground">C</span>
+      {/* Fixed Top Header - Mobile & Desktop */}
+      <div className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+          {/* Logo - Always visible */}
+          <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+            <div className="w-10 h-10 bg-gradient-secondary rounded-xl flex items-center justify-center shadow-glow-primary">
+              <span className="text-xl font-bold text-primary-foreground">C</span>
             </div>
-            <span className="font-semibold text-foreground">Dashboard</span>
+            <div>
+              <span className="text-xl font-bold text-foreground">Companya</span>
+              <span className="hidden sm:inline text-xs text-muted-foreground ml-2">Dashboard</span>
+            </div>
+          </Link>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex items-center gap-2">
+            {navItems.map((item) => {
+              const Icon = item.icon;
+              return (
+                <Link
+                  key={item.href}
+                  to={item.href}
+                  className={cn(
+                    "flex items-center gap-2 px-4 py-2 rounded-lg transition-all text-sm font-medium",
+                    isActive(item.href)
+                      ? "bg-primary text-primary-foreground"
+                      : "hover:bg-muted"
+                  )}
+                >
+                  <Icon className="w-4 h-4" />
+                  <span>{item.label}</span>
+                </Link>
+              );
+            })}
+          </nav>
+
+          {/* Desktop Actions */}
+          <div className="hidden lg:flex items-center gap-3">
+            <div className="text-xs text-right">
+              <p className="text-muted-foreground">Wallet</p>
+              <p className="font-mono font-semibold">{account?.slice(0, 6)}...{account?.slice(-4)}</p>
+            </div>
+            <Button variant="outline" size="sm" onClick={onLogout}>
+              <LogOut className="w-4 h-4 mr-2" />
+              Salir
+            </Button>
           </div>
+
+          {/* Mobile Menu Button */}
           <Button
             variant="ghost"
             size="icon"
+            className="lg:hidden"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X /> : <Menu />}
           </Button>
         </div>
         
-        {/* Mobile Menu */}
+        {/* Mobile Menu Dropdown */}
         {isMobileMenuOpen && (
-          <div className="border-t border-border bg-background/95 backdrop-blur-sm">
+          <div className="lg:hidden border-t border-border bg-background/95 backdrop-blur-sm">
             <nav className="container mx-auto px-4 py-4 space-y-2">
               {navItems.map((item) => {
                 const Icon = item.icon;
@@ -82,18 +123,22 @@ const DashboardNav = ({ onLogout }: DashboardNavProps) => {
                   </Link>
                 );
               })}
-              <div className="pt-4 border-t border-border">
-                <div className="px-4 py-2 text-xs text-muted-foreground">
-                  Wallet: {account?.slice(0, 6)}...{account?.slice(-4)}
+              <div className="pt-4 border-t border-border space-y-2">
+                <div className="px-4 py-2 text-xs">
+                  <p className="text-muted-foreground mb-1">Wallet conectada</p>
+                  <p className="font-mono font-semibold">{account?.slice(0, 10)}...{account?.slice(-6)}</p>
                 </div>
                 <Button
                   variant="outline"
                   size="sm"
-                  onClick={onLogout}
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    onLogout();
+                  }}
                   className="w-full justify-start"
                 >
                   <LogOut className="w-4 h-4 mr-2" />
-                  Desconectar
+                  Desconectar Wallet
                 </Button>
               </div>
             </nav>
@@ -106,21 +151,11 @@ const DashboardNav = ({ onLogout }: DashboardNavProps) => {
         <div className="flex flex-col h-full">
           {/* Sidebar Header */}
           <div className="p-6 border-b border-border">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-12 h-12 bg-gradient-secondary rounded-xl flex items-center justify-center shadow-glow-primary">
-                <span className="text-xl font-bold text-primary-foreground">C</span>
-              </div>
-              <div>
-                <h2 className="font-bold text-foreground">Dashboard</h2>
-                <p className="text-xs text-muted-foreground">Acompañante</p>
-              </div>
-            </div>
-            
-            {/* Wallet Info */}
-            <div className="bg-background/50 rounded-lg p-3">
-              <p className="text-xs text-muted-foreground mb-1">Wallet conectada</p>
+            <div className="bg-background/50 rounded-lg p-4">
+              <p className="text-xs text-muted-foreground mb-2">Dashboard de Acompañante</p>
+              <p className="text-xs text-muted-foreground mb-1">Wallet:</p>
               <p className="font-mono text-xs font-semibold truncate">
-                {account?.slice(0, 10)}...{account?.slice(-6)}
+                {account}
               </p>
             </div>
           </div>
@@ -157,7 +192,7 @@ const DashboardNav = ({ onLogout }: DashboardNavProps) => {
             <Link to="/acompanante">
               <Button variant="outline" size="sm" className="w-full justify-start">
                 <Home className="w-4 h-4 mr-2" />
-                Página de Acompañantes
+                Info Acompañantes
               </Button>
             </Link>
             <Button
@@ -167,7 +202,7 @@ const DashboardNav = ({ onLogout }: DashboardNavProps) => {
               className="w-full justify-start text-muted-foreground hover:text-foreground"
             >
               <LogOut className="w-4 h-4 mr-2" />
-              Desconectar Wallet
+              Desconectar
             </Button>
           </div>
         </div>

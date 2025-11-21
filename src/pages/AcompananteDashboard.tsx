@@ -4,7 +4,6 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Calendar, QrCode, Award, TrendingUp, Clock, CheckCircle2 } from "lucide-react";
-import Navigation from "@/components/Navigation";
 import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Context";
@@ -58,10 +57,9 @@ const AcompananteDashboard = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
       <DashboardNav onLogout={handleLogout} />
       
-      <main className="lg:ml-64 pt-16 lg:pt-16">
+      <main className="lg:ml-64 pt-16">
         <div className="container mx-auto px-4 py-8 lg:py-12">
           <div className="space-y-8">
           {/* Welcome Section */}

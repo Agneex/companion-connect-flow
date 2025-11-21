@@ -6,7 +6,6 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { QrCode, Camera, CheckCircle2 } from "lucide-react";
-import Navigation from "@/components/Navigation";
 import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Context";
@@ -82,10 +81,9 @@ const AcompananteScan = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
       <DashboardNav onLogout={handleLogout} />
       
-      <main className="lg:ml-64 pt-16 lg:pt-16">
+      <main className="lg:ml-64 pt-16">
         <div className="container mx-auto px-4 py-8 lg:py-12 max-w-2xl">
 
           <Card className="glass-effect">
