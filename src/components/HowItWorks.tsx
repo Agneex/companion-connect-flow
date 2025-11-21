@@ -5,11 +5,11 @@ const HowItWorks = () => {
   const actors = [
     {
       title: "Para tus padres o adultos mayores",
-      subtitle: "Cero apps, solo una tarjeta",
+      subtitle: "Cero apps, solo tu pase Companya en papel",
       icon: Heart,
       iconColor: "text-accent",
       points: [
-        { icon: CreditCard, text: "Reciben una tarjeta con QR" },
+        { icon: CreditCard, text: "Recibe un pase Companya con QR" },
         { icon: QrCode, text: "La muestran cuando llega el acompañante" },
         { icon: Sparkles, text: "Cada visita se registra automáticamente" },
         { icon: Shield, text: "Sin tecnología ni complicaciones" }
@@ -29,7 +29,7 @@ const HowItWorks = () => {
     },
     {
       title: "Para ti, que cuidas a distancia",
-      subtitle: "Tiqueteras con trazabilidad real",
+      subtitle: "Pases con trazabilidad real",
       icon: MapPin,
       iconColor: "text-secondary",
       points: [
