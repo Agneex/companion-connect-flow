@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Calendar, QrCode, Award, TrendingUp, Clock, CheckCircle2, LogOut, Wallet } from "lucide-react";
+import { Calendar, QrCode, Award, TrendingUp, Clock, CheckCircle2 } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Context";
+import { Link } from "react-router-dom";
 
 interface Session {
   id: string;
@@ -49,7 +51,7 @@ const AcompananteDashboard = () => {
 
   const handleLogout = () => {
     disconnectWallet();
-    navigate("/acompanante/login");
+    navigate("/");
   };
 
   const recentSessions = sessions.slice(0, 5);
@@ -57,32 +59,11 @@ const AcompananteDashboard = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      <DashboardNav onLogout={handleLogout} />
       
-      {/* Header with wallet info */}
-      <div className="border-b border-border bg-muted/30">
-        <div className="container mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-secondary rounded-full flex items-center justify-center">
-                <Wallet className="w-5 h-5 text-primary-foreground" />
-              </div>
-              <div>
-                <p className="text-sm text-muted-foreground">Conectado como</p>
-                <p className="font-mono text-sm font-semibold">
-                  {account?.slice(0, 6)}...{account?.slice(-4)}
-                </p>
-              </div>
-            </div>
-            <Button variant="outline" size="sm" onClick={handleLogout}>
-              <LogOut className="w-4 h-4 mr-2" />
-              Desconectar
-            </Button>
-          </div>
-        </div>
-      </div>
-
-      <main className="container mx-auto px-4 py-8">
-        <div className="space-y-8">
+      <main className="lg:ml-64 pt-16 lg:pt-16">
+        <div className="container mx-auto px-4 py-8 lg:py-12">
+          <div className="space-y-8">
           {/* Welcome Section */}
           <div>
             <h1 className="text-4xl font-bold text-foreground mb-2">
@@ -255,6 +236,7 @@ const AcompananteDashboard = () => {
               )}
             </CardContent>
           </Card>
+          </div>
         </div>
       </main>
 

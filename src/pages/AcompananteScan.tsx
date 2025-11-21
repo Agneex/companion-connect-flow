@@ -5,14 +5,15 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { QrCode, Camera, CheckCircle2, ArrowLeft } from "lucide-react";
+import { QrCode, Camera, CheckCircle2 } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Context";
 import { useToast } from "@/hooks/use-toast";
 
 const AcompananteScan = () => {
-  const { isConnected, isCompanion } = useWeb3();
+  const { isConnected, isCompanion, disconnectWallet } = useWeb3();
   const navigate = useNavigate();
   const { toast } = useToast();
   const [scanning, setScanning] = useState(false);
@@ -23,6 +24,11 @@ const AcompananteScan = () => {
     duration: "",
     notes: "",
   });
+
+  const handleLogout = () => {
+    disconnectWallet();
+    navigate("/");
+  };
 
   if (!isConnected || !isCompanion) {
     navigate("/acompanante/login");
@@ -77,17 +83,10 @@ const AcompananteScan = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      <DashboardNav onLogout={handleLogout} />
       
-      <main className="container mx-auto px-4 py-8">
-        <div className="max-w-2xl mx-auto">
-          <Button 
-            variant="ghost" 
-            onClick={() => navigate("/acompanante/dashboard")}
-            className="mb-6"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Volver al dashboard
-          </Button>
+      <main className="lg:ml-64 pt-16 lg:pt-16">
+        <div className="container mx-auto px-4 py-8 lg:py-12 max-w-2xl">
 
           <Card className="glass-effect">
             <CardHeader>
