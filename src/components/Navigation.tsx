@@ -3,15 +3,18 @@ import { Link } from "react-router-dom";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useTranslation } from "react-i18next";
+import LanguageSwitcher from "./LanguageSwitcher";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const { t } = useTranslation();
 
   const navItems = [
-    { label: "Cómo funciona", href: "#como-funciona" },
-    { label: "Soy acompañante", href: "/acompanante" },
-    { label: "Seguridad", href: "#seguridad" },
-    { label: "FAQ", href: "#faq" },
+    { label: t("nav.howItWorks"), href: "#como-funciona" },
+    { label: t("nav.companion"), href: "/acompanante" },
+    { label: t("nav.security"), href: "#seguridad" },
+    { label: t("nav.faq"), href: "#faq" },
   ];
 
   return (
@@ -42,19 +45,20 @@ const Navigation = () => {
 
           {/* CTA Buttons */}
           <div className="hidden lg:flex items-center space-x-3">
+            <LanguageSwitcher />
             <Button 
               variant="outline" 
               asChild 
               className="hover-lift glass-effect h-11 px-5"
             >
-              <Link to="/acompanante/login">Acceder acompañantes</Link>
+              <Link to="/acompanante/login">{t("nav.companionAccess")}</Link>
             </Button>
             <Button 
               asChild 
               className="shadow-glow-primary hover-lift relative overflow-hidden group h-11 px-6"
             >
               <Link to="/validar">
-                <span className="relative z-10 font-semibold">Validar tiquetera</span>
+                <span className="relative z-10 font-semibold">{t("nav.validateTicket")}</span>
                 <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
               </Link>
             </Button>
@@ -89,13 +93,16 @@ const Navigation = () => {
               </a>
             ))}
             <div className="pt-4 space-y-3">
+              <div className="flex justify-center mb-3">
+                <LanguageSwitcher />
+              </div>
               <Button 
                 variant="outline" 
                 asChild 
                 className="w-full h-12 glass-effect"
               >
                 <Link to="/acompanante/login" onClick={() => setIsOpen(false)}>
-                  Acceder acompañantes
+                  {t("nav.companionAccess")}
                 </Link>
               </Button>
               <Button 
@@ -103,7 +110,7 @@ const Navigation = () => {
                 className="w-full h-12 shadow-glow-primary relative overflow-hidden group"
               >
                 <Link to="/validar" onClick={() => setIsOpen(false)}>
-                  <span className="relative z-10 font-semibold">Validar tiquetera</span>
+                  <span className="relative z-10 font-semibold">{t("nav.validateTicket")}</span>
                   <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Link>
               </Button>

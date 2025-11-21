@@ -1,0 +1,146 @@
+{
+  "nav": {
+    "howItWorks": "How it works",
+    "companion": "I'm a companion",
+    "validate": "Check your pass",
+    "companies": "For companies & organizations",
+    "security": "Security & Traceability",
+    "faq": "FAQ",
+    "companionAccess": "Companion login",
+    "validateTicket": "Check your pass"
+  },
+  "hero": {
+    "title": "Real companionship for the ones who matter most",
+    "subtitle": "Connect your loved ones with verified companions for day-to-day activities. Every visit gets recorded on blockchain for total transparency.",
+    "ctaCompanion": "Start as a companion",
+    "ctaBuy": "Get a pass"
+  },
+  "howItWorks": {
+    "title": "How Companya works",
+    "silver": {
+      "title": "For the Silver (senior)",
+      "point1": "Zero apps, just your paper Companya pass",
+      "point2": "Your companion scans the QR at the start",
+      "point3": "Enjoy the company hassle-free",
+      "point4": "Every visit gets logged automatically"
+    },
+    "companion": {
+      "title": "For the companion",
+      "point1": "Sign up and get verified",
+      "point2": "Get gigs or pick up available passes",
+      "point3": "Scan the QR when you start each session",
+      "point4": "Earn NFTs and rewards for your work"
+    },
+    "payer": {
+      "title": "For the payer/donor",
+      "point1": "Buy passes with real traceability",
+      "point2": "Give it to family or donate to someone in need",
+      "point3": "Get usage reports and verification",
+      "point4": "Everything's recorded on blockchain for transparency"
+    }
+  },
+  "benefits": {
+    "title": "Benefits for everyone",
+    "subtitle": "An ecosystem where everyone wins",
+    "companions": {
+      "title": "For Companions",
+      "income": "Clear and traceable income",
+      "reputation": "Verifiable on-chain rep",
+      "training": "Training and certifications",
+      "schedule": "Organized and flexible schedule"
+    },
+    "families": {
+      "title": "For Families",
+      "peace": "Peace of mind from afar",
+      "care": "Verified professional care",
+      "tracking": "Tickets recorded on blockchain",
+      "reports": "Detailed usage reports"
+    },
+    "seniors": {
+      "title": "For Seniors",
+      "reliable": "Reliable companionship",
+      "notech": "No apps or tech needed",
+      "activities": "Meaningful activities",
+      "seen": "Feel accompanied and seen"
+    }
+  },
+  "web3Trust": {
+    "title": "Built with trust tech",
+    "subtitle": "The care journey for your loved one",
+    "flow": {
+      "receive": "Get pass",
+      "receiveDesc": "Printed booklet",
+      "company": "Real company",
+      "companyDesc": "Verified visits",
+      "peace": "Peace of mind",
+      "peaceDesc": "All verified",
+      "peaceDesc2": "Immutable record"
+    },
+    "cards": {
+      "verified": {
+        "title": "Verified companions",
+        "desc": "Every companion goes through a rigorous vetting process before they can offer services."
+      },
+      "traceability": {
+        "title": "Total traceability",
+        "desc": "Every visit gets recorded immutably on blockchain, giving you complete transparency."
+      },
+      "privacy": {
+        "title": "Privacy guaranteed",
+        "desc": "Personal data stays protected while service traceability remains verifiable."
+      }
+    },
+    "technical": {
+      "title": "Security tech details",
+      "blockchain": {
+        "title": "Blockchain Recording",
+        "desc": "Every companion session gets recorded as an immutable transaction on the blockchain, creating a tamper-proof verifiable history."
+      },
+      "nft": {
+        "title": "NFTs as Certificates",
+        "desc": "Companions receive unique NFTs that certify their work, creating a transferable and verifiable on-chain reputation."
+      },
+      "identity": {
+        "title": "Identity Verification",
+        "desc": "We use proof-of-personhood tech to ensure every companion is a real and unique person on the platform."
+      }
+    }
+  },
+  "useCases": {
+    "title": "Use cases",
+    "subtitle": "Companya adapts to different needs",
+    "gift": {
+      "title": "Meaningful gift",
+      "desc": "Gift real companionship to your loved ones, especially if you live far away. A gift that truly makes a difference.",
+      "cta": "Get a pass"
+    },
+    "donate": {
+      "title": "Donation with impact",
+      "desc": "Donate companion passes to foundations and social programs. Every visit gets recorded for max transparency.",
+      "cta": "Donate now"
+    },
+    "corporate": {
+      "title": "Corporate program",
+      "desc": "Integrate Companya into your employee or insured benefits program. Wellness with full traceability.",
+      "cta": "Get in touch"
+    }
+  },
+  "footer": {
+    "tagline": "Verified companionship with blockchain tech",
+    "product": "Product",
+    "howWorks": "How it works",
+    "forCompanions": "For companions",
+    "forFamilies": "For families",
+    "forCompanies": "For companies",
+    "company": "Company",
+    "about": "About",
+    "blog": "Blog",
+    "careers": "Careers",
+    "contact": "Contact",
+    "legal": "Legal",
+    "privacy": "Privacy",
+    "terms": "Terms",
+    "cookies": "Cookies",
+    "rights": "All rights reserved"
+  }
+}

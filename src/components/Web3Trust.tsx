@@ -6,9 +6,11 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { useTranslation } from "react-i18next";
 
 const Web3Trust = () => {
   const [activeNode, setActiveNode] = useState<number | null>(null);
+  const { t } = useTranslation();
 
   return (
     <section id="seguridad" className="py-12 md:py-16 lg:py-20 relative overflow-hidden">
@@ -28,13 +30,10 @@ const Web3Trust = () => {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-8 md:mb-10 lg:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">
-              El viaje de cuidado para{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-secondary">
-                tu ser querido
-              </span>
+              {t("web3Trust.title")}
             </h2>
             <p className="text-base md:text-lg lg:text-xl text-muted-foreground px-4">
-              Desde que adquieres el pase hasta la tranquilidad de saber que están bien cuidados
+              {t("web3Trust.subtitle")}
             </p>
           </div>
 
@@ -56,8 +55,8 @@ const Web3Trust = () => {
                   <Database className="text-primary transition-transform group-hover:scale-110" size={28} />
                 </div>
                 <div className="text-center max-w-[100px] md:max-w-[120px]">
-                  <span className="text-xs md:text-sm font-semibold text-foreground block">1. Recibe pase</span>
-                  <span className="text-xs text-muted-foreground">Talonario impreso</span>
+                  <span className="text-xs md:text-sm font-semibold text-foreground block">1. {t("web3Trust.flow.receive")}</span>
+                  <span className="text-xs text-muted-foreground">{t("web3Trust.flow.receiveDesc")}</span>
                 </div>
                 {activeNode === 1 && (
                   <div className="absolute top-full mt-4 glass-effect border border-primary/30 rounded-lg p-3 max-w-[200px] animate-fade-in z-20">
@@ -88,8 +87,8 @@ const Web3Trust = () => {
                   <Network className="text-accent transition-transform group-hover:scale-110" size={28} />
                 </div>
                 <div className="text-center max-w-[100px] md:max-w-[120px]">
-                  <span className="text-xs md:text-sm font-semibold text-foreground block">2. Compañía real</span>
-                  <span className="text-xs text-muted-foreground">Visitas verificadas</span>
+                  <span className="text-xs md:text-sm font-semibold text-foreground block">2. {t("web3Trust.flow.company")}</span>
+                  <span className="text-xs text-muted-foreground">{t("web3Trust.flow.companyDesc")}</span>
                 </div>
                 {activeNode === 2 && (
                   <div className="absolute top-full mt-4 glass-effect border border-accent/30 rounded-lg p-3 max-w-[200px] animate-fade-in z-20">
@@ -120,8 +119,8 @@ const Web3Trust = () => {
                   <CheckCircle className="text-secondary transition-transform group-hover:scale-110" size={28} />
                 </div>
                 <div className="text-center max-w-[100px] md:max-w-[120px]">
-                  <span className="text-xs md:text-sm font-semibold text-foreground block">3. Tranquilidad</span>
-                  <span className="text-xs text-muted-foreground">Todo verificado</span>
+                  <span className="text-xs md:text-sm font-semibold text-foreground block">3. {t("web3Trust.flow.peace")}</span>
+                  <span className="text-xs text-muted-foreground">{t("web3Trust.flow.peaceDesc")}</span>
                 </div>
                 {activeNode === 3 && (
                   <div className="absolute top-full mt-4 glass-effect border border-secondary/30 rounded-lg p-3 max-w-[200px] animate-fade-in z-20">
@@ -137,18 +136,18 @@ const Web3Trust = () => {
             {[
               { 
                 icon: ShieldCheck, 
-                title: "Sin tecnología complicada",
-                description: "Solo pases en papel con código QR, fácil de usar"
+                title: t("web3Trust.cards.verified.title"),
+                description: t("web3Trust.cards.verified.desc")
               },
               { 
                 icon: Eye, 
-                title: "Visitas que sí pasan",
-                description: "Cada encuentro queda verificado automáticamente"
+                title: t("web3Trust.cards.traceability.title"),
+                description: t("web3Trust.cards.traceability.desc")
               },
               { 
                 icon: Lock, 
-                title: "Registro inmutable",
-                description: "Historial completo de visitas verificadas en blockchain"
+                title: t("web3Trust.cards.privacy.title"),
+                description: t("web3Trust.cards.privacy.desc")
               }
             ].map((feature, index) => {
               const Icon = feature.icon;
@@ -178,28 +177,28 @@ const Web3Trust = () => {
               <AccordionTrigger className="text-sm md:text-base font-semibold text-foreground hover:text-primary py-4">
                 <div className="flex items-center gap-2">
                   <Database className="text-primary" size={20} />
-                  <span>¿Cómo garantizamos la seguridad y calidad?</span>
+                  <span>{t("web3Trust.technical.title")}</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pb-4">
                 <div className="flex items-start space-x-3 p-3 rounded-lg bg-background/50">
                   <ShieldCheck className="text-primary flex-shrink-0 mt-1" size={18} />
                   <p className="text-xs md:text-sm text-muted-foreground">
-                    <span className="font-semibold text-foreground">Acompañantes confiables:</span> Todos pasan verificación de identidad y antecedentes antes de atender a tu familiar.
+                    <span className="font-semibold text-foreground">{t("web3Trust.technical.blockchain.title")}:</span> {t("web3Trust.technical.blockchain.desc")}
                   </p>
                 </div>
                 
                 <div className="flex items-start space-x-3 p-3 rounded-lg bg-background/50">
                   <Eye className="text-primary flex-shrink-0 mt-1" size={18} />
                   <p className="text-xs md:text-sm text-muted-foreground">
-                    <span className="font-semibold text-foreground">Registro automático:</span> Cada vez que el acompañante escanea un pase del talonario, la visita queda registrada con fecha y hora.
+                    <span className="font-semibold text-foreground">{t("web3Trust.technical.nft.title")}:</span> {t("web3Trust.technical.nft.desc")}
                   </p>
                 </div>
 
                 <div className="flex items-start space-x-3 p-3 rounded-lg bg-background/50">
                   <Lock className="text-primary flex-shrink-0 mt-1" size={18} />
                   <p className="text-xs md:text-sm text-muted-foreground">
-                    <span className="font-semibold text-foreground">Tecnología invisible:</span> Usamos blockchain para garantizar transparencia total, pero tu familiar nunca tiene que entenderlo.
+                    <span className="font-semibold text-foreground">{t("web3Trust.technical.identity.title")}:</span> {t("web3Trust.technical.identity.desc")}
                   </p>
                 </div>
               </AccordionContent>

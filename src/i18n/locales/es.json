@@ -1,0 +1,146 @@
+{
+  "nav": {
+    "howItWorks": "Cómo funciona",
+    "companion": "Soy acompañante",
+    "validate": "Validar Tiquetera",
+    "companies": "Para empresas y organizaciones",
+    "security": "Seguridad y Trazabilidad",
+    "faq": "Preguntas frecuentes",
+    "companionAccess": "Acceso acompañantes",
+    "validateTicket": "Validar Tiquetera"
+  },
+  "hero": {
+    "title": "Compañía real para las personas que más importan",
+    "subtitle": "Conecta a tus seres queridos con acompañantes verificados para actividades del día a día. Cada visita queda registrada en blockchain para total transparencia.",
+    "ctaCompanion": "Comenzar como acompañante",
+    "ctaBuy": "Comprar un pase"
+  },
+  "howItWorks": {
+    "title": "Cómo funciona Companya",
+    "silver": {
+      "title": "Para el Silver (adulto mayor)",
+      "point1": "Cero apps, solo tu pase Companya en papel",
+      "point2": "El acompañante escanea el QR al inicio",
+      "point3": "Disfruta de la compañía sin complicaciones",
+      "point4": "Cada visita queda registrada automáticamente"
+    },
+    "companion": {
+      "title": "Para el acompañante",
+      "point1": "Regístrate y verifica tu perfil",
+      "point2": "Recibe asignaciones o atiende pases disponibles",
+      "point3": "Escanea el QR al iniciar cada sesión",
+      "point4": "Gana NFTs y recompensas por tu labor"
+    },
+    "payer": {
+      "title": "Para el pagador/donante",
+      "point1": "Compra pases con trazabilidad real",
+      "point2": "Asigna a tu familiar o dona a quien lo necesite",
+      "point3": "Recibe reportes de uso y verificación",
+      "point4": "Todo registrado en blockchain para transparencia"
+    }
+  },
+  "benefits": {
+    "title": "Beneficios para todos",
+    "subtitle": "Un ecosistema donde todos ganan",
+    "companions": {
+      "title": "Para Acompañantes",
+      "income": "Ingresos claros y trazables",
+      "reputation": "Reputación on-chain verificable",
+      "training": "Capacitación y certificaciones",
+      "schedule": "Agenda organizada y flexible"
+    },
+    "families": {
+      "title": "Para Familias",
+      "peace": "Tranquilidad desde lejos",
+      "care": "Cuidado profesional verificado",
+      "tracking": "Tickets registrados en blockchain",
+      "reports": "Reportes de uso detallados"
+    },
+    "seniors": {
+      "title": "Para Seniors",
+      "reliable": "Compañía confiable",
+      "notech": "Sin apps ni tecnología",
+      "activities": "Actividades significativas",
+      "seen": "Sentirse acompañado y visto"
+    }
+  },
+  "web3Trust": {
+    "title": "Construido con tecnología de confianza",
+    "subtitle": "El viaje de cuidado para tu ser querido",
+    "flow": {
+      "receive": "Recibe pase",
+      "receiveDesc": "Talonario impreso",
+      "company": "Compañía real",
+      "companyDesc": "Visitas verificadas",
+      "peace": "Tranquilidad",
+      "peaceDesc": "Todo verificado",
+      "peaceDesc2": "Registro inmutable"
+    },
+    "cards": {
+      "verified": {
+        "title": "Acompañantes verificados",
+        "desc": "Cada acompañante pasa por un proceso de verificación riguroso antes de poder ofrecer servicios."
+      },
+      "traceability": {
+        "title": "Trazabilidad total",
+        "desc": "Cada visita queda registrada de forma inmutable en blockchain, brindando transparencia completa."
+      },
+      "privacy": {
+        "title": "Privacidad garantizada",
+        "desc": "Los datos personales están protegidos mientras la trazabilidad de servicios permanece verificable."
+      }
+    },
+    "technical": {
+      "title": "Detalles técnicos de seguridad",
+      "blockchain": {
+        "title": "Registro en Blockchain",
+        "desc": "Cada sesión de acompañamiento se registra como una transacción inmutable en la blockchain, creando un historial verificable y a prueba de manipulaciones."
+      },
+      "nft": {
+        "title": "NFTs como Certificados",
+        "desc": "Los acompañantes reciben NFTs únicos que certifican su trabajo, creando una reputación on-chain transferible y verificable."
+      },
+      "identity": {
+        "title": "Verificación de Identidad",
+        "desc": "Utilizamos tecnología de proof-of-personhood para garantizar que cada acompañante es una persona real y única en la plataforma."
+      }
+    }
+  },
+  "useCases": {
+    "title": "Casos de uso",
+    "subtitle": "Companya se adapta a diferentes necesidades",
+    "gift": {
+      "title": "Regalo significativo",
+      "desc": "Regala compañía real a tus seres queridos, especialmente si vives lejos. Un regalo que realmente marca la diferencia.",
+      "cta": "Comprar pase"
+    },
+    "donate": {
+      "title": "Donación con impacto",
+      "desc": "Dona pases de acompañamiento a fundaciones y programas sociales. Cada visita queda registrada para máxima transparencia.",
+      "cta": "Donar ahora"
+    },
+    "corporate": {
+      "title": "Programa corporativo",
+      "desc": "Integra Companya en tu programa de beneficios para empleados o asegurados. Bienestar con trazabilidad completa.",
+      "cta": "Contactar"
+    }
+  },
+  "footer": {
+    "tagline": "Compañía verificada con tecnología blockchain",
+    "product": "Producto",
+    "howWorks": "Cómo funciona",
+    "forCompanions": "Para acompañantes",
+    "forFamilies": "Para familias",
+    "forCompanies": "Para empresas",
+    "company": "Empresa",
+    "about": "Acerca de",
+    "blog": "Blog",
+    "careers": "Carreras",
+    "contact": "Contacto",
+    "legal": "Legal",
+    "privacy": "Privacidad",
+    "terms": "Términos",
+    "cookies": "Cookies",
+    "rights": "Todos los derechos reservados"
+  }
+}

@@ -2,8 +2,11 @@ import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, CreditCard, Users, Globe, Sparkles } from "lucide-react";
 import companyaPass from "@/assets/companya-paper-pass.png";
+import { useTranslation } from "react-i18next";
 
 const Hero = () => {
+  const { t } = useTranslation();
+  
   return (
     <section className="relative min-h-[calc(100vh-4rem)] flex items-center pt-20 md:pt-24 pb-8 md:pb-12 overflow-hidden">
       {/* Background gradient with radial glow */}
@@ -25,27 +28,23 @@ const Hero = () => {
           {/* Main content */}
           <div className="space-y-6 md:space-y-8 animate-fade-in text-center w-full max-w-4xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight">
-              Companya: acompaña a quienes amas,{" "}
-              <span className="text-transparent bg-clip-text bg-gradient-secondary glow-text">
-                estés donde estés
-              </span>
+              {t("hero.title")}
             </h1>
             
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-              Compras un pase de acompañamiento, un profesional lo convierte en tiempo de calidad 
-              con personas mayores. Todo con trazabilidad web3, sin complicaciones para ellos.
+              {t("hero.subtitle")}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-slide-up justify-center" style={{ animationDelay: "0.2s" }}>
               <Button size="lg" asChild className="shadow-glow-primary group hover-lift relative overflow-hidden w-full sm:w-auto text-sm md:text-base">
                 <Link to="/acompanante">
-                  <span className="relative z-10">Comenzar como acompañante</span>
+                  <span className="relative z-10">{t("hero.ctaCompanion")}</span>
                   <ArrowRight className="ml-2 relative z-10 group-hover:translate-x-1 transition-transform" size={18} />
                   <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild className="hover-lift glass-effect w-full sm:w-auto text-sm md:text-base">
-                <Link to="/comprar">Comprar un pase</Link>
+                <Link to="/comprar">{t("hero.ctaBuy")}</Link>
               </Button>
             </div>
           </div>
