@@ -47,7 +47,7 @@ const Navigation = () => {
               asChild 
               className="hover-lift glass-effect h-11 px-5"
             >
-              <Link to="/acompanante">Acceder acompañantes</Link>
+              <Link to="/acompanante/login">Acceder acompañantes</Link>
             </Button>
             <Button 
               asChild 
@@ -94,7 +94,7 @@ const Navigation = () => {
                 asChild 
                 className="w-full h-12 glass-effect"
               >
-                <Link to="/acompanante" onClick={() => setIsOpen(false)}>
+                <Link to="/acompanante/login" onClick={() => setIsOpen(false)}>
                   Acceder acompañantes
                 </Link>
               </Button>
