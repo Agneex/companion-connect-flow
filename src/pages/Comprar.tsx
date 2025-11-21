@@ -15,10 +15,10 @@ const Comprar = () => {
   const [selectedTicket, setSelectedTicket] = useState("");
 
   const tickets = [
-    { id: "3", name: "Tiquetera 3 acompañamientos", visits: "3 visitas", price: "€90", description: "Perfecto para comenzar" },
-    { id: "5", name: "Tiquetera 5 acompañamientos", visits: "5 visitas", price: "€140", description: "Opción más popular", popular: true },
-    { id: "10", name: "Tiquetera 10 acompañamientos", visits: "10 visitas", price: "€250", description: "Mejor valor" },
-    { id: "monthly", name: "Programa mensual", visits: "1 visita semanal", price: "€120/mes", description: "Acompañamiento continuo" }
+    { id: "3", name: "Tiquetera 3 acompañamientos", visits: "3 visitas", price: "$90", description: "Perfecto para comenzar" },
+    { id: "5", name: "Tiquetera 5 acompañamientos", visits: "5 visitas", price: "$140", description: "Opción más popular", popular: true },
+    { id: "10", name: "Tiquetera 10 acompañamientos", visits: "10 visitas", price: "$250", description: "Mejor valor" },
+    { id: "monthly", name: "Programa mensual", visits: "1 visita semanal", price: "$120/mes", description: "Acompañamiento continuo" }
   ];
 
   const steps = [
@@ -239,7 +239,7 @@ const Comprar = () => {
                       </div>
                       <div className="border-t border-border pt-4 flex justify-between text-lg">
                         <span className="font-semibold text-foreground">Total</span>
-                        <span className="font-bold text-primary">€140</span>
+                        <span className="font-bold text-primary">$140</span>
                       </div>
                     </div>
 
