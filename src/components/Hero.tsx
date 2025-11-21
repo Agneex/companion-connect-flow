@@ -5,7 +5,7 @@ import companyaPass from "@/assets/companya-paper-pass.png";
 
 const Hero = () => {
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] flex items-center pt-20 md:pt-24 pb-12 md:pb-20 overflow-hidden">
+    <section className="relative min-h-[calc(100vh-4rem)] flex items-center pt-20 md:pt-24 pb-8 md:pb-12 overflow-hidden">
       {/* Background gradient with radial glow */}
       <div className="absolute inset-0 bg-gradient-primary" />
       <div className="absolute inset-0" style={{ background: "var(--gradient-hero)" }} />
@@ -20,8 +20,8 @@ const Hero = () => {
         <div className="absolute bottom-1/4 right-1/2 w-3 h-3 bg-accent rounded-full animate-pulse-glow" style={{ animationDelay: "2.5s" }} />
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 relative z-10">
-        <div className="flex flex-col items-center gap-8 md:gap-12 max-w-7xl mx-auto">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-6 md:py-8 relative z-10">
+        <div className="flex flex-col items-center gap-6 md:gap-8 max-w-7xl mx-auto">
           {/* Main content */}
           <div className="space-y-6 md:space-y-8 animate-fade-in text-center w-full max-w-4xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight">
