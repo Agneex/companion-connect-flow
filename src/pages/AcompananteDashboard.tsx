@@ -59,7 +59,7 @@ const AcompananteDashboard = () => {
     <div className="min-h-screen bg-background">
       <DashboardNav onLogout={handleLogout} />
       
-      <main className="lg:ml-64 pt-16">
+      <main className="pt-16">
         <div className="container mx-auto px-4 py-8 lg:py-12">
           <div className="space-y-8">
           {/* Welcome Section */}
