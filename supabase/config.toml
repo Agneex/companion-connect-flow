@@ -1,1 +1,4 @@
 project_id = "yhcxzazumehhfmkgscvv"
+
+[functions.verify-worldcoin]
+verify_jwt = false

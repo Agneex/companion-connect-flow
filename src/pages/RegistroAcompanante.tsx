@@ -3,16 +3,17 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import * as z from "zod";
+import { IDKitWidget, VerificationLevel, ISuccessResult } from "@worldcoin/idkit";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { CheckCircle2, Upload, QrCode } from "lucide-react";
+import { CheckCircle2, Upload, Shield } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
+import { supabase } from "@/integrations/supabase/client";
 
 const formSchema = z.object({
   fullName: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
@@ -31,8 +32,12 @@ type FormData = z.infer<typeof formSchema>;
 const RegistroAcompanante = () => {
   const [step, setStep] = useState<"form" | "worldcoin" | "success">("form");
   const [formData, setFormData] = useState<FormData | null>(null);
+  const [isVerifying, setIsVerifying] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+
+  const APP_ID = import.meta.env.VITE_WORLDCOIN_APP_ID || "app_staging_c71c2036e1ff3ebb8b5bc13bcacee962";
+  const ACTION_ID = "register-companion";
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
@@ -53,11 +58,24 @@ const RegistroAcompanante = () => {
     setStep("worldcoin");
   };
 
-  const handleWorldcoinVerification = () => {
-    // Simulación de verificación Worldcoin
-    setTimeout(() => {
-      if (formData) {
-        // Guardar en localStorage
+  const handleWorldcoinSuccess = async (result: ISuccessResult) => {
+    setIsVerifying(true);
+    
+    try {
+      // Verify the proof with our backend
+      const { data, error } = await supabase.functions.invoke('verify-worldcoin', {
+        body: {
+          proof: result.proof,
+          merkle_root: result.merkle_root,
+          nullifier_hash: result.nullifier_hash,
+          signal: formData?.documentId || '',
+        },
+      });
+
+      if (error) throw error;
+
+      if (data?.success) {
+        // Save companion data
         const companions = JSON.parse(localStorage.getItem("companions") || "[]");
         const walletAddress = localStorage.getItem("web3_account") || `0x${Math.random().toString(16).substr(2, 40)}`;
         
@@ -66,9 +84,11 @@ const RegistroAcompanante = () => {
           walletAddress: walletAddress,
           ...formData,
           worldcoinVerified: true,
+          nullifierHash: result.nullifier_hash,
           registeredAt: new Date().toISOString(),
-          curriculum: formData.curriculum?.[0]?.name || "No subido",
+          curriculum: formData?.curriculum?.[0]?.name || "No subido",
         };
+        
         companions.push(newCompanion);
         localStorage.setItem("companions", JSON.stringify(companions));
         localStorage.setItem("web3_account", walletAddress);
@@ -77,10 +97,21 @@ const RegistroAcompanante = () => {
         setStep("success");
         toast({
           title: "¡Verificación exitosa!",
-          description: "Tu registro ha sido completado correctamente.",
+          description: "Tu identidad ha sido verificada con Worldcoin.",
         });
+      } else {
+        throw new Error("Verification failed");
       }
-    }, 2000);
+    } catch (error) {
+      console.error('Error verifying:', error);
+      toast({
+        title: "Error en la verificación",
+        description: "No se pudo verificar tu identidad. Por favor intenta de nuevo.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsVerifying(false);
+    }
   };
 
   return (
@@ -259,35 +290,41 @@ const RegistroAcompanante = () => {
               <CardHeader>
                 <CardTitle className="text-3xl text-center">Verificación Worldcoin</CardTitle>
                 <CardDescription className="text-center">
-                  Escanea el código QR con tu app de Worldcoin para verificar tu identidad
+                  Verifica tu identidad única usando World ID
                 </CardDescription>
               </CardHeader>
               <CardContent className="flex flex-col items-center space-y-6 py-8">
-                <div className="bg-background border-4 border-primary/20 rounded-lg p-8 relative">
-                  <QrCode className="w-48 h-48 text-primary" strokeWidth={1} />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="bg-background/90 backdrop-blur-sm px-4 py-2 rounded-md">
-                      <p className="text-sm font-medium">Simulación QR</p>
-                    </div>
-                  </div>
+                <div className="flex items-center justify-center w-48 h-48 rounded-lg bg-primary/5 border-2 border-primary/20">
+                  <Shield className="w-24 h-24 text-primary" />
                 </div>
                 
-                <div className="text-center space-y-2">
+                <div className="text-center space-y-2 max-w-md">
                   <p className="text-sm text-muted-foreground">
-                    En producción, esto mostrará un código QR real de Worldcoin
+                    Worldcoin World ID te permite verificar tu identidad de forma privada y segura
                   </p>
                   <p className="text-xs text-muted-foreground">
-                    Haz clic en el botón para simular la verificación
+                    Haz clic en el botón para iniciar la verificación
                   </p>
                 </div>
 
-                <Button 
-                  onClick={handleWorldcoinVerification}
-                  size="lg"
-                  className="w-full max-w-md"
+                <IDKitWidget
+                  app_id={APP_ID}
+                  action={ACTION_ID}
+                  signal={formData?.documentId || ''}
+                  onSuccess={handleWorldcoinSuccess}
+                  verification_level={VerificationLevel.Orb}
                 >
-                  Simular verificación exitosa
-                </Button>
+                  {({ open }) => (
+                    <Button 
+                      onClick={open}
+                      size="lg"
+                      className="w-full max-w-md"
+                      disabled={isVerifying}
+                    >
+                      {isVerifying ? "Verificando..." : "Verificar con World ID"}
+                    </Button>
+                  )}
+                </IDKitWidget>
               </CardContent>
             </Card>
           )}
