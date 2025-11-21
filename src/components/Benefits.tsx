@@ -1,36 +1,39 @@
 import { Shield, Globe, Heart, TrendingUp, CheckCircle, Users } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useTranslation } from "react-i18next";
 
 const Benefits = () => {
+  const { t } = useTranslation();
+  
   const benefits = [
     {
-      title: "Beneficios para acompañantes",
+      title: t("benefits.companions.title"),
       icon: Shield,
       items: [
-        "Ingresos claros y trazables",
-        "Reputación on-chain que te acompaña en tu carrera",
-        "Formación y respaldo de Companya",
-        "Agenda organizada y fácil de usar desde tu portal"
+        t("benefits.companions.income"),
+        t("benefits.companions.reputation"),
+        t("benefits.companions.training"),
+        t("benefits.companions.schedule")
       ]
     },
     {
-      title: "Beneficios para la familia",
+      title: t("benefits.families.title"),
       icon: Globe,
       items: [
-        "Paz mental: sabes que no están solos",
-        "Puedes estar en otro país y seguir cuidando",
-        "Cada ticket usado queda registrado",
-        "Informes de uso que puedes revisar cuando quieras"
+        t("benefits.families.peace"),
+        t("benefits.families.care"),
+        t("benefits.families.tracking"),
+        t("benefits.families.reports")
       ]
     },
     {
-      title: "Beneficios para personas mayores",
+      title: t("benefits.seniors.title"),
       icon: Heart,
       items: [
-        "Compañía confiable y cercana",
-        "No necesitan aprender apps ni tecnología",
-        "Actividades significativas: conversar, leer, caminar",
-        "Sensación de ser vistos, escuchados y acompañados"
+        t("benefits.seniors.reliable"),
+        t("benefits.seniors.notech"),
+        t("benefits.seniors.activities"),
+        t("benefits.seniors.seen")
       ]
     }
   ];
@@ -41,10 +44,10 @@ const Benefits = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10 md:mb-14 lg:mb-16">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">
-            Beneficios para todos
+            {t("benefits.title")}
           </h2>
           <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
-            Un ecosistema donde todos ganan
+            {t("benefits.subtitle")}
           </p>
         </div>
 

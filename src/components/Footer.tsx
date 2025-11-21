@@ -1,7 +1,10 @@
 import { Link } from "react-router-dom";
 import { Mail, Twitter, Linkedin } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Footer = () => {
+  const { t } = useTranslation();
+  
   return (
     <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
@@ -16,7 +19,7 @@ const Footer = () => {
             </div>
             
             <p className="text-sm text-muted-foreground max-w-md">
-              Acompañamiento con trazabilidad y confianza para personas mayores
+              {t("footer.tagline")}
             </p>
             
             <div className="flex space-x-4">
@@ -35,35 +38,35 @@ const Footer = () => {
           {/* Links */}
           <div className="flex flex-wrap justify-center gap-x-6 gap-y-2 mb-8 text-sm">
             <a href="#como-funciona" className="text-muted-foreground hover:text-foreground transition-colors">
-              Cómo funciona
+              {t("footer.howWorks")}
             </a>
             <a href="/acompanante" className="text-muted-foreground hover:text-foreground transition-colors">
-              Soy acompañante
+              {t("footer.forCompanions")}
             </a>
             <a href="/comprar" className="text-muted-foreground hover:text-foreground transition-colors">
-              Comprar tiquetera
+              {t("nav.validateTicket")}
             </a>
             <a href="#seguridad" className="text-muted-foreground hover:text-foreground transition-colors">
-              Seguridad
+              {t("nav.security")}
             </a>
             <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              Blog
+              {t("footer.blog")}
             </a>
             <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              Contacto
+              {t("footer.contact")}
             </a>
             <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              Privacidad
+              {t("footer.privacy")}
             </a>
             <a href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-              Términos
+              {t("footer.terms")}
             </a>
           </div>
 
           {/* Copyright */}
           <div className="pt-6 border-t border-border">
             <p className="text-sm text-muted-foreground text-center">
-              © {new Date().getFullYear()} Companya. Todos los derechos reservados.
+              © {new Date().getFullYear()} Companya. {t("footer.rights")}.
             </p>
           </div>
         </div>

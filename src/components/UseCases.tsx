@@ -2,28 +2,31 @@ import { Globe, Heart, Building2, ArrowRight } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 const UseCases = () => {
+  const { t } = useTranslation();
+  
   const cases = [
     {
       icon: Globe,
-      title: "Vivo en otro país, pero quiero estar presente",
-      description: "Compra una tiquetera, elige el número de acompañamientos, indica país/ciudad de tu familiar. Nosotros nos encargamos de la entrega física y coordinación local.",
-      cta: "Comprar tiquetera para mi familia",
+      title: t("useCases.gift.title"),
+      description: t("useCases.gift.desc"),
+      cta: t("useCases.gift.cta"),
       href: "/comprar?type=family"
     },
     {
       icon: Heart,
-      title: "Quiero donar compañía a quien más lo necesita",
-      description: "Puedes comprar tiqueteras destinadas a fundaciones, municipios o programas específicos. Recibirás reportes agregados de impacto.",
-      cta: "Donar una tiquetera",
+      title: t("useCases.donate.title"),
+      description: t("useCases.donate.desc"),
+      cta: t("useCases.donate.cta"),
       href: "/comprar?type=donate"
     },
     {
       icon: Building2,
-      title: "Soy empresa/aseguradora y quiero un programa",
-      description: "Integramos Companya en tu portafolio de bienestar: definimos paquetes, territorios y tipos de actividades. Todo medible y trazable.",
-      cta: "Hablar con nuestro equipo",
+      title: t("useCases.corporate.title"),
+      description: t("useCases.corporate.desc"),
+      cta: t("useCases.corporate.cta"),
       href: "#contacto"
     }
   ];
@@ -34,10 +37,10 @@ const UseCases = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-10 md:mb-14 lg:mb-16">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">
-              Casos de uso
+              {t("useCases.title")}
             </h2>
             <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
-              Companya se adapta a diferentes necesidades y situaciones
+              {t("useCases.subtitle")}
             </p>
           </div>
 

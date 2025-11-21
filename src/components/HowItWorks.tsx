@@ -1,42 +1,45 @@
 import { CreditCard, Heart, Smartphone, Shield, MapPin, TrendingUp, QrCode, Sparkles, Gift, BarChart3 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
+import { useTranslation } from "react-i18next";
 
 const HowItWorks = () => {
+  const { t } = useTranslation();
+  
   const actors = [
     {
-      title: "Para padres y adultos mayores",
-      subtitle: "Cero apps, solo un pase en papel",
+      title: t("howItWorks.silver.title"),
+      subtitle: t("howItWorks.silver.point1"),
       icon: Heart,
       iconColor: "text-accent",
       points: [
-        { icon: CreditCard, text: "Recibe un pase Companya con QR" },
-        { icon: QrCode, text: "La muestran cuando llega el acompañante" },
-        { icon: Sparkles, text: "Cada visita se registra automáticamente" },
-        { icon: Shield, text: "Sin tecnología ni complicaciones" }
+        { icon: CreditCard, text: t("howItWorks.silver.point1") },
+        { icon: QrCode, text: t("howItWorks.silver.point2") },
+        { icon: Sparkles, text: t("howItWorks.silver.point3") },
+        { icon: Shield, text: t("howItWorks.silver.point4") }
       ]
     },
     {
-      title: "Para ti, que acompañas",
-      subtitle: "Una app que convierte tiempo en valor",
+      title: t("howItWorks.companion.title"),
+      subtitle: t("howItWorks.companion.point1"),
       icon: Smartphone,
       iconColor: "text-primary",
       points: [
-        { icon: Shield, text: "Regístrate y verifica tu identidad" },
-        { icon: QrCode, text: "Escanea la tarjeta en cada visita" },
-        { icon: Gift, text: "Recibe un NFT por cada acompañamiento" },
-        { icon: TrendingUp, text: "Genera valor económico y reputación" }
+        { icon: Shield, text: t("howItWorks.companion.point1") },
+        { icon: QrCode, text: t("howItWorks.companion.point2") },
+        { icon: Gift, text: t("howItWorks.companion.point3") },
+        { icon: TrendingUp, text: t("howItWorks.companion.point4") }
       ]
     },
     {
-      title: "Para ti, que cuidas lejos",
-      subtitle: "Pases con trazabilidad garantizada",
+      title: t("howItWorks.payer.title"),
+      subtitle: t("howItWorks.payer.point1"),
       icon: MapPin,
       iconColor: "text-secondary",
       points: [
-        { icon: CreditCard, text: "Compra tickets para tu familiar o dona" },
-        { icon: Heart, text: "Nosotros emitimos y coordinamos todo" },
-        { icon: BarChart3, text: "Seguimiento de visitas en tiempo real" },
-        { icon: Sparkles, text: "Impacto medible y transparente" }
+        { icon: CreditCard, text: t("howItWorks.payer.point1") },
+        { icon: Heart, text: t("howItWorks.payer.point2") },
+        { icon: BarChart3, text: t("howItWorks.payer.point3") },
+        { icon: Sparkles, text: t("howItWorks.payer.point4") }
       ]
     }
   ];
@@ -47,18 +50,12 @@ const HowItWorks = () => {
         <div className="text-center mb-10 md:mb-14 lg:mb-16 animate-fade-in">
           <div className="inline-block mb-3 md:mb-4">
             <span className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-semibold">
-              Cómo funciona
+              {t("howItWorks.title")}
             </span>
           </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 md:mb-4 px-4">
-            Un sistema simple para{" "}
-            <span className="text-transparent bg-clip-text bg-gradient-secondary">
-              tres actores
-            </span>
+            {t("howItWorks.title")}
           </h2>
-          <p className="text-base md:text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto px-4">
-            Conectando familias, acompañantes y personas mayores
-          </p>
         </div>
 
         <div className="grid sm:grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 relative">
