@@ -4,8 +4,8 @@ import { Card, CardContent } from "@/components/ui/card";
 const HowItWorks = () => {
   const actors = [
     {
-      title: "Para tus padres o adultos mayores",
-      subtitle: "Cero apps, solo tu pase Companya en papel",
+      title: "Para padres y adultos mayores",
+      subtitle: "Cero apps, solo un pase en papel",
       icon: Heart,
       iconColor: "text-accent",
       points: [
@@ -17,7 +17,7 @@ const HowItWorks = () => {
     },
     {
       title: "Para ti, que acompañas",
-      subtitle: "Una app simple que convierte tiempo en valor",
+      subtitle: "Una app que convierte tiempo en valor",
       icon: Smartphone,
       iconColor: "text-primary",
       points: [
@@ -28,8 +28,8 @@ const HowItWorks = () => {
       ]
     },
     {
-      title: "Para ti, que cuidas a distancia",
-      subtitle: "Pases con trazabilidad real",
+      title: "Para ti, que cuidas lejos",
+      subtitle: "Pases con trazabilidad garantizada",
       icon: MapPin,
       iconColor: "text-secondary",
       points: [
