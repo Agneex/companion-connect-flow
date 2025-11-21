@@ -294,7 +294,7 @@ const RegistroAcompanante = () => {
                 <div className="text-center space-y-2">
                   <h2 className="text-3xl font-bold">¡Registro completado!</h2>
                   <p className="text-muted-foreground">
-                    Tu verificación ha sido exitosa. Pronto recibirás información sobre los siguientes pasos.
+                    Tu verificación ha sido exitosa. Ya puedes acceder a la plataforma.
                   </p>
                 </div>
                 <div className="bg-muted/50 p-6 rounded-lg space-y-3 w-full">
@@ -302,18 +302,28 @@ const RegistroAcompanante = () => {
                   <ul className="space-y-2 text-sm text-muted-foreground">
                     <li>✓ Verificación Worldcoin completada</li>
                     <li>✓ Datos KYC registrados</li>
+                    <li>✓ Acceso a plataforma web3 habilitado</li>
                     <li>⏳ Revisión de perfil (1-2 días hábiles)</li>
-                    <li>⏳ Acceso a plataforma web3</li>
                     <li>⏳ Capacitación inicial</li>
                   </ul>
                 </div>
-                <Button 
-                  onClick={() => navigate("/")}
-                  size="lg"
-                  className="w-full max-w-md"
-                >
-                  Volver al inicio
-                </Button>
+                <div className="flex gap-3 w-full max-w-md">
+                  <Button 
+                    onClick={() => navigate("/acompanante/login")}
+                    size="lg"
+                    className="flex-1 shadow-glow-primary"
+                  >
+                    Acceder a plataforma
+                  </Button>
+                  <Button 
+                    onClick={() => navigate("/")}
+                    size="lg"
+                    variant="outline"
+                    className="flex-1"
+                  >
+                    Volver al inicio
+                  </Button>
+                </div>
               </CardContent>
             </Card>
           )}
