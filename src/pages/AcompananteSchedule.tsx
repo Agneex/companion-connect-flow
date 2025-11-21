@@ -1,16 +1,18 @@
 import { useState, useEffect } from "react";
-import { useNavigate, Link } from "react-router-dom";
-import { format, isSameDay, addDays, startOfMonth, endOfMonth, eachDayOfInterval, isToday } from "date-fns";
+import { useNavigate } from "react-router-dom";
+import { format, isSameDay, addDays, isToday } from "date-fns";
 import { es } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, Calendar as CalendarIcon, Clock, MapPin, User, Phone, Plus } from "lucide-react";
+import { Calendar as CalendarIcon, Clock, MapPin, User, Phone, Plus } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Context";
 import { cn } from "@/lib/utils";
+import { Link } from "react-router-dom";
 
 interface ScheduledSession {
   id: string;
@@ -26,10 +28,15 @@ interface ScheduledSession {
 }
 
 const AcompananteSchedule = () => {
-  const { isConnected, isCompanion } = useWeb3();
+  const { isConnected, isCompanion, disconnectWallet } = useWeb3();
   const navigate = useNavigate();
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [scheduledSessions, setScheduledSessions] = useState<ScheduledSession[]>([]);
+
+  const handleLogout = () => {
+    disconnectWallet();
+    navigate("/");
+  };
 
   useEffect(() => {
     if (!isConnected || !isCompanion) {
@@ -142,27 +149,11 @@ const AcompananteSchedule = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      <DashboardNav onLogout={handleLogout} />
       
-      {/* Header */}
-      <div className="border-b border-border bg-muted/30">
-        <div className="container mx-auto px-4 py-6">
-          <Button 
-            variant="ghost" 
-            onClick={() => navigate("/acompanante/dashboard")}
-            className="mb-4"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Volver al dashboard
-          </Button>
-          <h1 className="text-3xl font-bold text-foreground">Mi Agenda</h1>
-          <p className="text-muted-foreground mt-1">
-            Gestiona tus sesiones programadas y próximas citas
-          </p>
-        </div>
-      </div>
-
-      <main className="container mx-auto px-4 py-8">
-        <div className="grid lg:grid-cols-3 gap-6">
+      <main className="lg:ml-64 pt-16 lg:pt-16">
+        <div className="container mx-auto px-4 py-8 lg:py-12">
+          <div className="grid lg:grid-cols-3 gap-6">
           {/* Calendar Section */}
           <div className="lg:col-span-2 space-y-6">
             <Card className="glass-effect">
@@ -374,6 +365,7 @@ const AcompananteSchedule = () => {
                 </Button>
               </CardContent>
             </Card>
+          </div>
           </div>
         </div>
       </main>

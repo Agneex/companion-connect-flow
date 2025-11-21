@@ -7,7 +7,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Badge } from "@/components/ui/badge";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { 
-  ArrowLeft, 
   Award, 
   Calendar, 
   User, 
@@ -20,6 +19,7 @@ import {
   Share2
 } from "lucide-react";
 import Navigation from "@/components/Navigation";
+import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Context";
 import { cn } from "@/lib/utils";
@@ -83,11 +83,16 @@ const impactCategories = {
 };
 
 const AcompananteNFTs = () => {
-  const { isConnected, isCompanion, account } = useWeb3();
+  const { isConnected, isCompanion, disconnectWallet } = useWeb3();
   const navigate = useNavigate();
   const [nfts, setNfts] = useState<NFTMetadata[]>([]);
   const [selectedNFT, setSelectedNFT] = useState<NFTMetadata | null>(null);
   const [filter, setFilter] = useState<"all" | "companionship" | "practical" | "digital">("all");
+
+  const handleLogout = () => {
+    disconnectWallet();
+    navigate("/");
+  };
 
   useEffect(() => {
     if (!isConnected || !isCompanion) {
@@ -236,20 +241,12 @@ const AcompananteNFTs = () => {
   return (
     <div className="min-h-screen bg-background">
       <Navigation />
+      <DashboardNav onLogout={handleLogout} />
       
-      {/* Header */}
-      <div className="border-b border-border bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5">
-        <div className="container mx-auto px-4 py-8">
-          <Button 
-            variant="ghost" 
-            onClick={() => navigate("/acompanante/dashboard")}
-            className="mb-4"
-          >
-            <ArrowLeft className="w-4 h-4 mr-2" />
-            Volver al dashboard
-          </Button>
-          
-          <div className="flex items-center gap-4 mb-4">
+      <div className="lg:ml-64 pt-16 lg:pt-16">
+        {/* Header */}
+        <div className="border-b border-border bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5">
+          <div className="container mx-auto px-4 py-8">
             <div className="w-16 h-16 bg-gradient-secondary rounded-2xl flex items-center justify-center shadow-glow-primary">
               <Award className="w-8 h-8 text-primary-foreground" />
             </div>
@@ -295,9 +292,8 @@ const AcompananteNFTs = () => {
             </Card>
           </div>
         </div>
-      </div>
 
-      <main className="container mx-auto px-4 py-8">
+        <main className="container mx-auto px-4 py-8">
         {/* Filters */}
         <Tabs defaultValue="all" className="mb-8" onValueChange={(v) => setFilter(v as any)}>
           <TabsList className="grid grid-cols-4 w-full max-w-2xl mx-auto">
@@ -553,7 +549,8 @@ const AcompananteNFTs = () => {
             </Card>
           </div>
         )}
-      </main>
+        </main>
+      </div>
 
       <Footer />
     </div>
