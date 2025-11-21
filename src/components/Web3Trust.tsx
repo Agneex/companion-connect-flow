@@ -1,6 +1,15 @@
-import { Network, Lock, CheckCircle, Database, ShieldCheck, Eye, FileCheck } from "lucide-react";
+import { Network, Lock, CheckCircle, Database, ShieldCheck, Eye, FileCheck, ChevronDown } from "lucide-react";
+import { useState } from "react";
+import {
+  Accordion,
+  AccordionContent,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 
 const Web3Trust = () => {
+  const [activeNode, setActiveNode] = useState<number | null>(null);
+
   return (
     <section id="seguridad" className="py-12 md:py-16 lg:py-20 relative overflow-hidden">
       {/* Network visualization background */}
@@ -29,102 +38,173 @@ const Web3Trust = () => {
             </p>
           </div>
 
-          {/* Network visualization */}
-          <div className="relative mb-8 md:mb-10 lg:mb-12 animate-fade-in">
-            <div className="flex items-center justify-center space-x-8 md:space-x-12 lg:space-x-24">
+          {/* Interactive Network visualization */}
+          <div className="relative mb-10 md:mb-14 lg:mb-16 animate-fade-in">
+            <div className="flex items-center justify-center space-x-4 md:space-x-8 lg:space-x-16">
               {/* Node 1 */}
-              <div className="flex flex-col items-center space-y-2 md:space-y-3 animate-scale-in" style={{ animationDelay: "0.2s" }}>
-                <div className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full glass-effect border-2 border-primary flex items-center justify-center shadow-glow-primary hover:scale-110 hover:rotate-12 transition-all cursor-pointer">
-                  <Database className="text-primary" size={24} />
+              <div 
+                className="flex flex-col items-center space-y-2 md:space-y-3 animate-scale-in cursor-pointer group" 
+                style={{ animationDelay: "0.2s" }}
+                onMouseEnter={() => setActiveNode(1)}
+                onMouseLeave={() => setActiveNode(null)}
+              >
+                <div className={`w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full glass-effect border-2 flex items-center justify-center transition-all duration-300 ${
+                  activeNode === 1 
+                    ? "border-primary shadow-glow-primary scale-110 rotate-3" 
+                    : "border-primary/50 hover:border-primary hover:shadow-glow-primary hover:scale-105"
+                }`}>
+                  <Database className="text-primary transition-transform group-hover:scale-110" size={28} />
                 </div>
-                <span className="text-xs text-center text-muted-foreground max-w-[80px] md:max-w-[100px]">
-                  Compra de pases
-                </span>
+                <div className="text-center max-w-[100px] md:max-w-[120px]">
+                  <span className="text-xs md:text-sm font-semibold text-foreground block">1. Compra</span>
+                  <span className="text-xs text-muted-foreground">Pase digital seguro</span>
+                </div>
+                {activeNode === 1 && (
+                  <div className="absolute top-full mt-4 glass-effect border border-primary/30 rounded-lg p-3 max-w-[200px] animate-fade-in z-20">
+                    <p className="text-xs text-muted-foreground">Cada pase se registra como activo digital verificado</p>
+                  </div>
+                )}
               </div>
 
-              {/* Connection line */}
-              <div className="hidden md:block w-16 lg:w-24 h-0.5 bg-gradient-to-r from-primary via-accent to-secondary" />
+              {/* Animated Connection line 1 */}
+              <div className="hidden md:block relative w-12 lg:w-20 h-1 overflow-hidden rounded-full">
+                <div className={`absolute inset-0 bg-gradient-to-r from-primary to-accent transition-all duration-500 ${
+                  activeNode === 1 || activeNode === 2 ? "opacity-100 animate-shimmer" : "opacity-30"
+                }`} style={{ backgroundSize: "200% 100%" }} />
+              </div>
 
               {/* Node 2 */}
-              <div className="flex flex-col items-center space-y-2 md:space-y-3 animate-scale-in" style={{ animationDelay: "0.4s" }}>
-                <div className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full glass-effect border-2 border-accent flex items-center justify-center shadow-glow-accent hover:scale-110 hover:rotate-12 transition-all cursor-pointer">
-                  <Network className="text-accent" size={24} />
+              <div 
+                className="flex flex-col items-center space-y-2 md:space-y-3 animate-scale-in cursor-pointer group" 
+                style={{ animationDelay: "0.4s" }}
+                onMouseEnter={() => setActiveNode(2)}
+                onMouseLeave={() => setActiveNode(null)}
+              >
+                <div className={`w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full glass-effect border-2 flex items-center justify-center transition-all duration-300 ${
+                  activeNode === 2 
+                    ? "border-accent shadow-glow-accent scale-110 rotate-3" 
+                    : "border-accent/50 hover:border-accent hover:shadow-glow-accent hover:scale-105"
+                }`}>
+                  <Network className="text-accent transition-transform group-hover:scale-110" size={28} />
                 </div>
-                <span className="text-xs text-center text-muted-foreground max-w-[80px] md:max-w-[100px]">
-                  Sesión de acompañamiento
-                </span>
+                <div className="text-center max-w-[100px] md:max-w-[120px]">
+                  <span className="text-xs md:text-sm font-semibold text-foreground block">2. Acompañamiento</span>
+                  <span className="text-xs text-muted-foreground">Escaneo QR</span>
+                </div>
+                {activeNode === 2 && (
+                  <div className="absolute top-full mt-4 glass-effect border border-accent/30 rounded-lg p-3 max-w-[200px] animate-fade-in z-20">
+                    <p className="text-xs text-muted-foreground">Cada visita queda registrada de forma inmutable</p>
+                  </div>
+                )}
               </div>
 
-              {/* Connection line */}
-              <div className="hidden md:block w-16 lg:w-24 h-0.5 bg-gradient-to-r from-secondary via-accent to-primary" />
+              {/* Animated Connection line 2 */}
+              <div className="hidden md:block relative w-12 lg:w-20 h-1 overflow-hidden rounded-full">
+                <div className={`absolute inset-0 bg-gradient-to-r from-accent to-secondary transition-all duration-500 ${
+                  activeNode === 2 || activeNode === 3 ? "opacity-100 animate-shimmer" : "opacity-30"
+                }`} style={{ backgroundSize: "200% 100%" }} />
+              </div>
 
               {/* Node 3 */}
-              <div className="flex flex-col items-center space-y-2 md:space-y-3 animate-scale-in" style={{ animationDelay: "0.6s" }}>
-                <div className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 rounded-full glass-effect border-2 border-secondary flex items-center justify-center shadow-glow-secondary hover:scale-110 hover:rotate-12 transition-all cursor-pointer">
-                  <CheckCircle className="text-secondary" size={24} />
+              <div 
+                className="flex flex-col items-center space-y-2 md:space-y-3 animate-scale-in cursor-pointer group" 
+                style={{ animationDelay: "0.6s" }}
+                onMouseEnter={() => setActiveNode(3)}
+                onMouseLeave={() => setActiveNode(null)}
+              >
+                <div className={`w-16 h-16 md:w-20 md:h-20 lg:w-24 lg:h-24 rounded-full glass-effect border-2 flex items-center justify-center transition-all duration-300 ${
+                  activeNode === 3 
+                    ? "border-secondary shadow-glow-secondary scale-110 rotate-3" 
+                    : "border-secondary/50 hover:border-secondary hover:shadow-glow-secondary hover:scale-105"
+                }`}>
+                  <CheckCircle className="text-secondary transition-transform group-hover:scale-110" size={28} />
                 </div>
-                <span className="text-xs text-center text-muted-foreground max-w-[80px] md:max-w-[100px]">
-                  Recompensa NFT
-                </span>
+                <div className="text-center max-w-[100px] md:max-w-[120px]">
+                  <span className="text-xs md:text-sm font-semibold text-foreground block">3. Recompensa</span>
+                  <span className="text-xs text-muted-foreground">NFT verificado</span>
+                </div>
+                {activeNode === 3 && (
+                  <div className="absolute top-full mt-4 glass-effect border border-secondary/30 rounded-lg p-3 max-w-[200px] animate-fade-in z-20">
+                    <p className="text-xs text-muted-foreground">Prueba inmutable del servicio prestado</p>
+                  </div>
+                )}
               </div>
             </div>
           </div>
 
-          {/* Features grid */}
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
+          {/* 3 Key Benefits - Large Cards */}
+          <div className="grid md:grid-cols-3 gap-6 md:gap-8 mb-8 md:mb-10">
             {[
-              { icon: ShieldCheck, text: "Todos los acompañantes verifican su identidad antes de ofrecer servicios" },
-              { icon: Eye, text: "Cada visita queda registrada con fecha, hora y acompañante verificado" },
-              { icon: FileCheck, text: "Historial inmutable de servicios prestados para total transparencia" },
-              { icon: Database, text: "Cada pase se representa como un activo digital seguro" },
-              { icon: CheckCircle, text: "Cada acompañamiento genera una prueba en la red (NFT) para el acompañante" },
-              { icon: Lock, text: "El adulto mayor nunca tiene que entender nada de crypto" }
+              { 
+                icon: ShieldCheck, 
+                title: "Acompañantes verificados",
+                description: "Identidad y antecedentes validados en blockchain"
+              },
+              { 
+                icon: Eye, 
+                title: "Trazabilidad total",
+                description: "Historial inmutable de cada visita en tiempo real"
+              },
+              { 
+                icon: Lock, 
+                title: "Privacidad garantizada",
+                description: "Seguridad web3 sin exponer datos personales"
+              }
             ].map((feature, index) => {
               const Icon = feature.icon;
               return (
-                <div key={index} className="flex items-start space-x-3 glass-effect rounded-lg p-3 md:p-4 border border-border/50 hover-lift group animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                  <Icon className="text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" size={18} />
-                  <span className="text-xs md:text-sm text-muted-foreground">{feature.text}</span>
+                <div 
+                  key={index} 
+                  className="glass-effect rounded-xl p-6 md:p-8 border border-border/50 hover:border-primary/50 hover-lift group animate-fade-in text-center"
+                  style={{ animationDelay: `${index * 0.15}s` }}
+                >
+                  <div className="w-16 h-16 md:w-20 md:h-20 mx-auto mb-4 rounded-xl bg-gradient-secondary flex items-center justify-center group-hover:shadow-glow-primary transition-all group-hover:scale-110 group-hover:rotate-3">
+                    <Icon className="text-primary-foreground" size={32} />
+                  </div>
+                  <h3 className="text-lg md:text-xl font-semibold text-foreground mb-2">
+                    {feature.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {feature.description}
+                  </p>
                 </div>
               );
             })}
           </div>
 
-          {/* Security notes */}
-          <div className="space-y-4">
-            <div className="glass-effect rounded-lg p-4 md:p-6 border border-border hover-lift group animate-slide-up" style={{ animationDelay: "0.4s" }}>
-              <div className="flex items-start space-x-3">
-                <ShieldCheck className="text-primary flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" size={18} />
-                <p className="text-xs md:text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Validación de acompañantes:</span> Todos los acompañantes 
-                  pasan por un proceso de verificación de identidad y antecedentes antes de poder registrar sesiones. 
-                  Cada perfil incluye su historial verificado en blockchain.
-                </p>
-              </div>
-            </div>
-            
-            <div className="glass-effect rounded-lg p-4 md:p-6 border border-border hover-lift group animate-slide-up" style={{ animationDelay: "0.5s" }}>
-              <div className="flex items-start space-x-3">
-                <Eye className="text-primary flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" size={18} />
-                <p className="text-xs md:text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Trazabilidad completa:</span> Cada visita queda registrada 
-                  de forma inmutable con fecha, hora, duración y acompañante verificado. Las familias pueden revisar 
-                  el historial completo en tiempo real desde cualquier lugar.
-                </p>
-              </div>
-            </div>
+          {/* Technical Details Accordion */}
+          <Accordion type="single" collapsible className="w-full max-w-3xl mx-auto">
+            <AccordionItem value="technical-details" className="glass-effect rounded-lg border border-border px-4 md:px-6">
+              <AccordionTrigger className="text-sm md:text-base font-semibold text-foreground hover:text-primary py-4">
+                <div className="flex items-center gap-2">
+                  <Database className="text-primary" size={20} />
+                  <span>Ver detalles técnicos de seguridad</span>
+                </div>
+              </AccordionTrigger>
+              <AccordionContent className="space-y-4 pb-4">
+                <div className="flex items-start space-x-3 p-3 rounded-lg bg-background/50">
+                  <ShieldCheck className="text-primary flex-shrink-0 mt-1" size={18} />
+                  <p className="text-xs md:text-sm text-muted-foreground">
+                    <span className="font-semibold text-foreground">Validación:</span> Verificación de identidad y antecedentes. Historial verificado en blockchain.
+                  </p>
+                </div>
+                
+                <div className="flex items-start space-x-3 p-3 rounded-lg bg-background/50">
+                  <Eye className="text-primary flex-shrink-0 mt-1" size={18} />
+                  <p className="text-xs md:text-sm text-muted-foreground">
+                    <span className="font-semibold text-foreground">Registro:</span> Cada visita inmutable con fecha, hora, duración y acompañante verificado.
+                  </p>
+                </div>
 
-            <div className="glass-effect rounded-lg p-4 md:p-6 border border-border hover-lift group animate-slide-up" style={{ animationDelay: "0.6s" }}>
-              <div className="flex items-start space-x-3">
-                <Lock className="text-primary flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" size={18} />
-                <p className="text-xs md:text-sm text-muted-foreground">
-                  <span className="font-semibold text-foreground">Seguridad técnica:</span> Usamos 
-                  infraestructura web3 para asegurar que cada pase y cada acompañamiento queden 
-                  registrados de forma inmutable, sin exponer datos personales. Máxima transparencia con total privacidad.
-                </p>
-              </div>
-            </div>
-          </div>
+                <div className="flex items-start space-x-3 p-3 rounded-lg bg-background/50">
+                  <Lock className="text-primary flex-shrink-0 mt-1" size={18} />
+                  <p className="text-xs md:text-sm text-muted-foreground">
+                    <span className="font-semibold text-foreground">Infraestructura:</span> Web3 para registros inmutables sin exponer datos personales.
+                  </p>
+                </div>
+              </AccordionContent>
+            </AccordionItem>
+          </Accordion>
         </div>
       </div>
     </section>
