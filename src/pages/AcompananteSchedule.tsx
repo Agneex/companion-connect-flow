@@ -149,7 +149,7 @@ const AcompananteSchedule = () => {
     <div className="min-h-screen bg-background">
       <DashboardNav onLogout={handleLogout} />
       
-      <main className="pt-16">
+      <main className="pt-[120px]">
         <div className="container mx-auto px-4 py-8 lg:py-12">
           <div className="grid lg:grid-cols-3 gap-6">
           {/* Calendar Section */}
