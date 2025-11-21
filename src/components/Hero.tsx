@@ -36,7 +36,7 @@ const Hero = () => {
               con personas mayores. Todo con trazabilidad web3, sin complicaciones para ellos.
             </p>
 
-            <div className="space-y-4 md:space-y-5 animate-slide-up" style={{ animationDelay: "0.2s" }}>
+            <div className="flex flex-col gap-4 md:gap-5 animate-slide-up" style={{ animationDelay: "0.2s" }}>
               <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
                 <Button size="lg" asChild className="shadow-glow-primary group hover-lift relative overflow-hidden w-full sm:w-auto text-sm md:text-base">
                   <Link to="/acompanante">
@@ -50,7 +50,7 @@ const Hero = () => {
                 </Button>
               </div>
 
-              <div className="flex justify-center lg:justify-start">
+              <div className="flex justify-center lg:justify-start w-full">
                 <a 
                   href="#como-funciona" 
                   className="inline-flex items-center text-primary hover:text-primary/80 transition-colors group text-sm md:text-base"
