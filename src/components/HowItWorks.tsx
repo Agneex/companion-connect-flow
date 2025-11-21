@@ -1,4 +1,4 @@
-import { CreditCard, Heart, Smartphone, Shield, MapPin, TrendingUp } from "lucide-react";
+import { CreditCard, Heart, Smartphone, Shield, MapPin, TrendingUp, QrCode, Sparkles, Gift, BarChart3 } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 
 const HowItWorks = () => {
@@ -9,10 +9,10 @@ const HowItWorks = () => {
       icon: Heart,
       iconColor: "text-accent",
       points: [
-        "Reciben una tarjeta o talonario Companya con un QR",
-        "Solo tienen que mostrarla cuando un acompañante los visita",
-        "Cada encuentro se registra y suma a su bienestar",
-        "Sin que tengan que hacer nada digital"
+        { icon: CreditCard, text: "Reciben una tarjeta con QR" },
+        { icon: QrCode, text: "La muestran cuando llega el acompañante" },
+        { icon: Sparkles, text: "Cada visita se registra automáticamente" },
+        { icon: Shield, text: "Sin tecnología ni complicaciones" }
       ]
     },
     {
@@ -21,10 +21,10 @@ const HowItWorks = () => {
       icon: Smartphone,
       iconColor: "text-primary",
       points: [
-        "Te registras y verificas tu identidad en Companya",
-        "Escaneas el ticket físico del adulto mayor cuando lo acompañas",
-        "Recibes un NFT/recompensa asociado a esa experiencia",
-        "Con valor económico y reputación verificable"
+        { icon: Shield, text: "Regístrate y verifica tu identidad" },
+        { icon: QrCode, text: "Escanea la tarjeta en cada visita" },
+        { icon: Gift, text: "Recibe un NFT por cada acompañamiento" },
+        { icon: TrendingUp, text: "Genera valor económico y reputación" }
       ]
     },
     {
@@ -33,10 +33,10 @@ const HowItWorks = () => {
       icon: MapPin,
       iconColor: "text-secondary",
       points: [
-        "Entras al portal y compras una tiquetera para una persona concreta o para donar",
-        "Nosotros nos encargamos de emitir la tarjeta física y coordinar las actividades",
-        "Puedes ver el uso de tus tickets: cuántas visitas se realizaron y su frecuencia",
-        "Con impacto medible y transparente"
+        { icon: CreditCard, text: "Compra tickets para tu familiar o dona" },
+        { icon: Heart, text: "Nosotros emitimos y coordinamos todo" },
+        { icon: BarChart3, text: "Seguimiento de visitas en tiempo real" },
+        { icon: Sparkles, text: "Impacto medible y transparente" }
       ]
     }
   ];
@@ -93,14 +93,19 @@ const HowItWorks = () => {
                   </div>
 
                   <ul className="space-y-2 md:space-y-3">
-                    {actor.points.map((point, i) => (
-                      <li key={i} className="flex items-start space-x-2">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-1.5 md:mt-2 flex-shrink-0" />
-                        <span className="text-xs md:text-sm text-muted-foreground leading-relaxed">
-                          {point}
-                        </span>
-                      </li>
-                    ))}
+                    {actor.points.map((point, i) => {
+                      const PointIcon = point.icon;
+                      return (
+                        <li key={i} className="flex items-start space-x-3 group/item">
+                          <div className="w-6 h-6 md:w-7 md:h-7 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0 group-hover/item:bg-primary/20 transition-colors">
+                            <PointIcon className="text-primary" size={14} />
+                          </div>
+                          <span className="text-xs md:text-sm text-muted-foreground leading-relaxed pt-1">
+                            {point.text}
+                          </span>
+                        </li>
+                      );
+                    })}
                   </ul>
                 </CardContent>
               </Card>
