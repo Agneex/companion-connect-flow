@@ -21,9 +21,9 @@ const Hero = () => {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-8 md:py-12 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-8 md:gap-12 lg:gap-16 items-center max-w-7xl mx-auto">
-          {/* Left content */}
-          <div className="space-y-6 md:space-y-8 animate-fade-in text-center lg:text-left">
+        <div className="flex flex-col items-center gap-8 md:gap-12 max-w-7xl mx-auto">
+          {/* Main content */}
+          <div className="space-y-6 md:space-y-8 animate-fade-in text-center w-full max-w-4xl">
             <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight">
               Companya: acompaña a quienes amas,{" "}
               <span className="text-transparent bg-clip-text bg-gradient-secondary glow-text">
@@ -31,12 +31,12 @@ const Hero = () => {
               </span>
             </h1>
             
-            <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0">
+            <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
               Compras una tiquetera de acompañamiento, un profesional la convierte en tiempo de calidad 
               con personas mayores. Todo con trazabilidad web3, sin complicaciones para ellos.
             </p>
 
-            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-slide-up justify-center lg:justify-start" style={{ animationDelay: "0.2s" }}>
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-slide-up justify-center" style={{ animationDelay: "0.2s" }}>
               <Button size="lg" asChild className="shadow-glow-primary group hover-lift relative overflow-hidden w-full sm:w-auto text-sm md:text-base">
                 <Link to="/acompanante">
                   <span className="relative z-10">Comenzar como acompañante</span>
@@ -48,11 +48,28 @@ const Hero = () => {
                 <Link to="/comprar">Comprar una tiquetera</Link>
               </Button>
             </div>
+
+            <div className="flex justify-center pt-2">
+              <a 
+                href="#como-funciona" 
+                className="inline-flex items-center text-primary hover:text-primary/80 transition-colors group text-sm md:text-base"
+                onClick={(e) => {
+                  e.preventDefault();
+                  document.getElementById('como-funciona')?.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                  });
+                }}
+              >
+                <span className="font-medium">Ver cómo funciona</span>
+                <ArrowRight className="ml-2 group-hover:translate-y-1 transition-transform" size={16} />
+              </a>
+            </div>
           </div>
 
-          {/* Right visual - Enhanced Card */}
-          <div className="relative animate-scale-in mt-8 lg:mt-0" style={{ animationDelay: "0.3s" }}>
-            <div className="relative w-full max-w-sm md:max-w-md mx-auto">
+          {/* Visual Card - Now Below Content */}
+          <div className="relative animate-scale-in w-full" style={{ animationDelay: "0.3s" }}>
+            <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto">
               {/* Floating card with enhanced animations */}
               <div className="glass-effect rounded-xl md:rounded-2xl p-6 md:p-8 shadow-elevated relative overflow-hidden animate-float">
                 <div className="absolute inset-0 bg-gradient-secondary opacity-5" />
@@ -101,8 +118,8 @@ const Hero = () => {
                 </div>
               </div>
 
-              {/* Enhanced connection lines to icons with better animations - Hidden on mobile */}
-              <div className="hidden lg:flex absolute -right-4 top-1/4 items-center space-x-2 animate-fade-in" style={{ animationDelay: "0.5s" }}>
+              {/* Enhanced connection lines to icons with better animations */}
+              <div className="hidden md:flex absolute -right-8 lg:-right-12 top-1/4 items-center space-x-2 animate-fade-in" style={{ animationDelay: "0.5s" }}>
                 <div className="relative w-16 h-0.5 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-primary to-transparent animate-shimmer" 
                        style={{ backgroundSize: "200% 100%" }} />
@@ -112,7 +129,7 @@ const Hero = () => {
                 </div>
               </div>
 
-              <div className="hidden lg:flex absolute -right-4 top-1/2 items-center space-x-2 animate-fade-in" style={{ animationDelay: "0.7s" }}>
+              <div className="hidden md:flex absolute -right-8 lg:-right-12 top-1/2 items-center space-x-2 animate-fade-in" style={{ animationDelay: "0.7s" }}>
                 <div className="relative w-20 h-0.5 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-accent to-transparent animate-shimmer" 
                        style={{ backgroundSize: "200% 100%", animationDelay: "0.5s" }} />
@@ -122,7 +139,7 @@ const Hero = () => {
                 </div>
               </div>
 
-              <div className="hidden lg:flex absolute -right-4 top-3/4 items-center space-x-2 animate-fade-in" style={{ animationDelay: "0.9s" }}>
+              <div className="hidden md:flex absolute -right-8 lg:-right-12 top-3/4 items-center space-x-2 animate-fade-in" style={{ animationDelay: "0.9s" }}>
                 <div className="relative w-12 h-0.5 overflow-hidden">
                   <div className="absolute inset-0 bg-gradient-to-r from-secondary to-transparent animate-shimmer" 
                        style={{ backgroundSize: "200% 100%", animationDelay: "1s" }} />
@@ -132,24 +149,6 @@ const Hero = () => {
                 </div>
               </div>
             </div>
-          </div>
-
-          {/* Link full-width under hero */}
-          <div className="mt-6 md:mt-8 flex justify-center lg:justify-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <a 
-              href="#como-funciona" 
-              className="inline-flex items-center text-primary hover:text-primary/80 transition-colors group text-sm md:text-base"
-              onClick={(e) => {
-                e.preventDefault();
-                document.getElementById('como-funciona')?.scrollIntoView({ 
-                  behavior: 'smooth',
-                  block: 'start'
-                });
-              }}
-            >
-              <span className="font-medium">Ver cómo funciona</span>
-              <ArrowRight className="ml-2 group-hover:translate-y-1 transition-transform" size={16} />
-            </a>
           </div>
         </div>
       </div>
