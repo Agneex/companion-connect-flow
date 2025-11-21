@@ -94,7 +94,7 @@ const Footer = () => {
           </div>
           </div>
 
-          <div className="pt-6 md:pt-8 border-t border-border">
+          <div className="pt-4 md:pt-6 border-t border-border">
             <p className="text-xs md:text-sm text-muted-foreground text-center">
               © {new Date().getFullYear()} Companya. Todos los derechos reservados.
             </p>
