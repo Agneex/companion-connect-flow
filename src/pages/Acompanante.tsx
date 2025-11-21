@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
@@ -70,9 +71,11 @@ const Acompanante = () => {
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: "0.2s" }}>
-              <Button size="lg" className="shadow-glow-primary hover-lift relative overflow-hidden group">
-                <span className="relative z-10">Comenzar como acompañante</span>
-                <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+              <Button asChild size="lg" className="shadow-glow-primary hover-lift relative overflow-hidden group">
+                <Link to="/acompanante/registro">
+                  <span className="relative z-10">Comenzar como acompañante</span>
+                  <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </Link>
               </Button>
               <Button size="lg" variant="outline" className="hover-lift glass-effect">
                 Ver cómo funciona
