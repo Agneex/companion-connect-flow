@@ -44,18 +44,18 @@ const Navigation = () => {
           </div>
 
           {/* CTA Buttons */}
-          <div className="hidden lg:flex items-center space-x-3">
+          <div className="hidden lg:flex items-center space-x-2 xl:space-x-3">
             <LanguageSwitcher />
             <Button 
               variant="outline" 
               asChild 
-              className="hover-lift glass-effect h-11 px-5"
+              className="hover-lift glass-effect h-10 px-4 text-sm"
             >
               <Link to="/acompanante/login">{t("nav.companionAccess")}</Link>
             </Button>
             <Button 
               asChild 
-              className="shadow-glow-primary hover-lift relative overflow-hidden group h-11 px-6"
+              className="shadow-glow-primary hover-lift relative overflow-hidden group h-10 px-5 text-sm"
             >
               <Link to="/validar">
                 <span className="relative z-10 font-semibold">{t("nav.validateTicket")}</span>

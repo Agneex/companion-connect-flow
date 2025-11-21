@@ -21,12 +21,12 @@ const LanguageSwitcher = () => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
-        <Button variant="ghost" size="sm" className="gap-2">
-          <Globe size={18} />
-          <span className="hidden sm:inline">{currentLanguage.label}</span>
+        <Button variant="ghost" size="sm" className="gap-1.5 h-10 px-3 text-sm hover:bg-accent/50">
+          <Globe size={16} />
+          <span className="hidden xl:inline text-xs">{currentLanguage.label}</span>
         </Button>
       </DropdownMenuTrigger>
-      <DropdownMenuContent align="end">
+      <DropdownMenuContent align="end" className="min-w-[120px]">
         {languages.map((language) => (
           <DropdownMenuItem
             key={language.code}
