@@ -3,9 +3,8 @@ import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { 
   Award, 
@@ -22,7 +21,8 @@ import {
   Activity,
   Users,
   FileText,
-  Navigation
+  Navigation,
+  Filter
 } from "lucide-react";
 import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
@@ -64,13 +64,6 @@ const impactCategories = {
     textColor: "text-orange-600",
     icon: Users,
     image: nftSocial,
-    examples: [
-      "Conversación y escucha activa",
-      "Paseo por el parque",
-      "Juegos de mesa",
-      "Actividades recreativas",
-      "Compañía para eventos"
-    ]
   },
   health: {
     name: "Apoyo en Salud",
@@ -80,13 +73,6 @@ const impactCategories = {
     textColor: "text-teal-600",
     icon: Activity,
     image: nftHealth,
-    examples: [
-      "Acompañamiento a cita médica",
-      "Gestión de medicamentos",
-      "Acompañamiento a terapias",
-      "Control de signos vitales",
-      "Nutrición y alimentación"
-    ]
   },
   mobility: {
     name: "Movilidad",
@@ -96,13 +82,6 @@ const impactCategories = {
     textColor: "text-cyan-600",
     icon: Navigation,
     image: nftMobility,
-    examples: [
-      "Transporte a citas",
-      "Compras en supermercado",
-      "Paseos seguros",
-      "Acompañamiento en transporte público",
-      "Ejercicio y caminatas"
-    ]
   },
   admin: {
     name: "Gestión Administrativa",
@@ -112,13 +91,6 @@ const impactCategories = {
     textColor: "text-indigo-600",
     icon: FileText,
     image: nftAdmin,
-    examples: [
-      "Trámites bancarios",
-      "Gestión de documentos",
-      "Pago de servicios",
-      "Citas y agendamiento",
-      "Organización personal"
-    ]
   },
   emotional: {
     name: "Apoyo Emocional",
@@ -128,13 +100,6 @@ const impactCategories = {
     textColor: "text-pink-600",
     icon: Heart,
     image: nftEmotional,
-    examples: [
-      "Escucha empática",
-      "Apoyo en duelo",
-      "Reducción de ansiedad",
-      "Motivación y ánimo",
-      "Conexión emocional"
-    ]
   }
 };
 
@@ -156,7 +121,7 @@ const AcompananteNFTs = () => {
       return;
     }
 
-    // Generate demo NFTs with real impact examples
+    // Generate demo NFTs
     const demoNFTs: NFTMetadata[] = [
       {
         id: "1",
@@ -349,231 +314,278 @@ const AcompananteNFTs = () => {
     <div className="min-h-screen bg-background">
       <DashboardNav onLogout={handleLogout} />
       
-      <div className="pt-[120px]">
-        {/* Header */}
-        <div className="border-b border-border bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5">
-          <div className="container mx-auto px-4 py-8">
-            <div className="flex items-center gap-4 mb-6">
-              <div className="w-16 h-16 bg-gradient-secondary rounded-2xl flex items-center justify-center shadow-glow-primary">
-                <Award className="w-8 h-8 text-primary-foreground" />
+      <main className="pt-[120px]">
+        <div className="container mx-auto px-4 py-8 max-w-7xl">
+          {/* Header */}
+          <div className="mb-8">
+            <div className="flex items-center justify-between mb-6">
+              <div className="flex items-center gap-4">
+                <div className="w-14 h-14 bg-gradient-secondary rounded-2xl flex items-center justify-center shadow-glow-primary">
+                  <Award className="w-7 h-7 text-primary-foreground" />
+                </div>
+                <div>
+                  <h1 className="text-3xl font-bold mb-1">Mi Colección de NFTs</h1>
+                  <p className="text-muted-foreground text-sm">
+                    {stats.total} arte{stats.total !== 1 ? 's' : ''} digital{stats.total !== 1 ? 'es' : ''} que represent{stats.total !== 1 ? 'an' : 'a'} el impacto de tu trabajo
+                  </p>
+                </div>
               </div>
-              <div>
-                <h1 className="text-4xl font-bold mb-2">Mi Colección de NFTs</h1>
-                <p className="text-muted-foreground">
-                  Arte digital que representa el impacto de tu trabajo
-                </p>
+
+              <div className="flex items-center gap-2">
+                <Button variant="outline" size="sm">
+                  <Download className="w-4 h-4 mr-2" />
+                  Exportar Todo
+                </Button>
               </div>
             </div>
 
-            {/* Stats Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-4">
-              <Card className="hover-scale">
-                <CardContent className="p-4">
-                  <Sparkles className="w-6 h-6 text-primary mb-2" />
-                  <p className="text-2xl font-bold">{stats.total}</p>
-                  <p className="text-xs text-muted-foreground">Total NFTs</p>
+            {/* Stats Summary */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-3">
+              <Card className="hover-scale border-primary/20">
+                <CardContent className="p-4 flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <p className="text-2xl font-bold">{stats.total}</p>
+                    <p className="text-xs text-muted-foreground">Total</p>
+                  </div>
                 </CardContent>
               </Card>
 
               {Object.entries(impactCategories).map(([key, cat]) => {
                 const Icon = cat.icon;
+                const count = stats[key as keyof typeof stats];
                 return (
                   <Card key={key} className="hover-scale">
-                    <CardContent className="p-4">
-                      <Icon className={cn("w-6 h-6 mb-2", cat.textColor)} />
-                      <p className="text-2xl font-bold">{stats[key as keyof typeof stats]}</p>
-                      <p className="text-xs text-muted-foreground">{cat.name}</p>
+                    <CardContent className="p-4 flex items-center gap-3">
+                      <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0", cat.bgColor)}>
+                        <Icon className={cn("w-5 h-5", cat.textColor)} />
+                      </div>
+                      <div>
+                        <p className="text-2xl font-bold">{count}</p>
+                        <p className="text-xs text-muted-foreground truncate">{cat.name}</p>
+                      </div>
                     </CardContent>
                   </Card>
                 );
               })}
             </div>
           </div>
-        </div>
 
-        {/* Filter Tabs */}
-        <div className="container mx-auto px-4 py-8">
-          <Tabs value={filter} onValueChange={(v) => setFilter(v as typeof filter)} className="space-y-6">
-            <TabsList className="grid w-full grid-cols-2 lg:grid-cols-6">
-              <TabsTrigger value="all">Todos ({stats.total})</TabsTrigger>
-              <TabsTrigger value="social">
-                <Users className="w-4 h-4 mr-2" />
-                Social ({stats.social})
-              </TabsTrigger>
-              <TabsTrigger value="health">
-                <Activity className="w-4 h-4 mr-2" />
-                Salud ({stats.health})
-              </TabsTrigger>
-              <TabsTrigger value="mobility">
-                <Navigation className="w-4 h-4 mr-2" />
-                Movilidad ({stats.mobility})
-              </TabsTrigger>
-              <TabsTrigger value="admin">
-                <FileText className="w-4 h-4 mr-2" />
-                Admin ({stats.admin})
-              </TabsTrigger>
-              <TabsTrigger value="emotional">
-                <Heart className="w-4 h-4 mr-2" />
-                Emocional ({stats.emotional})
-              </TabsTrigger>
-            </TabsList>
+          {/* Filter Bar */}
+          <div className="flex items-center gap-3 mb-6 flex-wrap">
+            <div className="flex items-center gap-2 text-sm text-muted-foreground">
+              <Filter className="w-4 h-4" />
+              <span className="font-medium">Filtrar por categoría:</span>
+            </div>
+            
+            <div className="flex gap-2 flex-wrap">
+              <Button
+                variant={filter === "all" ? "default" : "outline"}
+                size="sm"
+                onClick={() => setFilter("all")}
+              >
+                Todos ({stats.total})
+              </Button>
+              {Object.entries(impactCategories).map(([key, cat]) => {
+                const Icon = cat.icon;
+                const count = stats[key as keyof typeof stats];
+                return (
+                  <Button
+                    key={key}
+                    variant={filter === key ? "default" : "outline"}
+                    size="sm"
+                    onClick={() => setFilter(key as typeof filter)}
+                    className={filter === key ? cn(cat.bgColor, cat.textColor, "border-0") : ""}
+                  >
+                    <Icon className="w-4 h-4 mr-1.5" />
+                    {cat.name} ({count})
+                  </Button>
+                );
+              })}
+            </div>
+          </div>
 
-            <TabsContent value={filter} className="space-y-6">
-              {filteredNFTs.length === 0 ? (
-                <Card>
-                  <CardContent className="py-12 text-center">
-                    <Award className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
-                    <p className="text-muted-foreground">No tienes NFTs en esta categoría todavía</p>
+          {/* NFT Grid */}
+          {filteredNFTs.length === 0 ? (
+            <Card className="border-dashed">
+              <CardContent className="py-16 text-center">
+                <Award className="w-20 h-20 text-muted-foreground mx-auto mb-4 opacity-30" />
+                <h3 className="text-lg font-semibold mb-2">No hay NFTs en esta categoría</h3>
+                <p className="text-sm text-muted-foreground">
+                  Completa sesiones de {filter === "all" ? "cualquier tipo" : impactCategories[filter as keyof typeof impactCategories].name.toLowerCase()} para ganar NFTs
+                </p>
+              </CardContent>
+            </Card>
+          ) : (
+            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+              {filteredNFTs.map((nft, idx) => (
+                <Card 
+                  key={nft.id}
+                  className="group hover:shadow-xl hover:-translate-y-1 transition-all cursor-pointer overflow-hidden border-muted animate-fade-in"
+                  style={{ animationDelay: `${idx * 40}ms` }}
+                  onClick={() => setSelectedNFT(nft)}
+                >
+                  {/* NFT Image */}
+                  <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-muted/50 to-background">
+                    <img 
+                      src={nft.image} 
+                      alt={nft.name}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity" />
+                    <div className="absolute top-3 right-3">
+                      {getCategoryBadge(nft.category)}
+                    </div>
+                    <div className="absolute top-3 left-3">
+                      <Badge variant="secondary" className="bg-background/80 backdrop-blur-sm">
+                        #{nft.tokenId}
+                      </Badge>
+                    </div>
+                  </div>
+
+                  {/* NFT Info */}
+                  <CardContent className="p-4 space-y-3">
+                    <div>
+                      <h3 className="font-semibold line-clamp-1 mb-1">{nft.name}</h3>
+                      <p className="text-xs text-muted-foreground line-clamp-2">{nft.description}</p>
+                    </div>
+
+                    <div className="space-y-1.5">
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <Calendar className="w-3.5 h-3.5 flex-shrink-0" />
+                        <span>{format(nft.sessionDate, "d MMM yyyy", { locale: es })}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <User className="w-3.5 h-3.5 flex-shrink-0" />
+                        <span className="truncate">{nft.silverName}</span>
+                      </div>
+                      <div className="flex items-center gap-2 text-xs text-muted-foreground">
+                        <Clock className="w-3.5 h-3.5 flex-shrink-0" />
+                        <span className="truncate">{nft.duration}h • {nft.activity}</span>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
-              ) : (
-                <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                  {filteredNFTs.map((nft, idx) => (
-                    <Card 
-                      key={nft.id}
-                      className="group hover:shadow-xl transition-all cursor-pointer overflow-hidden animate-fade-in"
-                      style={{ animationDelay: `${idx * 50}ms` }}
-                      onClick={() => setSelectedNFT(nft)}
-                    >
-                      <div className="aspect-square relative overflow-hidden bg-gradient-to-br from-muted to-background">
-                        <img 
-                          src={nft.image} 
-                          alt={nft.name}
-                          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
-                        />
-                        <div className="absolute top-3 right-3">
-                          {getCategoryBadge(nft.category)}
-                        </div>
-                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-background via-background/90 to-transparent p-4">
-                          <p className="text-xs text-muted-foreground mb-1">Token #{nft.tokenId}</p>
-                          <h3 className="font-semibold text-sm line-clamp-2">{nft.name}</h3>
-                        </div>
-                      </div>
-                      <CardContent className="p-4 space-y-2">
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <Calendar className="w-3 h-3" />
-                          <span>{format(nft.sessionDate, "d MMM yyyy", { locale: es })}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <User className="w-3 h-3" />
-                          <span className="truncate">{nft.silverName}</span>
-                        </div>
-                        <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <Clock className="w-3 h-3" />
-                          <span>{nft.duration}h • {nft.activity}</span>
-                        </div>
-                      </CardContent>
-                    </Card>
-                  ))}
-                </div>
-              )}
-            </TabsContent>
-          </Tabs>
+              ))}
+            </div>
+          )}
         </div>
-      </div>
+      </main>
 
       {/* NFT Detail Modal */}
       {selectedNFT && (
         <Dialog open={!!selectedNFT} onOpenChange={() => setSelectedNFT(null)}>
-          <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+          <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
             <DialogHeader>
               <DialogTitle className="flex items-center gap-3">
                 <Sparkles className="w-6 h-6 text-primary" />
                 {selectedNFT.name}
               </DialogTitle>
-              <DialogDescription>Token #{selectedNFT.tokenId}</DialogDescription>
+              <DialogDescription>Token #{selectedNFT.tokenId} • {format(selectedNFT.sessionDate, "d 'de' MMMM, yyyy", { locale: es })}</DialogDescription>
             </DialogHeader>
 
-            <div className="space-y-6">
-              {/* NFT Image */}
-              <div className="aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-muted to-background">
-                <img 
-                  src={selectedNFT.image} 
-                  alt={selectedNFT.name}
-                  className="w-full h-full object-cover"
-                />
-              </div>
+            <div className="grid md:grid-cols-2 gap-6">
+              {/* Left: NFT Image */}
+              <div className="space-y-4">
+                <div className="aspect-square rounded-xl overflow-hidden bg-gradient-to-br from-muted/50 to-background">
+                  <img 
+                    src={selectedNFT.image} 
+                    alt={selectedNFT.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
 
-              {/* Category Badge */}
-              <div className="flex items-center justify-between">
-                {getCategoryBadge(selectedNFT.category)}
-                <div className="flex gap-2">
-                  <Button variant="outline" size="sm">
-                    <Share2 className="w-4 h-4 mr-2" />
-                    Compartir
-                  </Button>
-                  <Button variant="outline" size="sm">
-                    <Download className="w-4 h-4 mr-2" />
-                    Descargar
-                  </Button>
-                  <Button variant="outline" size="sm">
-                    <ExternalLink className="w-4 h-4 mr-2" />
-                    Ver en Explorer
-                  </Button>
+                <div className="flex items-center justify-between">
+                  {getCategoryBadge(selectedNFT.category)}
+                  <div className="flex gap-2">
+                    <Button variant="outline" size="sm">
+                      <Share2 className="w-4 h-4" />
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <Download className="w-4 h-4" />
+                    </Button>
+                    <Button variant="outline" size="sm">
+                      <ExternalLink className="w-4 h-4" />
+                    </Button>
+                  </div>
                 </div>
               </div>
 
-              {/* Description */}
-              <div>
-                <h4 className="font-semibold mb-2">Descripción</h4>
-                <p className="text-sm text-muted-foreground">{selectedNFT.description}</p>
-              </div>
+              {/* Right: NFT Details */}
+              <div className="space-y-6">
+                {/* Description */}
+                <div>
+                  <h4 className="font-semibold mb-2 text-sm text-muted-foreground uppercase tracking-wide">Descripción</h4>
+                  <p className="text-sm leading-relaxed">{selectedNFT.description}</p>
+                </div>
 
-              {/* Session Details */}
-              <div className="grid sm:grid-cols-2 gap-4">
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Detalles de la Sesión</h4>
-                  <div className="space-y-2 text-sm">
-                    <div className="flex items-start gap-2">
-                      <Calendar className="w-4 h-4 mt-0.5 text-muted-foreground" />
+                {/* Impact */}
+                <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                  <div className="flex items-start gap-3">
+                    <TrendingUp className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                    <div>
+                      <h4 className="font-semibold mb-1 text-sm">Impacto Generado</h4>
+                      <p className="text-sm text-muted-foreground">{selectedNFT.impact}</p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Session Details */}
+                <div>
+                  <h4 className="font-semibold mb-3 text-sm text-muted-foreground uppercase tracking-wide">Detalles de la Sesión</h4>
+                  <div className="space-y-3">
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
+                        <Calendar className="w-4 h-4 text-muted-foreground" />
+                      </div>
                       <div>
                         <p className="text-xs text-muted-foreground">Fecha</p>
-                        <p>{format(selectedNFT.sessionDate, "d 'de' MMMM, yyyy", { locale: es })}</p>
+                        <p className="font-medium">{format(selectedNFT.sessionDate, "d 'de' MMMM, yyyy", { locale: es })}</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-2">
-                      <User className="w-4 h-4 mt-0.5 text-muted-foreground" />
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
+                        <User className="w-4 h-4 text-muted-foreground" />
+                      </div>
                       <div>
                         <p className="text-xs text-muted-foreground">Adulto mayor</p>
-                        <p>{selectedNFT.silverName}</p>
+                        <p className="font-medium">{selectedNFT.silverName}</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-2">
-                      <MapPin className="w-4 h-4 mt-0.5 text-muted-foreground" />
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
+                        <MapPin className="w-4 h-4 text-muted-foreground" />
+                      </div>
                       <div>
                         <p className="text-xs text-muted-foreground">Ubicación</p>
-                        <p>{selectedNFT.location}</p>
+                        <p className="font-medium">{selectedNFT.location}</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-2">
-                      <Clock className="w-4 h-4 mt-0.5 text-muted-foreground" />
+                    <div className="flex items-center gap-3 text-sm">
+                      <div className="w-8 h-8 rounded-lg bg-muted flex items-center justify-center flex-shrink-0">
+                        <Clock className="w-4 h-4 text-muted-foreground" />
+                      </div>
                       <div>
                         <p className="text-xs text-muted-foreground">Duración</p>
-                        <p>{selectedNFT.duration} horas</p>
+                        <p className="font-medium">{selectedNFT.duration} horas</p>
                       </div>
                     </div>
                   </div>
                 </div>
 
-                <div className="space-y-2">
-                  <h4 className="font-semibold text-sm">Impacto Generado</h4>
-                  <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
-                    <TrendingUp className="w-8 h-8 text-primary mb-2" />
-                    <p className="text-sm">{selectedNFT.impact}</p>
+                {/* Attributes */}
+                <div>
+                  <h4 className="font-semibold mb-3 text-sm text-muted-foreground uppercase tracking-wide">Atributos</h4>
+                  <div className="grid grid-cols-2 gap-2">
+                    {selectedNFT.attributes.map((attr, idx) => (
+                      <div key={idx} className="bg-muted/50 rounded-lg p-3">
+                        <p className="text-xs text-muted-foreground mb-1">{attr.trait_type}</p>
+                        <p className="text-sm font-semibold">{attr.value}</p>
+                      </div>
+                    ))}
                   </div>
-                </div>
-              </div>
-
-              {/* Attributes */}
-              <div>
-                <h4 className="font-semibold mb-3">Atributos del NFT</h4>
-                <div className="grid grid-cols-2 gap-3">
-                  {selectedNFT.attributes.map((attr, idx) => (
-                    <div key={idx} className="bg-muted/50 rounded-lg p-3">
-                      <p className="text-xs text-muted-foreground mb-1">{attr.trait_type}</p>
-                      <p className="text-sm font-semibold">{attr.value}</p>
-                    </div>
-                  ))}
                 </div>
               </div>
             </div>
