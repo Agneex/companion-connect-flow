@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 const HowItWorks = () => {
   const actors = [
     {
-      title: "Para tus padres, abuelos o adultos mayores",
+      title: "Para tus padres o adultos mayores",
       subtitle: "Cero apps, solo una tarjeta",
       icon: Heart,
       iconColor: "text-accent",
