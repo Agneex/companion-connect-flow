@@ -26,9 +26,9 @@ const Footer = () => {
     <footer className="bg-card border-t border-border">
       <div className="container mx-auto px-6 lg:px-8 py-16">
         <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-16 mb-12 text-center md:text-left justify-items-center md:justify-items-start">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 lg:gap-8 mb-12 text-center md:text-left">
           {/* Brand */}
-          <div className="space-y-4 w-full">
+          <div className="space-y-4">
             <div className="flex items-center space-x-2">
               <div className="w-8 h-8 bg-gradient-secondary rounded-lg flex items-center justify-center">
                 <span className="text-lg font-bold text-primary-foreground">C</span>
@@ -52,7 +52,7 @@ const Footer = () => {
           </div>
 
           {/* Product */}
-          <div className="w-full">
+          <div>
             <h4 className="font-semibold text-foreground mb-4">Producto</h4>
             <ul className="space-y-2">
               {links.product.map((link, index) => (
@@ -66,7 +66,7 @@ const Footer = () => {
           </div>
 
           {/* Company */}
-          <div className="w-full">
+          <div>
             <h4 className="font-semibold text-foreground mb-4">Empresa</h4>
             <ul className="space-y-2">
               {links.company.map((link, index) => (
@@ -80,7 +80,7 @@ const Footer = () => {
           </div>
 
           {/* Legal */}
-          <div className="w-full">
+          <div>
             <h4 className="font-semibold text-foreground mb-4">Legal</h4>
             <ul className="space-y-2">
               {links.legal.map((link, index) => (
