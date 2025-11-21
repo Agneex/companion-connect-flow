@@ -59,8 +59,11 @@ const RegistroAcompanante = () => {
       if (formData) {
         // Guardar en localStorage
         const companions = JSON.parse(localStorage.getItem("companions") || "[]");
+        const walletAddress = localStorage.getItem("web3_account") || `0x${Math.random().toString(16).substr(2, 40)}`;
+        
         const newCompanion = {
           id: Date.now().toString(),
+          walletAddress: walletAddress,
           ...formData,
           worldcoinVerified: true,
           registeredAt: new Date().toISOString(),
@@ -68,6 +71,8 @@ const RegistroAcompanante = () => {
         };
         companions.push(newCompanion);
         localStorage.setItem("companions", JSON.stringify(companions));
+        localStorage.setItem("web3_account", walletAddress);
+        localStorage.setItem("is_companion", "true");
         
         setStep("success");
         toast({

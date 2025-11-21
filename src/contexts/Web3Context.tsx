@@ -44,12 +44,44 @@ export const Web3Provider = ({ children }: Web3ProviderProps) => {
       // Simulated Web3 wallet connection
       if (typeof window !== "undefined") {
         // In production, this would use ethers.js or web3.js
-        // For now, we simulate with a random address
-        const simulatedAddress = `0x${Math.random().toString(16).substr(2, 40)}`;
+        // For demo purposes, check if there's already a wallet saved
+        let simulatedAddress = localStorage.getItem("web3_account");
+        
+        if (!simulatedAddress) {
+          simulatedAddress = `0x${Math.random().toString(16).substr(2, 40)}`;
+        }
         
         // Check if user is a registered companion
-        const companions = JSON.parse(localStorage.getItem("companions") || "[]");
-        const isRegistered = companions.length > 0; // Simplified check
+        let companions = JSON.parse(localStorage.getItem("companions") || "[]");
+        
+        // If no companions exist, create a demo companion for testing
+        if (companions.length === 0) {
+          const demoCompanion = {
+            id: Date.now().toString(),
+            walletAddress: simulatedAddress,
+            fullName: "Acompañante Demo",
+            documentId: "123456789",
+            birthDate: "1990-01-01",
+            address: "Dirección de prueba",
+            phone: "+57 300 123 4567",
+            aboutYou: "Este es un perfil de demostración para probar la plataforma de acompañantes.",
+            interests: "Acompañamiento general, conversación, ayuda con tecnología",
+            experience: "Experiencia en cuidado y acompañamiento de adultos mayores",
+            worldcoinVerified: true,
+            registeredAt: new Date().toISOString(),
+            curriculum: "Demo CV"
+          };
+          companions.push(demoCompanion);
+          localStorage.setItem("companions", JSON.stringify(companions));
+        } else {
+          // Link current wallet to first companion if not linked
+          if (!companions[0].walletAddress) {
+            companions[0].walletAddress = simulatedAddress;
+            localStorage.setItem("companions", JSON.stringify(companions));
+          }
+        }
+        
+        const isRegistered = companions.length > 0;
         
         setAccount(simulatedAddress);
         setIsCompanion(isRegistered);
