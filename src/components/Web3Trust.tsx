@@ -1,4 +1,4 @@
-import { Network, Lock, CheckCircle, Database } from "lucide-react";
+import { Network, Lock, CheckCircle, Database, ShieldCheck, Eye, FileCheck } from "lucide-react";
 
 const Web3Trust = () => {
   return (
@@ -38,7 +38,7 @@ const Web3Trust = () => {
                   <Database className="text-primary" size={24} />
                 </div>
                 <span className="text-xs text-center text-muted-foreground max-w-[80px] md:max-w-[100px]">
-                  Compra de tiquetera
+                  Compra de pases
                 </span>
               </div>
 
@@ -71,29 +71,58 @@ const Web3Trust = () => {
           </div>
 
           {/* Features grid */}
-          <div className="grid sm:grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-6 md:mb-8">
+          <div className="grid sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8">
             {[
-              "Cada tiquetera se representa como un activo digital seguro",
-              "Cada acompañamiento registrado genera una prueba en la red (NFT) para el acompañante",
-              "Esto permite trazabilidad, transparencia y menos riesgo de fraude",
-              "El adulto mayor nunca tiene que entender nada de crypto"
-            ].map((feature, index) => (
-              <div key={index} className="flex items-start space-x-3 glass-effect rounded-lg p-3 md:p-4 border border-border/50 hover-lift group animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
-                <CheckCircle className="text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" size={18} />
-                <span className="text-xs md:text-sm text-muted-foreground">{feature}</span>
-              </div>
-            ))}
+              { icon: ShieldCheck, text: "Todos los acompañantes verifican su identidad antes de ofrecer servicios" },
+              { icon: Eye, text: "Cada visita queda registrada con fecha, hora y acompañante verificado" },
+              { icon: FileCheck, text: "Historial inmutable de servicios prestados para total transparencia" },
+              { icon: Database, text: "Cada pase se representa como un activo digital seguro" },
+              { icon: CheckCircle, text: "Cada acompañamiento genera una prueba en la red (NFT) para el acompañante" },
+              { icon: Lock, text: "El adulto mayor nunca tiene que entender nada de crypto" }
+            ].map((feature, index) => {
+              const Icon = feature.icon;
+              return (
+                <div key={index} className="flex items-start space-x-3 glass-effect rounded-lg p-3 md:p-4 border border-border/50 hover-lift group animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
+                  <Icon className="text-primary flex-shrink-0 mt-0.5 group-hover:scale-110 transition-transform" size={18} />
+                  <span className="text-xs md:text-sm text-muted-foreground">{feature.text}</span>
+                </div>
+              );
+            })}
           </div>
 
-          {/* Technical note */}
-          <div className="glass-effect rounded-lg p-4 md:p-6 border border-border hover-lift group animate-slide-up" style={{ animationDelay: "0.4s" }}>
-            <div className="flex items-start space-x-3">
-              <Lock className="text-primary flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" size={18} />
-              <p className="text-xs md:text-sm text-muted-foreground">
-                <span className="font-semibold text-foreground">Seguridad técnica:</span> Usamos 
-                infraestructura web3 para asegurar que cada ticket y cada acompañamiento queden 
-                registrados de forma inmutable, sin exponer datos personales.
-              </p>
+          {/* Security notes */}
+          <div className="space-y-4">
+            <div className="glass-effect rounded-lg p-4 md:p-6 border border-border hover-lift group animate-slide-up" style={{ animationDelay: "0.4s" }}>
+              <div className="flex items-start space-x-3">
+                <ShieldCheck className="text-primary flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" size={18} />
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  <span className="font-semibold text-foreground">Validación de acompañantes:</span> Todos los acompañantes 
+                  pasan por un proceso de verificación de identidad y antecedentes antes de poder registrar sesiones. 
+                  Cada perfil incluye su historial verificado en blockchain.
+                </p>
+              </div>
+            </div>
+            
+            <div className="glass-effect rounded-lg p-4 md:p-6 border border-border hover-lift group animate-slide-up" style={{ animationDelay: "0.5s" }}>
+              <div className="flex items-start space-x-3">
+                <Eye className="text-primary flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" size={18} />
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  <span className="font-semibold text-foreground">Trazabilidad completa:</span> Cada visita queda registrada 
+                  de forma inmutable con fecha, hora, duración y acompañante verificado. Las familias pueden revisar 
+                  el historial completo en tiempo real desde cualquier lugar.
+                </p>
+              </div>
+            </div>
+
+            <div className="glass-effect rounded-lg p-4 md:p-6 border border-border hover-lift group animate-slide-up" style={{ animationDelay: "0.6s" }}>
+              <div className="flex items-start space-x-3">
+                <Lock className="text-primary flex-shrink-0 mt-1 group-hover:scale-110 transition-transform" size={18} />
+                <p className="text-xs md:text-sm text-muted-foreground">
+                  <span className="font-semibold text-foreground">Seguridad técnica:</span> Usamos 
+                  infraestructura web3 para asegurar que cada pase y cada acompañamiento queden 
+                  registrados de forma inmutable, sin exponer datos personales. Máxima transparencia con total privacidad.
+                </p>
+              </div>
             </div>
           </div>
         </div>
