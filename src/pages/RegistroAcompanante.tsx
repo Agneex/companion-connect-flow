@@ -60,9 +60,11 @@ const RegistroAcompanante = () => {
 
   const handleWorldcoinSuccess = async (result: ISuccessResult) => {
     setIsVerifying(true);
+    console.log("Worldcoin verification started", { result });
     
     try {
       // Verify the proof with our backend
+      console.log("Calling verify-worldcoin edge function...");
       const { data, error } = await supabase.functions.invoke('verify-worldcoin', {
         body: {
           proof: result.proof,
@@ -72,7 +74,12 @@ const RegistroAcompanante = () => {
         },
       });
 
-      if (error) throw error;
+      console.log("Edge function response:", { data, error });
+
+      if (error) {
+        console.error("Edge function error:", error);
+        throw error;
+      }
 
       if (data?.success) {
         // Save companion data
@@ -94,24 +101,36 @@ const RegistroAcompanante = () => {
         localStorage.setItem("web3_account", walletAddress);
         localStorage.setItem("is_companion", "true");
         
+        console.log("Companion registered successfully");
         setStep("success");
         toast({
           title: "¡Verificación exitosa!",
           description: "Tu identidad ha sido verificada con Worldcoin.",
         });
       } else {
-        throw new Error("Verification failed");
+        console.error("Verification failed:", data);
+        throw new Error(data?.error || "Verification failed");
       }
     } catch (error) {
       console.error('Error verifying:', error);
+      const errorMessage = error instanceof Error ? error.message : "Error desconocido";
       toast({
         title: "Error en la verificación",
-        description: "No se pudo verificar tu identidad. Por favor intenta de nuevo.",
+        description: `No se pudo verificar tu identidad: ${errorMessage}`,
         variant: "destructive",
       });
     } finally {
       setIsVerifying(false);
     }
+  };
+
+  const handleWorldcoinError = (errorState: any) => {
+    console.error("Worldcoin IDKit error:", errorState);
+    toast({
+      title: "Error de Worldcoin",
+      description: errorState?.message || "Hubo un problema con la verificación de Worldcoin.",
+      variant: "destructive",
+    });
   };
 
   return (
@@ -312,6 +331,7 @@ const RegistroAcompanante = () => {
                   action={ACTION_ID}
                   signal={formData?.documentId || ''}
                   onSuccess={handleWorldcoinSuccess}
+                  onError={handleWorldcoinError}
                   verification_level={VerificationLevel.Orb}
                 >
                   {({ open }) => (
@@ -325,6 +345,11 @@ const RegistroAcompanante = () => {
                     </Button>
                   )}
                 </IDKitWidget>
+                
+                <div className="text-xs text-muted-foreground text-center max-w-md">
+                  <p>App ID: {APP_ID}</p>
+                  <p>Action: {ACTION_ID}</p>
+                </div>
               </CardContent>
             </Card>
           )}
