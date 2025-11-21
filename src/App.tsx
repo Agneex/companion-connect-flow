@@ -12,6 +12,7 @@ import AcompananteLogin from "./pages/AcompananteLogin";
 import AcompananteDashboard from "./pages/AcompananteDashboard";
 import AcompananteScan from "./pages/AcompananteScan";
 import AcompananteSchedule from "./pages/AcompananteSchedule";
+import AcompananteNFTs from "./pages/AcompananteNFTs";
 import FlowDemo from "./pages/FlowDemo";
 import NotFound from "./pages/NotFound";
 
@@ -32,6 +33,7 @@ const App = () => (
             <Route path="/acompanante/dashboard" element={<AcompananteDashboard />} />
             <Route path="/acompanante/scan" element={<AcompananteScan />} />
             <Route path="/acompanante/schedule" element={<AcompananteSchedule />} />
+            <Route path="/acompanante/nfts" element={<AcompananteNFTs />} />
             <Route path="/demo-flow" element={<FlowDemo />} />
             <Route path="/comprar" element={<Comprar />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
