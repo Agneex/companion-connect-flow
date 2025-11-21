@@ -11,6 +11,7 @@ import RegistroAcompanante from "./pages/RegistroAcompanante";
 import AcompananteLogin from "./pages/AcompananteLogin";
 import AcompananteDashboard from "./pages/AcompananteDashboard";
 import AcompananteScan from "./pages/AcompananteScan";
+import FlowDemo from "./pages/FlowDemo";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -29,6 +30,7 @@ const App = () => (
             <Route path="/acompanante/login" element={<AcompananteLogin />} />
             <Route path="/acompanante/dashboard" element={<AcompananteDashboard />} />
             <Route path="/acompanante/scan" element={<AcompananteScan />} />
+            <Route path="/demo-flow" element={<FlowDemo />} />
             <Route path="/comprar" element={<Comprar />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
