@@ -241,7 +241,7 @@ const AcompananteNFTs = () => {
     <div className="min-h-screen bg-background">
       <DashboardNav onLogout={handleLogout} />
       
-      <div className="pt-16">
+      <div className="pt-[120px]">
         {/* Header */}
         <div className="border-b border-border bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5">
           <div className="container mx-auto px-4 py-8">

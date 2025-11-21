@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 import { useWeb3 } from "@/contexts/Web3Context";
 import { useState } from "react";
+import DashboardBreadcrumbs from "./DashboardBreadcrumbs";
 
 interface DashboardNavProps {
   onLogout: () => void;
@@ -40,8 +41,9 @@ const DashboardNav = ({ onLogout }: DashboardNavProps) => {
   const isActive = (path: string) => location.pathname === path;
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
-      <div className="container mx-auto px-4 h-16 flex items-center justify-between">
+    <>
+      <div className="fixed top-0 left-0 right-0 z-50 bg-background border-b border-border">
+        <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
           <div className="w-10 h-10 bg-gradient-secondary rounded-xl flex items-center justify-center shadow-glow-primary">
@@ -142,7 +144,13 @@ const DashboardNav = ({ onLogout }: DashboardNavProps) => {
           </nav>
         </div>
       )}
-    </div>
+      </div>
+      
+      {/* Breadcrumbs - Below header */}
+      <div className="fixed top-16 left-0 right-0 z-40 bg-background">
+        <DashboardBreadcrumbs />
+      </div>
+    </>
   );
 };
 
