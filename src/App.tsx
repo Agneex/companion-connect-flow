@@ -7,6 +7,7 @@ import { Web3Provider } from "./contexts/Web3Context";
 import Index from "./pages/Index";
 import Acompanante from "./pages/Acompanante";
 import Comprar from "./pages/Comprar";
+import ValidarTiquetera from "./pages/ValidarTiquetera";
 import RegistroAcompanante from "./pages/RegistroAcompanante";
 import AcompananteLogin from "./pages/AcompananteLogin";
 import AcompananteDashboard from "./pages/AcompananteDashboard";
@@ -35,6 +36,7 @@ const App = () => (
             <Route path="/acompanante/schedule" element={<AcompananteSchedule />} />
             <Route path="/acompanante/nfts" element={<AcompananteNFTs />} />
             <Route path="/demo-flow" element={<FlowDemo />} />
+            <Route path="/validar" element={<ValidarTiquetera />} />
             <Route path="/comprar" element={<Comprar />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
