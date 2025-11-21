@@ -18,7 +18,6 @@ import {
   Download,
   Share2
 } from "lucide-react";
-import Navigation from "@/components/Navigation";
 import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Context";
@@ -240,10 +239,9 @@ const AcompananteNFTs = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
       <DashboardNav onLogout={handleLogout} />
       
-      <div className="lg:ml-64 pt-16 lg:pt-16">
+      <div className="lg:ml-64 pt-16">
         {/* Header */}
         <div className="border-b border-border bg-gradient-to-r from-primary/5 via-primary/10 to-primary/5">
           <div className="container mx-auto px-4 py-8">

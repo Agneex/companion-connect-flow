@@ -7,7 +7,6 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Calendar } from "@/components/ui/calendar";
 import { Badge } from "@/components/ui/badge";
 import { Calendar as CalendarIcon, Clock, MapPin, User, Phone, Plus } from "lucide-react";
-import Navigation from "@/components/Navigation";
 import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Context";
@@ -148,10 +147,9 @@ const AcompananteSchedule = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navigation />
       <DashboardNav onLogout={handleLogout} />
       
-      <main className="lg:ml-64 pt-16 lg:pt-16">
+      <main className="lg:ml-64 pt-16">
         <div className="container mx-auto px-4 py-8 lg:py-12">
           <div className="grid lg:grid-cols-3 gap-6">
           {/* Calendar Section */}
