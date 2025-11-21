@@ -36,36 +36,17 @@ const Hero = () => {
               con personas mayores. Todo con trazabilidad web3, sin complicaciones para ellos.
             </p>
 
-            <div className="flex flex-col gap-4 md:gap-5 animate-slide-up" style={{ animationDelay: "0.2s" }}>
-              <div className="flex flex-col sm:flex-row gap-3 md:gap-4 justify-center lg:justify-start">
-                <Button size="lg" asChild className="shadow-glow-primary group hover-lift relative overflow-hidden w-full sm:w-auto text-sm md:text-base">
-                  <Link to="/acompanante">
-                    <span className="relative z-10">Comenzar como acompañante</span>
-                    <ArrowRight className="ml-2 relative z-10 group-hover:translate-x-1 transition-transform" size={18} />
-                    <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </Link>
-                </Button>
-                <Button size="lg" variant="outline" asChild className="hover-lift glass-effect w-full sm:w-auto text-sm md:text-base">
-                  <Link to="/comprar">Comprar una tiquetera</Link>
-                </Button>
-              </div>
-
-              <div className="flex justify-center lg:justify-start w-full">
-                <a 
-                  href="#como-funciona" 
-                  className="inline-flex items-center text-primary hover:text-primary/80 transition-colors group text-sm md:text-base"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    document.getElementById('como-funciona')?.scrollIntoView({ 
-                      behavior: 'smooth',
-                      block: 'start'
-                    });
-                  }}
-                >
-                  <span className="font-medium">Ver cómo funciona</span>
-                  <ArrowRight className="ml-2 group-hover:translate-y-1 transition-transform" size={16} />
-                </a>
-              </div>
+            <div className="flex flex-col sm:flex-row gap-3 md:gap-4 animate-slide-up justify-center lg:justify-start" style={{ animationDelay: "0.2s" }}>
+              <Button size="lg" asChild className="shadow-glow-primary group hover-lift relative overflow-hidden w-full sm:w-auto text-sm md:text-base">
+                <Link to="/acompanante">
+                  <span className="relative z-10">Comenzar como acompañante</span>
+                  <ArrowRight className="ml-2 relative z-10 group-hover:translate-x-1 transition-transform" size={18} />
+                  <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </Link>
+              </Button>
+              <Button size="lg" variant="outline" asChild className="hover-lift glass-effect w-full sm:w-auto text-sm md:text-base">
+                <Link to="/comprar">Comprar una tiquetera</Link>
+              </Button>
             </div>
           </div>
 
@@ -151,6 +132,24 @@ const Hero = () => {
                 </div>
               </div>
             </div>
+          </div>
+
+          {/* Link full-width under hero */}
+          <div className="mt-6 md:mt-8 flex justify-center lg:justify-start max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <a 
+              href="#como-funciona" 
+              className="inline-flex items-center text-primary hover:text-primary/80 transition-colors group text-sm md:text-base"
+              onClick={(e) => {
+                e.preventDefault();
+                document.getElementById('como-funciona')?.scrollIntoView({ 
+                  behavior: 'smooth',
+                  block: 'start'
+                });
+              }}
+            >
+              <span className="font-medium">Ver cómo funciona</span>
+              <ArrowRight className="ml-2 group-hover:translate-y-1 transition-transform" size={16} />
+            </a>
           </div>
         </div>
       </div>
