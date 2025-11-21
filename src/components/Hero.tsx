@@ -50,57 +50,21 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Visual Card - Now Below Content */}
-          <div className="relative animate-scale-in w-full" style={{ animationDelay: "0.3s" }}>
-            <div className="relative w-full max-w-md md:max-w-lg mx-auto">
-              {/* Floating pass card */}
-              <div className="relative overflow-hidden rounded-xl md:rounded-2xl shadow-elevated hover-lift animate-float group">
-                <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
-                
-                {/* Sparkle effect */}
-                <div className="absolute top-4 right-4 md:top-6 md:right-6 text-primary animate-pulse z-10">
-                  <Sparkles size={20} className="md:w-6 md:h-6" />
-                </div>
-
-                <img 
-                  src={companyaPass} 
-                  alt="Pase Companya - Ejemplo de acompañamiento a cita médica" 
-                  className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
-                />
-                
-                <div className="absolute inset-0 border-2 border-primary/20 rounded-xl md:rounded-2xl group-hover:border-primary/40 transition-colors pointer-events-none" />
+          {/* Floating Pass */}
+          <div className="relative animate-scale-in max-w-sm md:max-w-md mx-auto" style={{ animationDelay: "0.3s" }}>
+            <div className="relative overflow-hidden rounded-xl shadow-elevated hover-lift animate-float group">
+              {/* Sparkle effect */}
+              <div className="absolute top-3 right-3 md:top-4 md:right-4 text-primary animate-pulse z-10">
+                <Sparkles size={18} className="md:w-5 md:h-5" />
               </div>
 
-              {/* Enhanced connection lines to icons with better animations */}
-              <div className="hidden md:flex absolute -right-8 lg:-right-12 top-1/4 items-center space-x-2 animate-fade-in" style={{ animationDelay: "0.5s" }}>
-                <div className="relative w-16 h-0.5 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-primary to-transparent animate-shimmer" 
-                       style={{ backgroundSize: "200% 100%" }} />
-                </div>
-                <div className="w-10 h-10 xl:w-12 xl:h-12 glass-effect border-2 border-primary rounded-full flex items-center justify-center shadow-glow-primary hover:scale-110 hover:rotate-12 transition-all cursor-pointer group">
-                  <Users className="text-primary group-hover:scale-110 transition-transform" size={20} />
-                </div>
-              </div>
-
-              <div className="hidden md:flex absolute -right-8 lg:-right-12 top-1/2 items-center space-x-2 animate-fade-in" style={{ animationDelay: "0.7s" }}>
-                <div className="relative w-20 h-0.5 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-accent to-transparent animate-shimmer" 
-                       style={{ backgroundSize: "200% 100%", animationDelay: "0.5s" }} />
-                </div>
-                <div className="w-10 h-10 xl:w-12 xl:h-12 glass-effect border-2 border-accent rounded-full flex items-center justify-center shadow-glow-accent hover:scale-110 hover:rotate-12 transition-all cursor-pointer group">
-                  <CreditCard className="text-accent group-hover:scale-110 transition-transform" size={20} />
-                </div>
-              </div>
-
-              <div className="hidden md:flex absolute -right-8 lg:-right-12 top-3/4 items-center space-x-2 animate-fade-in" style={{ animationDelay: "0.9s" }}>
-                <div className="relative w-12 h-0.5 overflow-hidden">
-                  <div className="absolute inset-0 bg-gradient-to-r from-secondary to-transparent animate-shimmer" 
-                       style={{ backgroundSize: "200% 100%", animationDelay: "1s" }} />
-                </div>
-                <div className="w-10 h-10 xl:w-12 xl:h-12 glass-effect border-2 border-secondary rounded-full flex items-center justify-center shadow-glow-secondary hover:scale-110 hover:rotate-12 transition-all cursor-pointer group">
-                  <Globe className="text-secondary group-hover:scale-110 transition-transform" size={20} />
-                </div>
-              </div>
+              <img 
+                src={companyaPass} 
+                alt="Pase Companya - Ejemplo de acompañamiento a cita médica" 
+                className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
+              />
+              
+              <div className="absolute inset-0 border-2 border-primary/20 rounded-xl group-hover:border-primary/40 transition-colors pointer-events-none" />
             </div>
           </div>
         </div>
