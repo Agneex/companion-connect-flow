@@ -5,7 +5,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { QrCode, Camera, CheckCircle2 } from "lucide-react";
+import { QrCode, Camera, CheckCircle2, ArrowLeft } from "lucide-react";
 import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Context";
@@ -85,6 +85,16 @@ const AcompananteScan = () => {
       
       <main className="pt-[120px]">
         <div className="container mx-auto px-4 py-8 lg:py-12 max-w-2xl">
+          {/* Back button */}
+          <Button
+            variant="ghost"
+            size="sm"
+            onClick={() => navigate("/acompanante/dashboard")}
+            className="mb-4 -ml-2"
+          >
+            <ArrowLeft className="w-4 h-4 mr-2" />
+            Volver al Dashboard
+          </Button>
 
           <Card className="glass-effect">
             <CardHeader>
@@ -213,9 +223,10 @@ const AcompananteScan = () => {
                     <Button 
                       type="button"
                       variant="outline"
-                      onClick={() => setScanned(false)}
+                      onClick={() => navigate("/acompanante/dashboard")}
                       className="flex-1"
                     >
+                      <ArrowLeft className="w-4 h-4 mr-2" />
                       Cancelar
                     </Button>
                     <Button 
