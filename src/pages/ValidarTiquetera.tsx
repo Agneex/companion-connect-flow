@@ -233,9 +233,19 @@ const ValidarTiquetera = () => {
                   {isSearching ? "Buscando..." : "Buscar"}
                 </Button>
               </div>
-              <p className="text-xs text-muted-foreground mt-2">
-                Puedes encontrar el ID de contrato en el email de confirmación de compra o en tu pase físico
-              </p>
+              <div className="flex items-center justify-between mt-3">
+                <p className="text-xs text-muted-foreground">
+                  Puedes encontrar el ID de contrato en el email de confirmación de compra o en tu pase físico
+                </p>
+                <Button
+                  variant="outline"
+                  size="sm"
+                  onClick={() => setContractId("COMP-2024-DEMO")}
+                  className="text-xs"
+                >
+                  Usar ID Demo
+                </Button>
+              </div>
             </CardContent>
           </Card>
 
