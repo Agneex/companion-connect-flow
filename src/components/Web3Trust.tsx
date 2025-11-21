@@ -57,11 +57,11 @@ const Web3Trust = () => {
                 </div>
                 <div className="text-center max-w-[100px] md:max-w-[120px]">
                   <span className="text-xs md:text-sm font-semibold text-foreground block">1. Recibe pase</span>
-                  <span className="text-xs text-muted-foreground">Tarjeta física</span>
+                  <span className="text-xs text-muted-foreground">Talonario impreso</span>
                 </div>
                 {activeNode === 1 && (
                   <div className="absolute top-full mt-4 glass-effect border border-primary/30 rounded-lg p-3 max-w-[200px] animate-fade-in z-20">
-                    <p className="text-xs text-muted-foreground">Tu familiar recibe una tarjeta física simple, sin tecnología complicada</p>
+                    <p className="text-xs text-muted-foreground">Tu familiar recibe un talonario con múltiples pases, cada uno con su código QR</p>
                   </div>
                 )}
               </div>
@@ -138,7 +138,7 @@ const Web3Trust = () => {
               { 
                 icon: ShieldCheck, 
                 title: "Sin tecnología complicada",
-                description: "Solo una tarjeta física que siempre funciona"
+                description: "Solo pases en papel con código QR, fácil de usar"
               },
               { 
                 icon: Eye, 
@@ -192,7 +192,7 @@ const Web3Trust = () => {
                 <div className="flex items-start space-x-3 p-3 rounded-lg bg-background/50">
                   <Eye className="text-primary flex-shrink-0 mt-1" size={18} />
                   <p className="text-xs md:text-sm text-muted-foreground">
-                    <span className="font-semibold text-foreground">Registro automático:</span> Cada visita queda registrada con fecha, hora y duración sin que tu familiar haga nada.
+                    <span className="font-semibold text-foreground">Registro automático:</span> Cada vez que el acompañante escanea un pase del talonario, la visita queda registrada con fecha y hora.
                   </p>
                 </div>
 
