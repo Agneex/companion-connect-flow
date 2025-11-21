@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button";
 import { Link } from "react-router-dom";
 import { ArrowRight, CreditCard, Users, Globe, Sparkles } from "lucide-react";
-import qrCode from "@/assets/qr-code.png";
+import companyaPass from "@/assets/companya-pass-card.png";
 
 const Hero = () => {
   return (
@@ -32,7 +32,7 @@ const Hero = () => {
             </h1>
             
             <p className="text-base sm:text-lg md:text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-              Compras una tiquetera de acompañamiento, un profesional la convierte en tiempo de calidad 
+              Compras un pase de acompañamiento, un profesional lo convierte en tiempo de calidad 
               con personas mayores. Todo con trazabilidad web3, sin complicaciones para ellos.
             </p>
 
@@ -45,7 +45,7 @@ const Hero = () => {
                 </Link>
               </Button>
               <Button size="lg" variant="outline" asChild className="hover-lift glass-effect w-full sm:w-auto text-sm md:text-base">
-                <Link to="/comprar">Comprar una tiquetera</Link>
+                <Link to="/comprar">Comprar un pase</Link>
               </Button>
             </div>
 
@@ -69,53 +69,23 @@ const Hero = () => {
 
           {/* Visual Card - Now Below Content */}
           <div className="relative animate-scale-in w-full" style={{ animationDelay: "0.3s" }}>
-            <div className="relative w-full max-w-sm md:max-w-md lg:max-w-lg mx-auto">
-              {/* Floating card with enhanced animations */}
-              <div className="glass-effect rounded-xl md:rounded-2xl p-6 md:p-8 shadow-elevated relative overflow-hidden animate-float">
-                <div className="absolute inset-0 bg-gradient-secondary opacity-5" />
+            <div className="relative w-full max-w-2xl mx-auto">
+              {/* Floating pass card */}
+              <div className="relative overflow-hidden rounded-xl md:rounded-2xl shadow-elevated hover-lift animate-float group">
+                <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-10 transition-opacity duration-300" />
                 
                 {/* Sparkle effect */}
-                <div className="absolute top-3 right-3 md:top-4 md:right-4 text-primary animate-pulse">
-                  <Sparkles size={18} className="md:w-5 md:h-5" />
+                <div className="absolute top-4 right-4 md:top-6 md:right-6 text-primary animate-pulse z-10">
+                  <Sparkles size={20} className="md:w-6 md:h-6" />
                 </div>
 
-                <div className="space-y-4 md:space-y-6 relative z-10">
-                  <div className="flex items-center justify-between">
-                    <span className="text-xl md:text-2xl font-bold text-foreground">Companya</span>
-                    <div className="w-10 h-10 md:w-12 md:h-12 bg-gradient-secondary rounded-lg flex items-center justify-center shadow-glow-primary group hover:scale-110 hover:rotate-6 transition-all cursor-pointer">
-                      <CreditCard className="text-primary-foreground" />
-                    </div>
-                  </div>
-                  
-                  {/* QR Code with enhanced styling */}
-                  <div className="glass-effect rounded-lg md:rounded-xl p-3 md:p-4 flex items-center justify-center relative group cursor-pointer hover-lift">
-                    <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-10 transition-opacity rounded-lg md:rounded-xl" />
-                    <div className="relative">
-                      <img 
-                        src={qrCode} 
-                        alt="QR Code Companya" 
-                        className="w-32 h-32 md:w-40 md:h-40 rounded-lg group-hover:scale-105 transition-transform"
-                      />
-                      <div className="absolute inset-0 border-2 border-primary/20 rounded-lg group-hover:border-primary/40 transition-colors" />
-                    </div>
-                  </div>
-
-                  <div className="space-y-1 md:space-y-2">
-                    <div className="text-xs md:text-sm text-muted-foreground">Tiquetera de acompañamiento</div>
-                    <div className="flex items-center justify-between">
-                      <div className="text-base md:text-lg font-semibold text-foreground">5 visitas restantes</div>
-                      <div className="flex space-x-1">
-                        {[...Array(5)].map((_, i) => (
-                          <div 
-                            key={i} 
-                            className="w-1.5 h-1.5 md:w-2 md:h-2 rounded-full bg-primary animate-pulse" 
-                            style={{ animationDelay: `${i * 0.2}s` }}
-                          />
-                        ))}
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <img 
+                  src={companyaPass} 
+                  alt="Pase Companya - Ejemplo de acompañamiento a cita médica" 
+                  className="w-full h-auto group-hover:scale-105 transition-transform duration-300"
+                />
+                
+                <div className="absolute inset-0 border-2 border-primary/20 rounded-xl md:rounded-2xl group-hover:border-primary/40 transition-colors pointer-events-none" />
               </div>
 
               {/* Enhanced connection lines to icons with better animations */}
