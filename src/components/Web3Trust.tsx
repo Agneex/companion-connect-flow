@@ -28,13 +28,13 @@ const Web3Trust = () => {
         <div className="max-w-5xl mx-auto">
           <div className="text-center mb-8 md:mb-10 lg:mb-12">
             <h2 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 md:mb-4">
-              Construido con tecnología de{" "}
+              El viaje de cuidado para{" "}
               <span className="text-transparent bg-clip-text bg-gradient-secondary">
-                confianza
+                tu ser querido
               </span>
             </h2>
             <p className="text-base md:text-lg lg:text-xl text-muted-foreground px-4">
-              Tecnología descentralizada al servicio del cuidado, no al revés
+              Desde que adquieres el pase hasta la tranquilidad de saber que están bien cuidados
             </p>
           </div>
 
@@ -56,12 +56,12 @@ const Web3Trust = () => {
                   <Database className="text-primary transition-transform group-hover:scale-110" size={28} />
                 </div>
                 <div className="text-center max-w-[100px] md:max-w-[120px]">
-                  <span className="text-xs md:text-sm font-semibold text-foreground block">1. Compra</span>
-                  <span className="text-xs text-muted-foreground">Pase digital seguro</span>
+                  <span className="text-xs md:text-sm font-semibold text-foreground block">1. Recibe pase</span>
+                  <span className="text-xs text-muted-foreground">Tarjeta física</span>
                 </div>
                 {activeNode === 1 && (
                   <div className="absolute top-full mt-4 glass-effect border border-primary/30 rounded-lg p-3 max-w-[200px] animate-fade-in z-20">
-                    <p className="text-xs text-muted-foreground">Cada pase se registra como activo digital verificado</p>
+                    <p className="text-xs text-muted-foreground">Tu familiar recibe una tarjeta física simple, sin tecnología complicada</p>
                   </div>
                 )}
               </div>
@@ -88,12 +88,12 @@ const Web3Trust = () => {
                   <Network className="text-accent transition-transform group-hover:scale-110" size={28} />
                 </div>
                 <div className="text-center max-w-[100px] md:max-w-[120px]">
-                  <span className="text-xs md:text-sm font-semibold text-foreground block">2. Visita</span>
-                  <span className="text-xs text-muted-foreground">Escaneo QR</span>
+                  <span className="text-xs md:text-sm font-semibold text-foreground block">2. Compañía real</span>
+                  <span className="text-xs text-muted-foreground">Visitas verificadas</span>
                 </div>
                 {activeNode === 2 && (
                   <div className="absolute top-full mt-4 glass-effect border border-accent/30 rounded-lg p-3 max-w-[200px] animate-fade-in z-20">
-                    <p className="text-xs text-muted-foreground">Cada visita queda registrada de forma inmutable</p>
+                    <p className="text-xs text-muted-foreground">Acompañantes verificados realizan visitas de calidad, registradas automáticamente</p>
                   </div>
                 )}
               </div>
@@ -120,12 +120,12 @@ const Web3Trust = () => {
                   <CheckCircle className="text-secondary transition-transform group-hover:scale-110" size={28} />
                 </div>
                 <div className="text-center max-w-[100px] md:max-w-[120px]">
-                  <span className="text-xs md:text-sm font-semibold text-foreground block">3. Recompensa</span>
-                  <span className="text-xs text-muted-foreground">NFT verificado</span>
+                  <span className="text-xs md:text-sm font-semibold text-foreground block">3. Tranquilidad</span>
+                  <span className="text-xs text-muted-foreground">Reportes en vivo</span>
                 </div>
                 {activeNode === 3 && (
                   <div className="absolute top-full mt-4 glass-effect border border-secondary/30 rounded-lg p-3 max-w-[200px] animate-fade-in z-20">
-                    <p className="text-xs text-muted-foreground">Prueba inmutable del servicio prestado</p>
+                    <p className="text-xs text-muted-foreground">Ves cada visita registrada y sabes que tu familiar está bien cuidado</p>
                   </div>
                 )}
               </div>
@@ -137,18 +137,18 @@ const Web3Trust = () => {
             {[
               { 
                 icon: ShieldCheck, 
-                title: "Acompañantes verificados",
-                description: "Identidad y antecedentes validados en blockchain"
+                title: "Sin tecnología complicada",
+                description: "Solo una tarjeta física que siempre funciona"
               },
               { 
                 icon: Eye, 
-                title: "Trazabilidad total",
-                description: "Historial inmutable de cada visita en tiempo real"
+                title: "Visitas que sí pasan",
+                description: "Cada encuentro queda verificado automáticamente"
               },
               { 
                 icon: Lock, 
-                title: "Privacidad garantizada",
-                description: "Seguridad web3 sin exponer datos personales"
+                title: "Tú siempre informado",
+                description: "Ve el historial completo desde donde estés"
               }
             ].map((feature, index) => {
               const Icon = feature.icon;
@@ -178,28 +178,28 @@ const Web3Trust = () => {
               <AccordionTrigger className="text-sm md:text-base font-semibold text-foreground hover:text-primary py-4">
                 <div className="flex items-center gap-2">
                   <Database className="text-primary" size={20} />
-                  <span>Ver detalles técnicos de seguridad</span>
+                  <span>¿Cómo garantizamos la seguridad y calidad?</span>
                 </div>
               </AccordionTrigger>
               <AccordionContent className="space-y-4 pb-4">
                 <div className="flex items-start space-x-3 p-3 rounded-lg bg-background/50">
                   <ShieldCheck className="text-primary flex-shrink-0 mt-1" size={18} />
                   <p className="text-xs md:text-sm text-muted-foreground">
-                    <span className="font-semibold text-foreground">Validación:</span> Verificación de identidad y antecedentes. Historial verificado en blockchain.
+                    <span className="font-semibold text-foreground">Acompañantes confiables:</span> Todos pasan verificación de identidad y antecedentes antes de atender a tu familiar.
                   </p>
                 </div>
                 
                 <div className="flex items-start space-x-3 p-3 rounded-lg bg-background/50">
                   <Eye className="text-primary flex-shrink-0 mt-1" size={18} />
                   <p className="text-xs md:text-sm text-muted-foreground">
-                    <span className="font-semibold text-foreground">Registro:</span> Cada visita inmutable con fecha, hora, duración y acompañante verificado.
+                    <span className="font-semibold text-foreground">Registro automático:</span> Cada visita queda registrada con fecha, hora y duración sin que tu familiar haga nada.
                   </p>
                 </div>
 
                 <div className="flex items-start space-x-3 p-3 rounded-lg bg-background/50">
                   <Lock className="text-primary flex-shrink-0 mt-1" size={18} />
                   <p className="text-xs md:text-sm text-muted-foreground">
-                    <span className="font-semibold text-foreground">Infraestructura:</span> Web3 para registros inmutables sin exponer datos personales.
+                    <span className="font-semibold text-foreground">Tecnología invisible:</span> Usamos blockchain para garantizar transparencia total, pero tu familiar nunca tiene que entenderlo.
                   </p>
                 </div>
               </AccordionContent>
