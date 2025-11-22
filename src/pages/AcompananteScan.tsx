@@ -5,7 +5,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { QrCode, Camera, CheckCircle2, ArrowLeft } from "lucide-react";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import { QrCode, Camera, CheckCircle2, ArrowLeft, Award, ExternalLink } from "lucide-react";
 import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Provider";
@@ -25,6 +26,12 @@ const AcompananteScan = () => {
   const [scanned, setScanned] = useState(false);
   const [transferring, setTransferring] = useState(false);
   const [isInIframe, setIsInIframe] = useState(false);
+  const [showSuccessDialog, setShowSuccessDialog] = useState(false);
+  const [transferResult, setTransferResult] = useState<{
+    transactionHash: string;
+    tokenId: string;
+    silverName: string;
+  } | null>(null);
   const [sessionData, setSessionData] = useState({
     tokenId: "",
     silverName: "",
@@ -183,12 +190,13 @@ const AcompananteScan = () => {
       sessions.unshift(newSession);
       localStorage.setItem("companion_sessions", JSON.stringify(sessions));
       
-      toast({
-        title: t("companion.scan.sessionRegistered"),
-        description: `NFT transferido exitosamente. TX: ${data.transactionHash.slice(0, 10)}...`,
+      // Show success dialog instead of navigating immediately
+      setTransferResult({
+        transactionHash: data.transactionHash,
+        tokenId: sessionData.tokenId,
+        silverName: sessionData.silverName,
       });
-      
-      navigate("/acompanante/dashboard");
+      setShowSuccessDialog(true);
     } catch (error) {
       console.error("Error transferring NFT:", error);
       toast({
@@ -389,6 +397,82 @@ const AcompananteScan = () => {
       </main>
 
       <Footer />
+
+      {/* Success Dialog */}
+      <Dialog open={showSuccessDialog} onOpenChange={setShowSuccessDialog}>
+        <DialogContent className="sm:max-w-[500px]">
+          <DialogHeader>
+            <div className="flex justify-center mb-4">
+              <div className="w-20 h-20 rounded-full bg-green-500/20 flex items-center justify-center">
+                <Award className="w-10 h-10 text-green-500" />
+              </div>
+            </div>
+            <DialogTitle className="text-2xl text-center">
+              ¡Felicitaciones! 🎉
+            </DialogTitle>
+            <DialogDescription className="text-center space-y-3 pt-2">
+              <p className="text-base">
+                Has recibido exitosamente tu NFT de acompañamiento
+              </p>
+              {transferResult && (
+                <div className="bg-muted/50 rounded-lg p-4 space-y-2 text-left">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Token ID:</span>
+                    <span className="font-mono font-semibold">#{transferResult.tokenId}</span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-muted-foreground">Silver:</span>
+                    <span className="font-semibold">{transferResult.silverName}</span>
+                  </div>
+                  <div className="flex justify-between text-sm items-center gap-2">
+                    <span className="text-muted-foreground">Transaction:</span>
+                    <a
+                      href={`https://sepolia.arbiscan.io/tx/${transferResult.transactionHash}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-mono text-xs text-primary hover:underline flex items-center gap-1"
+                    >
+                      {transferResult.transactionHash.slice(0, 10)}...
+                      <ExternalLink className="w-3 h-3" />
+                    </a>
+                  </div>
+                </div>
+              )}
+            </DialogDescription>
+          </DialogHeader>
+          <DialogFooter className="flex-col sm:flex-col gap-2 pt-4">
+            <Button
+              onClick={() => {
+                setShowSuccessDialog(false);
+                navigate("/acompanante/nfts");
+              }}
+              className="w-full shadow-glow-primary"
+            >
+              <Award className="w-4 h-4 mr-2" />
+              Ver mis NFTs
+            </Button>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setShowSuccessDialog(false);
+                setScanned(false);
+                setSessionData({
+                  tokenId: "",
+                  silverName: "",
+                  city: "",
+                  activity: "",
+                  duration: "",
+                  notes: "",
+                });
+              }}
+              className="w-full"
+            >
+              <Camera className="w-4 h-4 mr-2" />
+              Escanear otro ticket
+            </Button>
+          </DialogFooter>
+        </DialogContent>
+      </Dialog>
     </div>
   );
 };
