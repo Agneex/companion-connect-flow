@@ -16,6 +16,7 @@ import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
 import { useWeb3 } from "@/contexts/Web3Provider";
 import { ConnectButton } from '@rainbow-me/rainbowkit';
+import { useTranslation } from "react-i18next";
 
 const formSchema = z.object({
   fullName: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
@@ -38,6 +39,7 @@ const RegistroAcompanante = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
   const { account, isConnected, connectWallet, disconnectWallet } = useWeb3();
+  const { t } = useTranslation();
 
 const APP_ID = import.meta.env.VITE_WORLDCOIN_APP_ID || "app_e44c90a11f70d766a711185b9bff6da6";
 const ACTION_ID = "validation-human";
@@ -61,8 +63,8 @@ const ACTION_ID = "validation-human";
     if (isConnected && account && step === "wallet") {
       setStep("form");
       toast({
-        title: "¡Wallet conectada!",
-        description: "Ahora puedes continuar con tu registro",
+        title: t("companion.registration.walletConnectedSuccess"),
+        description: t("companion.registration.walletConnectedSuccessDesc"),
       });
     }
   }, [isConnected, account, step, toast]);
@@ -79,7 +81,7 @@ const ACTION_ID = "validation-human";
     if (!account) {
       toast({
         title: "Error",
-        description: "Debes conectar tu wallet primero",
+        description: t("companion.registration.errorConnectWallet"),
         variant: "destructive",
       });
       return;
@@ -138,15 +140,15 @@ const ACTION_ID = "validation-human";
       console.log("Companion registered successfully after Worldcoin verification");
       setStep("success");
       toast({
-        title: "¡Verificación exitosa!",
-        description: "Tu identidad ha sido verificada con Worldcoin.",
+        title: t("companion.registration.verificationSuccess"),
+        description: t("companion.registration.verificationSuccessDesc"),
       });
     } catch (error) {
       console.error('Error finalizando el registro después de Worldcoin:', error);
       const errorMessage = error instanceof Error ? error.message : "Error desconocido";
       toast({
-        title: "Error al guardar tus datos",
-        description: `Tu verificación Worldcoin fue exitosa, pero hubo un problema guardando tu registro: ${errorMessage}`,
+        title: t("companion.registration.saveError"),
+        description: t("companion.registration.saveErrorDesc", { error: errorMessage }),
         variant: "destructive",
       });
     } finally {
@@ -157,8 +159,8 @@ const ACTION_ID = "validation-human";
   const handleWorldcoinError = (errorState: any) => {
     console.error("Worldcoin IDKit error:", errorState);
     toast({
-      title: "Error de Worldcoin",
-      description: errorState?.message || "Hubo un problema con la verificación de Worldcoin.",
+      title: t("companion.registration.worldcoinError"),
+      description: errorState?.message || t("companion.registration.worldcoinError"),
       variant: "destructive",
     });
   };
@@ -172,10 +174,9 @@ const ACTION_ID = "validation-human";
           {step === "wallet" && (
             <Card>
               <CardHeader>
-                <CardTitle className="text-3xl text-center">Conecta tu Wallet</CardTitle>
+                <CardTitle className="text-3xl text-center">{t("companion.registration.connectWallet")}</CardTitle>
                 <CardDescription className="text-center">
-                  Para comenzar el registro como acompañante, primero debes conectar tu wallet Web3.
-                  Esta será tu identidad única en la plataforma.
+                  {t("companion.registration.connectWalletDesc")}
                 </CardDescription>
               </CardHeader>
               <CardContent className="space-y-6">
@@ -183,10 +184,9 @@ const ACTION_ID = "validation-human";
                   <div className="flex items-start gap-3">
                     <Wallet className="h-6 w-6 text-primary mt-0.5 flex-shrink-0" />
                     <div>
-                      <p className="font-semibold text-foreground mb-2">¿Por qué necesito una wallet?</p>
+                      <p className="font-semibold text-foreground mb-2">{t("companion.registration.whyWallet")}</p>
                       <p className="text-sm text-muted-foreground">
-                        Tu wallet es tu identidad en Web3. Te permitirá recibir NFTs de tus sesiones,
-                        gestionar tus recompensas y acceder a tu dashboard de forma segura sin contraseñas.
+                        {t("companion.registration.whyWalletDesc")}
                       </p>
                     </div>
                   </div>
@@ -195,15 +195,15 @@ const ACTION_ID = "validation-human";
                 <div className="space-y-3">
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
-                    <span>Proceso seguro y encriptado</span>
+                    <span>{t("companion.registration.secureProcess")}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
-                    <span>Una wallet por acompañante</span>
+                    <span>{t("companion.registration.oneWallet")}</span>
                   </div>
                   <div className="flex items-center gap-2 text-sm text-muted-foreground">
                     <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
-                    <span>Control total de tus activos digitales</span>
+                    <span>{t("companion.registration.fullControl")}</span>
                   </div>
                 </div>
 
@@ -212,14 +212,14 @@ const ACTION_ID = "validation-human";
                     <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
                       <div className="flex items-center gap-2 text-green-600 dark:text-green-400 mb-2">
                         <CheckCircle2 className="h-5 w-5" />
-                        <span className="font-semibold">Wallet conectada</span>
+                        <span className="font-semibold">{t("companion.registration.walletConnected")}</span>
                       </div>
                       <p className="text-sm text-muted-foreground font-mono break-all">
                         {account}
                       </p>
                     </div>
                     <Button onClick={() => setStep("form")} className="w-full" size="lg">
-                      Continuar con el registro
+                      {t("companion.registration.continueRegistration")}
                       <ArrowRight className="ml-2 h-4 w-4" />
                     </Button>
                   </div>
@@ -228,7 +228,7 @@ const ACTION_ID = "validation-human";
                     {({ openConnectModal }) => (
                       <Button onClick={openConnectModal} className="w-full" size="lg">
                         <Wallet className="mr-2 h-5 w-5" />
-                        Conectar Wallet
+                        {t("companion.login.connectWallet")}
                       </Button>
                     )}
                   </ConnectButton.Custom>
@@ -240,9 +240,9 @@ const ACTION_ID = "validation-human";
           {step === "form" && (
             <Card>
               <CardHeader>
-                <CardTitle className="text-3xl">Registro de Acompañante</CardTitle>
+                <CardTitle className="text-3xl">{t("companion.registration.title")}</CardTitle>
                 <CardDescription>
-                  Completa el formulario KYC para comenzar tu proceso de verificación
+                  {t("companion.registration.kycDesc")}
                 </CardDescription>
               </CardHeader>
               <CardContent>
@@ -252,7 +252,7 @@ const ACTION_ID = "validation-human";
                     <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
                       <div className="flex items-center justify-between mb-2">
                         <label className="text-sm font-medium text-foreground">
-                          Dirección de Wallet
+                          {t("companion.registration.walletAddress")}
                         </label>
                         <Button
                           type="button"
@@ -261,14 +261,14 @@ const ACTION_ID = "validation-human";
                           onClick={disconnectWallet}
                           className="h-8 text-xs"
                         >
-                          Desconectar
+                          {t("companion.registration.disconnect")}
                         </Button>
                       </div>
                       <div className="font-mono text-sm text-muted-foreground break-all">
                         {account}
                       </div>
                       <p className="text-xs text-muted-foreground mt-2">
-                        Esta es tu identidad única en la plataforma
+                        {t("companion.registration.uniqueIdentity")}
                       </p>
                     </div>
 
