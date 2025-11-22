@@ -51,34 +51,28 @@ serve(async (req) => {
       );
     }
 
-    // Normalizar clave privada desde entorno
-    // 1) Eliminar todos los espacios y saltos de línea
-    let normalizedKey = privateKeyFromEnv.replace(/\s+/g, "");
+    // Normalizar clave privada: eliminar espacios, quitar todos los "0x", quedarnos solo con hex
+    let hexOnly = privateKeyFromEnv
+      .replace(/\s+/g, "")        // eliminar espacios
+      .replace(/0x/gi, "");        // eliminar todos los "0x" (case insensitive)
 
-    // 2) Asegurar prefijo 0x
-    if (!normalizedKey.startsWith("0x")) {
-      normalizedKey = "0x" + normalizedKey;
+    // Si MetaMask da 63 caracteres hex, completar con un 0 al inicio
+    if (hexOnly.length === 63) {
+      hexOnly = "0" + hexOnly;
     }
 
-    // 3) Ajustar longitud del tramo hexadecimal (después de 0x)
-    let hexPart = normalizedKey.slice(2);
+    // Reconstruir con un único "0x"
+    const privateKey = "0x" + hexOnly;
 
-    // Si viene con 63 caracteres (caso que comentas), anteponemos un 0
-    if (hexPart.length === 63) {
-      hexPart = "0" + hexPart;
-    }
-
-    // Reconstruimos la clave normalizada definitiva
-    const privateKey = "0x" + hexPart;
-
-    // 4) Validar formato final: debe ser 0x + 64 hex
+    // Validar formato final: debe ser 0x + 64 caracteres hexadecimales
     if (!/^0x[0-9a-fA-F]{64}$/.test(privateKey)) {
-      console.error("ADMIN_WALLET_PRIVATE_KEY has invalid format after normalization. Length:", privateKey.length);
+      console.error("ADMIN_WALLET_PRIVATE_KEY invalid after normalization. Length:", privateKey.length, "Hex part:", hexOnly.length);
       return new Response(
         JSON.stringify({
-          error: "Server configuration error: invalid admin wallet key format",
-          hint: "La clave privada debe ser 64 caracteres hexadecimales (0-9, a-f) con prefijo 0x; se han eliminado espacios y, si venía con 63 chars, se ha completado con un 0 al inicio.",
+          error: "Invalid admin wallet private key format",
+          hint: "Debe ser exactamente 64 caracteres hexadecimales (0-9, a-f). Verificar que la clave exportada de MetaMask no tenga espacios ni caracteres extra.",
           length: privateKey.length,
+          hexLength: hexOnly.length,
         }),
         { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
