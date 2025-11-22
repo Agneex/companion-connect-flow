@@ -19,6 +19,7 @@
     "title": "Cómo funciona Companya",
     "silver": {
       "title": "Para el Companyer",
+      "subtitle": "Simple y sin complicaciones",
       "point1": "Cero apps, solo tu pase Companya en papel",
       "point2": "El Compa escanea el QR al inicio",
       "point3": "Disfruta de la compañía sin complicaciones",
@@ -26,13 +27,15 @@
     },
     "companion": {
       "title": "Para el Compa",
+      "subtitle": "Tu trabajo, verificado y valorado",
       "point1": "Regístrate y verifica tu perfil",
       "point2": "Recibe asignaciones o atiende pases disponibles",
-      "point3": "Escanea el QR al iniciar cada sesión",
+      "point3": "Escanea el QR al finalizar cada sesión",
       "point4": "Gana NFTs y recompensas por tu labor"
     },
     "payer": {
       "title": "Para el familiar/donante",
+      "subtitle": "Tranquilidad con trazabilidad total",
       "point1": "Compra pases con trazabilidad real",
       "point2": "Asigna a tu familiar o dona a quien lo necesite",
       "point3": "Recibe reportes de uso y verificación",

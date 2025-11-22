@@ -8,7 +8,7 @@ const HowItWorks = () => {
   const actors = [
     {
       title: t("howItWorks.silver.title"),
-      subtitle: t("howItWorks.silver.point1"),
+      subtitle: t("howItWorks.silver.subtitle"),
       icon: Heart,
       iconColor: "text-accent",
       points: [
@@ -20,7 +20,7 @@ const HowItWorks = () => {
     },
     {
       title: t("howItWorks.companion.title"),
-      subtitle: t("howItWorks.companion.point1"),
+      subtitle: t("howItWorks.companion.subtitle"),
       icon: Smartphone,
       iconColor: "text-primary",
       points: [
@@ -32,7 +32,7 @@ const HowItWorks = () => {
     },
     {
       title: t("howItWorks.payer.title"),
-      subtitle: t("howItWorks.payer.point1"),
+      subtitle: t("howItWorks.payer.subtitle"),
       icon: MapPin,
       iconColor: "text-secondary",
       points: [
@@ -48,11 +48,6 @@ const HowItWorks = () => {
     <section id="como-funciona" className="py-12 md:py-16 lg:py-20 relative scroll-mt-16 md:scroll-mt-20">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-10 md:mb-14 lg:mb-16 animate-fade-in">
-          <div className="inline-block mb-3 md:mb-4">
-            <span className="px-3 py-1.5 md:px-4 md:py-2 rounded-full bg-primary/10 text-primary text-xs md:text-sm font-semibold">
-              {t("howItWorks.title")}
-            </span>
-          </div>
           <h2 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-foreground mb-3 md:mb-4 px-4">
             {t("howItWorks.title")}
           </h2>
