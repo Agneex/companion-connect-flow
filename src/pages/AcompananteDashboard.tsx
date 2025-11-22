@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge";
 import { Calendar, QrCode, Award, TrendingUp, Clock, CheckCircle2, Wallet, ArrowDownToLine, CreditCard, Loader2 } from "lucide-react";
 import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
-import { useWeb3 } from "@/contexts/Web3Context";
+import { useWeb3 } from "@/contexts/Web3Provider";
 import { Link } from "react-router-dom";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";

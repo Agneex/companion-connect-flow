@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import { Home, Calendar, QrCode, Award, LogOut, Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { useWeb3 } from "@/contexts/Web3Context";
+import { useWeb3 } from "@/contexts/Web3Provider";
 import { useState } from "react";
 import DashboardBreadcrumbs from "./DashboardBreadcrumbs";
 

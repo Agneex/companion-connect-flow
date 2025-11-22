@@ -5,10 +5,11 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Wallet, Shield, Award, CheckCircle2 } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
-import { useWeb3 } from "@/contexts/Web3Context";
+import { useWeb3 } from "@/contexts/Web3Provider";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const AcompananteLogin = () => {
-  const { connectWallet, isConnected, isCompanion, account } = useWeb3();
+  const { isConnected, isCompanion, account } = useWeb3();
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -16,10 +17,6 @@ const AcompananteLogin = () => {
       navigate("/acompanante/dashboard");
     }
   }, [isConnected, isCompanion, navigate]);
-
-  const handleConnect = async () => {
-    await connectWallet();
-  };
 
   const features = [
     {
@@ -76,14 +73,18 @@ const AcompananteLogin = () => {
                     </div>
 
                     <div className="space-y-3">
-                      <Button 
-                        onClick={handleConnect}
-                        size="lg"
-                        className="w-full shadow-glow-primary"
-                      >
-                        <Wallet className="mr-2 w-5 h-5" />
-                        Conectar Wallet
-                      </Button>
+                      <ConnectButton.Custom>
+                        {({ openConnectModal }) => (
+                          <Button 
+                            onClick={openConnectModal}
+                            size="lg"
+                            className="w-full shadow-glow-primary"
+                          >
+                            <Wallet className="mr-2 w-5 h-5" />
+                            Conectar Wallet
+                          </Button>
+                        )}
+                      </ConnectButton.Custom>
                       <p className="text-xs text-center text-muted-foreground">
                         Compatible con MetaMask, WalletConnect y más
                       </p>
