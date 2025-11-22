@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { format } from "date-fns";
 import { es } from "date-fns/locale";
@@ -21,12 +21,14 @@ import {
   Activity,
   Users,
   Navigation,
-  Filter
+  Filter,
+  Loader2
 } from "lucide-react";
 import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Provider";
 import { cn } from "@/lib/utils";
+import { useCompanionNFTs } from "@/hooks/useCompanionNFTs";
 
 // Import NFT Art
 import nftSocial from "@/assets/nft-social.png";
@@ -95,8 +97,8 @@ const impactCategories = {
 const AcompananteNFTs = () => {
   const { isConnected, isCompanion, disconnectWallet } = useWeb3();
   const navigate = useNavigate();
-  const [nfts, setNfts] = useState<NFTMetadata[]>([]);
-  const [selectedNFT, setSelectedNFT] = useState<NFTMetadata | null>(null);
+  const { nfts: contractNFTs, loading } = useCompanionNFTs();
+  const [selectedNFT, setSelectedNFT] = useState<any | null>(null);
   const [filter, setFilter] = useState<"all" | "social" | "health" | "mobility" | "emotional">("all");
 
   const handleLogout = () => {
@@ -104,158 +106,25 @@ const AcompananteNFTs = () => {
     navigate("/");
   };
 
-  useEffect(() => {
-    if (!isConnected || !isCompanion) {
-      navigate("/acompanante/login");
-      return;
-    }
-
-    // Generate demo NFTs
-    const demoNFTs: NFTMetadata[] = [
-      {
-        id: "1",
-        tokenId: 1001,
-        name: "Conversación y Escucha Activa",
-        description: "Sesión dedicada a reducir la soledad mediante conversación significativa y compañía.",
-        image: impactCategories.social.image,
-        sessionDate: new Date("2024-01-15"),
-        silverName: "María González",
-        activity: "Conversación y escucha activa",
-        location: "Bogotá, Colombia",
-        duration: 2,
-        category: "social",
-        impact: "Reducción de sentimiento de soledad y mejora del bienestar emocional",
-        attributes: [
-          { trait_type: "Categoría", value: "Conexión Social" },
-          { trait_type: "Actividad", value: "Conversación y escucha activa" },
-          { trait_type: "Duración", value: "2 horas" },
-          { trait_type: "Impacto", value: "Bienestar emocional" },
-        ],
-      },
-      {
-        id: "2",
-        tokenId: 1002,
-        name: "Acompañamiento a Cita Médica",
-        description: "Apoyo práctico en consulta médica, ayudando con transporte y comprensión de indicaciones.",
-        image: impactCategories.health.image,
-        sessionDate: new Date("2024-01-18"),
-        silverName: "Carlos Ramírez",
-        activity: "Acompañamiento a cita médica",
-        location: "Hospital San José, Bogotá",
-        duration: 3,
-        category: "health",
-        impact: "Acceso efectivo a servicios de salud y seguimiento médico adecuado",
-        attributes: [
-          { trait_type: "Categoría", value: "Apoyo en Salud" },
-          { trait_type: "Actividad", value: "Acompañamiento a cita médica" },
-          { trait_type: "Duración", value: "3 horas" },
-          { trait_type: "Impacto", value: "Acceso a salud" },
-        ],
-      },
-      {
-        id: "3",
-        tokenId: 1003,
-        name: "Compras en Supermercado",
-        description: "Ayuda práctica con compras semanales, asegurando nutrición adecuada y autonomía.",
-        image: impactCategories.mobility.image,
-        sessionDate: new Date("2024-01-20"),
-        silverName: "Ana López",
-        activity: "Compras en supermercado",
-        location: "Éxito Calle 80, Bogotá",
-        duration: 2,
-        category: "mobility",
-        impact: "Autonomía en necesidades básicas y nutrición adecuada",
-        attributes: [
-          { trait_type: "Categoría", value: "Movilidad" },
-          { trait_type: "Actividad", value: "Compras en supermercado" },
-          { trait_type: "Duración", value: "2 horas" },
-          { trait_type: "Impacto", value: "Autonomía" },
-        ],
-      },
-      {
-        id: "5",
-        tokenId: 1005,
-        name: "Apoyo Emocional en Duelo",
-        description: "Compañía empática durante proceso de duelo, ofreciendo escucha activa y contención emocional.",
-        image: impactCategories.emotional.image,
-        sessionDate: new Date("2024-01-25"),
-        silverName: "Patricia Jiménez",
-        activity: "Apoyo emocional",
-        location: "Domicilio, Bogotá",
-        duration: 2.5,
-        category: "emotional",
-        impact: "Procesamiento saludable de emociones y reducción de aislamiento",
-        attributes: [
-          { trait_type: "Categoría", value: "Apoyo Emocional" },
-          { trait_type: "Actividad", value: "Apoyo emocional en duelo" },
-          { trait_type: "Duración", value: "2.5 horas" },
-          { trait_type: "Impacto", value: "Salud emocional" },
-        ],
-      },
-      {
-        id: "6",
-        tokenId: 1006,
-        name: "Paseo por el Parque",
-        description: "Acompañamiento recreativo para actividad física y disfrute del aire libre.",
-        image: impactCategories.social.image,
-        sessionDate: new Date("2024-01-28"),
-        silverName: "Luis Martínez",
-        activity: "Paseo por el parque",
-        location: "Parque Simón Bolívar, Bogotá",
-        duration: 1.5,
-        category: "social",
-        impact: "Actividad física y bienestar mental",
-        attributes: [
-          { trait_type: "Categoría", value: "Conexión Social" },
-          { trait_type: "Actividad", value: "Paseo por el parque" },
-          { trait_type: "Duración", value: "1.5 horas" },
-          { trait_type: "Impacto", value: "Actividad física" },
-        ],
-      },
-      {
-        id: "7",
-        tokenId: 1007,
-        name: "Gestión de Medicamentos",
-        description: "Organización de medicamentos y recordatorios para tomas correctas.",
-        image: impactCategories.health.image,
-        sessionDate: new Date("2024-01-30"),
-        silverName: "Elena Ruiz",
-        activity: "Gestión de medicamentos",
-        location: "Domicilio, Bogotá",
-        duration: 1,
-        category: "health",
-        impact: "Adherencia al tratamiento y prevención de complicaciones",
-        attributes: [
-          { trait_type: "Categoría", value: "Apoyo en Salud" },
-          { trait_type: "Actividad", value: "Gestión de medicamentos" },
-          { trait_type: "Duración", value: "1 hora" },
-          { trait_type: "Impacto", value: "Salud preventiva" },
-        ],
-      },
-      {
-        id: "8",
-        tokenId: 1008,
-        name: "Transporte a Terapia",
-        description: "Acompañamiento seguro en transporte público para asistir a sesiones de fisioterapia.",
-        image: impactCategories.mobility.image,
-        sessionDate: new Date("2024-02-02"),
-        silverName: "Jorge Mendoza",
-        activity: "Transporte a terapia",
-        location: "Centro de Rehabilitación, Bogotá",
-        duration: 2,
-        category: "mobility",
-        impact: "Continuidad en tratamiento de rehabilitación",
-        attributes: [
-          { trait_type: "Categoría", value: "Movilidad" },
-          { trait_type: "Actividad", value: "Transporte a terapia" },
-          { trait_type: "Duración", value: "2 horas" },
-          { trait_type: "Impacto", value: "Acceso a tratamiento" },
-        ],
-      },
-    ];
-
-    setNfts(demoNFTs);
-  }, [isConnected, isCompanion, navigate]);
+  // Transform contract NFTs to match expected format
+  const nfts: NFTMetadata[] = contractNFTs.map(nft => ({
+    id: nft.tokenId.toString(),
+    tokenId: nft.tokenId,
+    name: nft.metadata?.name || `NFT #${nft.tokenId}`,
+    description: nft.metadata?.description || '',
+    image: nft.metadata?.image ? nft.metadata.image.replace('ipfs://', 'https://ipfs.io/ipfs/') : impactCategories[nft.category].image,
+    sessionDate: new Date(),
+    silverName: nft.metadata?.attributes.find(a => a.trait_type === 'Usuario')?.value?.toString() || 'N/A',
+    activity: nft.metadata?.attributes.find(a => a.trait_type === 'Actividad')?.value?.toString() || 'Sesión de acompañamiento',
+    location: 'Bogotá, Colombia',
+    duration: Number(nft.metadata?.attributes.find(a => a.trait_type === 'tiempo')?.value) || 0,
+    category: nft.category,
+    impact: 'Servicio de acompañamiento verificado',
+    attributes: nft.metadata?.attributes.map(a => ({
+      trait_type: a.trait_type,
+      value: a.value.toString()
+    })) || []
+  }));
 
   const filteredNFTs = filter === "all" 
     ? nfts 
@@ -376,13 +245,27 @@ const AcompananteNFTs = () => {
           </div>
 
           {/* NFT Grid */}
-          {filteredNFTs.length === 0 ? (
+          {loading ? (
+            <Card>
+              <CardContent className="py-16 text-center">
+                <Loader2 className="w-12 h-12 text-primary mx-auto mb-4 animate-spin" />
+                <h3 className="text-lg font-semibold mb-2">Cargando NFTs desde Arbitrum Sepolia...</h3>
+                <p className="text-sm text-muted-foreground">
+                  Conectando con el contrato inteligente
+                </p>
+              </CardContent>
+            </Card>
+          ) : filteredNFTs.length === 0 ? (
             <Card className="border-dashed">
               <CardContent className="py-16 text-center">
                 <Award className="w-20 h-20 text-muted-foreground mx-auto mb-4 opacity-30" />
                 <h3 className="text-lg font-semibold mb-2">No hay NFTs en esta categoría</h3>
                 <p className="text-sm text-muted-foreground">
-                  Completa sesiones de {filter === "all" ? "cualquier tipo" : impactCategories[filter as keyof typeof impactCategories].name.toLowerCase()} para ganar NFTs
+                  {!isConnected 
+                    ? "Conecta tu wallet para ver tus NFTs"
+                    : filter === "all" 
+                      ? "Completa sesiones de acompañamiento para ganar NFTs" 
+                      : `Completa sesiones de ${impactCategories[filter as keyof typeof impactCategories].name.toLowerCase()} para ganar NFTs`}
                 </p>
               </CardContent>
             </Card>
