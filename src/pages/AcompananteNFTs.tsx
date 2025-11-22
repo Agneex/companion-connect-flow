@@ -49,6 +49,7 @@ interface NFTMetadata {
   duration: number;
   category: "social" | "health" | "mobility" | "emotional";
   impact: string;
+  transactionHash?: string;
   attributes: {
     trait_type: string;
     value: string;
@@ -120,6 +121,7 @@ const AcompananteNFTs = () => {
     duration: Number(nft.metadata?.attributes.find(a => a.trait_type === 'tiempo')?.value) || 0,
     category: nft.category,
     impact: 'Servicio de acompañamiento verificado',
+    transactionHash: nft.transactionHash,
     attributes: nft.metadata?.attributes.map(a => ({
       trait_type: a.trait_type,
       value: a.value.toString()
@@ -382,6 +384,27 @@ const AcompananteNFTs = () => {
                     </div>
                   </div>
                 </div>
+
+                {/* Blockchain Verification */}
+                {selectedNFT.transactionHash && (
+                  <div className="bg-teal-500/5 border border-teal-500/20 rounded-lg p-4">
+                    <div className="flex items-start gap-3">
+                      <ExternalLink className="w-5 h-5 text-teal-600 flex-shrink-0 mt-0.5" />
+                      <div className="min-w-0 flex-1">
+                        <h4 className="font-semibold mb-2 text-sm">Verificación Blockchain</h4>
+                        <p className="text-xs text-muted-foreground mb-2">Hash de transacción:</p>
+                        <a 
+                          href={`https://sepolia.arbiscan.io/tx/${selectedNFT.transactionHash}`}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="text-xs text-teal-600 hover:text-teal-700 hover:underline font-mono break-all block"
+                        >
+                          {selectedNFT.transactionHash}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                )}
 
                 {/* Session Details */}
                 <div>

@@ -22,6 +22,7 @@ export interface CompanionNFT {
   tokenId: number;
   metadata: NFTMetadata | null;
   category: 'social' | 'health' | 'mobility' | 'emotional';
+  transactionHash?: string;
 }
 
 const getCategoryFromAttributes = (attributes: NFTAttribute[]): 'social' | 'health' | 'mobility' | 'emotional' => {
@@ -121,6 +122,38 @@ export const useCompanionNFTs = () => {
                   }
                 }
 
+                // Get transaction hash by querying Transfer events
+                let transactionHash: string | undefined;
+                try {
+                  const logsResponse = await fetch(rpcUrl, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                      jsonrpc: '2.0',
+                      id: 3,
+                      method: 'eth_getLogs',
+                      params: [{
+                        fromBlock: '0x0',
+                        toBlock: 'latest',
+                        address: CONTRACT_ADDRESS,
+                        topics: [
+                          '0xddf252ad1be2c89b69c2b068fc378daa952ba7f163c4a11628f55a4df523b3ef', // Transfer event signature
+                          '0x0000000000000000000000000000000000000000000000000000000000000000', // from: 0x0 (mint)
+                          null, // to: any
+                          `0x${tokenId.toString(16).padStart(64, '0')}` // tokenId
+                        ]
+                      }]
+                    })
+                  });
+
+                  const logsResult = await logsResponse.json();
+                  if (logsResult.result && logsResult.result.length > 0) {
+                    transactionHash = logsResult.result[0].transactionHash;
+                  }
+                } catch (e) {
+                  console.error(`Error fetching transaction hash for token ${tokenId}:`, e);
+                }
+
                 const category = metadata?.attributes 
                   ? getCategoryFromAttributes(metadata.attributes)
                   : 'social';
@@ -129,6 +162,7 @@ export const useCompanionNFTs = () => {
                   tokenId,
                   metadata,
                   category,
+                  transactionHash,
                 });
               }
             }
