@@ -11,15 +11,18 @@ import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Provider";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
+import { useServiceContract } from "@/hooks/useServiceContract";
 
 const AcompananteScan = () => {
   const { isConnected, isCompanion, disconnectWallet } = useWeb3();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
+  const { completeService, verifyToken, loading: contractLoading } = useServiceContract();
   const [scanning, setScanning] = useState(false);
   const [scanned, setScanned] = useState(false);
   const [sessionData, setSessionData] = useState({
+    tokenId: "",
     silverName: "",
     activity: "",
     duration: "",
@@ -36,17 +39,34 @@ const AcompananteScan = () => {
     return null;
   }
 
-  const handleStartScan = () => {
+  const handleStartScan = async () => {
     setScanning(true);
     
     // Simulate QR scan after 2 seconds
-    setTimeout(() => {
+    setTimeout(async () => {
+      // Para MVP: simular tokenId escaneado
+      // En producción: usar una librería de QR scan real
+      const mockTokenId = "1"; // Simular que se escaneó el token #1
+      
+      // Verificar que el token existe
+      const verification = await verifyToken(mockTokenId);
+      
       setScanning(false);
+      
+      if (!verification.exists) {
+        toast({
+          title: "Token inválido",
+          description: "El código QR no corresponde a un ticket válido",
+          variant: "destructive",
+        });
+        return;
+      }
+      
       setScanned(true);
-      // Simulate scanned data
       setSessionData({
         ...sessionData,
-        silverName: "María González",
+        tokenId: mockTokenId,
+        silverName: "María González", // En producción: obtener del contrato o metadata
       });
       toast({
         title: t("companion.scan.qrScanned"),
@@ -55,30 +75,47 @@ const AcompananteScan = () => {
     }, 2000);
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    // Save session to localStorage
-    const sessions = JSON.parse(localStorage.getItem("companion_sessions") || "[]");
-    const newSession = {
-      id: Date.now().toString(),
-      date: new Date().toISOString(),
-      silverName: sessionData.silverName,
-      activity: sessionData.activity,
-      duration: parseFloat(sessionData.duration),
-      notes: sessionData.notes,
-      nftAwarded: true, // Simulate NFT awarding
-    };
-    
-    sessions.unshift(newSession);
-    localStorage.setItem("companion_sessions", JSON.stringify(sessions));
-    
-    toast({
-      title: t("companion.scan.sessionRegistered"),
-      description: t("companion.scan.nftProcessing"),
-    });
-    
-    navigate("/acompanante/dashboard");
+    try {
+      // Llamar al contrato para completar el servicio
+      const result = await completeService(
+        sessionData.tokenId,
+        sessionData.activity,
+        parseFloat(sessionData.duration)
+      );
+      
+      // Guardar sesión localmente con información de blockchain
+      const sessions = JSON.parse(localStorage.getItem("companion_sessions") || "[]");
+      const newSession = {
+        id: Date.now().toString(),
+        date: new Date().toISOString(),
+        tokenId: sessionData.tokenId,
+        silverName: sessionData.silverName,
+        activity: sessionData.activity,
+        duration: parseFloat(sessionData.duration),
+        notes: sessionData.notes,
+        nftAwarded: true,
+        txHash: result.txHash,
+      };
+      
+      sessions.unshift(newSession);
+      localStorage.setItem("companion_sessions", JSON.stringify(sessions));
+      
+      toast({
+        title: "✅ " + t("companion.scan.sessionRegistered"),
+        description: `NFT transferido exitosamente. TX: ${result.txHash.slice(0, 10)}...`,
+      });
+      
+      navigate("/acompanante/dashboard");
+    } catch (error: any) {
+      toast({
+        title: "Error al registrar sesión",
+        description: error.message || "No se pudo completar la transacción",
+        variant: "destructive",
+      });
+    }
   };
 
   return (
@@ -227,6 +264,7 @@ const AcompananteScan = () => {
                       variant="outline"
                       onClick={() => navigate("/acompanante/dashboard")}
                       className="flex-1"
+                      disabled={contractLoading}
                     >
                       <ArrowLeft className="w-4 h-4 mr-2" />
                       {t("companion.scan.cancel")}
@@ -234,8 +272,9 @@ const AcompananteScan = () => {
                     <Button 
                       type="submit"
                       className="flex-1 shadow-glow-primary"
+                      disabled={contractLoading}
                     >
-                      {t("companion.scan.confirmRegister")}
+                      {contractLoading ? "Procesando..." : t("companion.scan.confirmRegister")}
                     </Button>
                   </div>
                 </form>
