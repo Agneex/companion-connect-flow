@@ -36,8 +36,8 @@ const RegistroAcompanante = () => {
   const navigate = useNavigate();
   const { toast } = useToast();
 
-  const APP_ID = import.meta.env.VITE_WORLDCOIN_APP_ID || "app_staging_c71c2036e1ff3ebb8b5bc13bcacee962";
-  const ACTION_ID = "register-companion";
+const APP_ID = import.meta.env.VITE_WORLDCOIN_APP_ID || "app_e44c90a11f70d766a711185b9bff6da6";
+const ACTION_ID = "validation-human";
 
   const form = useForm<FormData>({
     resolver: zodResolver(formSchema),
