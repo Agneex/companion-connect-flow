@@ -1,18 +1,18 @@
 {
   "nav": {
     "howItWorks": "Cómo funciona",
-    "companion": "Soy acompañante",
+    "companion": "Soy Compa",
     "validate": "Validar Tiquetera",
     "companies": "Para empresas y organizaciones",
     "security": "Seguridad y Trazabilidad",
     "faq": "Preguntas frecuentes",
-    "companionAccess": "Acceso acompañantes",
+    "companionAccess": "Acceso Compas",
     "validateTicket": "Validar Tiquetera"
   },
   "hero": {
     "title": "Compañía real para las personas que más importan",
     "subtitle": "Conecta a tus seres queridos con acompañantes verificados para actividades del día a día. Cada visita queda registrada en blockchain para total transparencia.",
-    "ctaCompanion": "Comenzar como acompañante",
+    "ctaCompanion": "Comenzar como Compa",
     "ctaBuy": "Comprar un pase"
   },
   "howItWorks": {
