@@ -1,4 +1,4 @@
-import { useAccount, useReadContract } from 'wagmi';
+import { useAccount } from 'wagmi';
 import { arbitrumSepolia } from 'wagmi/chains';
 import { useState, useEffect } from 'react';
 import contractABI from '@/contracts/ColeccionServiciosNFT.json';
@@ -40,19 +40,6 @@ export const useCompanionNFTs = () => {
   const { address } = useAccount();
   const [nfts, setNfts] = useState<CompanionNFT[]>([]);
   const [loading, setLoading] = useState(true);
-  const [checkedTokens, setCheckedTokens] = useState<number>(0);
-
-  // Get balance
-  const { data: balance } = useReadContract({
-    address: CONTRACT_ADDRESS,
-    abi: contractABI.abi,
-    functionName: 'balanceOf',
-    args: address ? [address] : undefined,
-    chainId: arbitrumSepolia.id,
-    query: {
-      enabled: !!address,
-    },
-  });
 
   useEffect(() => {
     const fetchNFTs = async () => {
@@ -66,46 +53,57 @@ export const useCompanionNFTs = () => {
         setLoading(true);
         const ownedNFTs: CompanionNFT[] = [];
         
-        // Check tokens 1-20 (reasonable range for testing)
-        const maxCheckTokens = 20;
+        // Check tokens 1-50 (reasonable range for testnet)
+        const maxCheckTokens = 50;
         
         for (let tokenId = 1; tokenId <= maxCheckTokens; tokenId++) {
           try {
-            // Create a read contract call to check owner
-            const response = await fetch(
-              `https://arb-sepolia.g.alchemy.com/v2/demo/getNFTs/?owner=${address}&contractAddresses[]=${CONTRACT_ADDRESS}`,
-              { method: 'GET' }
-            ).catch(() => null);
-
-            // Fallback: use direct wagmi call
-            // For now, we'll use a simpler approach - check ownership via contract
-            const ownerCheckResponse = await (window as any).ethereum?.request({
-              method: 'eth_call',
-              params: [{
-                to: CONTRACT_ADDRESS,
-                data: `0x6352211e${tokenId.toString(16).padStart(64, '0')}` // ownerOf(tokenId)
-              }, 'latest']
+            // Check ownership using fetch directly to Arbitrum Sepolia RPC
+            const rpcUrl = 'https://sepolia-rollup.arbitrum.io/rpc';
+            
+            // Call ownerOf
+            const ownerResponse = await fetch(rpcUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify({
+                jsonrpc: '2.0',
+                id: 1,
+                method: 'eth_call',
+                params: [{
+                  to: CONTRACT_ADDRESS,
+                  data: `0x6352211e${tokenId.toString(16).padStart(64, '0')}` // ownerOf(tokenId)
+                }, 'latest']
+              })
             });
 
-            if (ownerCheckResponse && ownerCheckResponse !== '0x') {
-              const owner = `0x${ownerCheckResponse.slice(-40)}`;
+            const ownerResult = await ownerResponse.json();
+            
+            if (ownerResult.result && ownerResult.result !== '0x') {
+              const owner = `0x${ownerResult.result.slice(-40)}`.toLowerCase();
               
-              if (owner.toLowerCase() === address.toLowerCase()) {
+              if (owner === address.toLowerCase()) {
                 // Get token URI
-                const uriResponse = await (window as any).ethereum?.request({
-                  method: 'eth_call',
-                  params: [{
-                    to: CONTRACT_ADDRESS,
-                    data: `0xc87b56dd${tokenId.toString(16).padStart(64, '0')}` // tokenURI(tokenId)
-                  }, 'latest']
+                const uriResponse = await fetch(rpcUrl, {
+                  method: 'POST',
+                  headers: { 'Content-Type': 'application/json' },
+                  body: JSON.stringify({
+                    jsonrpc: '2.0',
+                    id: 2,
+                    method: 'eth_call',
+                    params: [{
+                      to: CONTRACT_ADDRESS,
+                      data: `0xc87b56dd${tokenId.toString(16).padStart(64, '0')}` // tokenURI(tokenId)
+                    }, 'latest']
+                  })
                 });
 
+                const uriResult = await uriResponse.json();
                 let metadata: NFTMetadata | null = null;
                 
-                if (uriResponse && uriResponse !== '0x') {
+                if (uriResult.result && uriResult.result !== '0x') {
                   try {
                     // Decode the URI from hex
-                    const uri = decodeURIFromHex(uriResponse);
+                    const uri = decodeURIFromHex(uriResult.result);
                     
                     if (uri) {
                       // Fetch metadata from IPFS
@@ -135,10 +133,9 @@ export const useCompanionNFTs = () => {
               }
             }
           } catch (error) {
-            // Token might not exist, continue
+            // Token might not exist or other error, continue
+            console.log(`Token ${tokenId} check failed, continuing...`);
           }
-          
-          setCheckedTokens(tokenId);
         }
 
         setNfts(ownedNFTs);
