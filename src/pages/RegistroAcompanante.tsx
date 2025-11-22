@@ -240,6 +240,19 @@ const ACTION_ID = "validation-human";
               <CardContent>
                 <Form {...form}>
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                    {/* Wallet Address Field - Read Only */}
+                    <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
+                      <label className="text-sm font-medium text-foreground mb-2 block">
+                        Dirección de Wallet
+                      </label>
+                      <div className="font-mono text-sm text-muted-foreground break-all">
+                        {account}
+                      </div>
+                      <p className="text-xs text-muted-foreground mt-2">
+                        Esta es tu identidad única en la plataforma
+                      </p>
+                    </div>
+
                     <FormField
                       control={form.control}
                       name="fullName"
