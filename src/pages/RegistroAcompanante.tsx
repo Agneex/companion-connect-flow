@@ -251,6 +251,7 @@ const ACTION_ID = "validation-human";
                           variant="ghost"
                           size="sm"
                           onClick={() => {
+                            form.reset();
                             disconnectWallet();
                             setStep("wallet");
                           }}
