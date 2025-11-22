@@ -2,24 +2,24 @@
   "nav": {
     "howItWorks": "How it works",
     "companion": "I'm a companion",
-    "validate": "Check your paper wallet",
+    "validate": "Validate Pass",
     "companies": "For companies & organizations",
     "security": "Security & Traceability",
     "faq": "FAQ",
     "companionAccess": "Companion login",
-    "validateTicket": "Check your paper wallet"
+    "validateTicket": "Validate Pass"
   },
   "hero": {
     "title": "Real companionship for the ones who matter most",
     "subtitle": "Connect your loved ones with verified companions for day-to-day activities. Every visit gets recorded on blockchain for total transparency.",
     "ctaCompanion": "Start as a companion",
-    "ctaBuy": "Get a paper wallet"
+    "ctaBuy": "Get a Companya pass"
   },
   "howItWorks": {
     "title": "How Companya works",
     "silver": {
       "title": "For the Companyer",
-      "point1": "Zero apps, just your paper wallet with QR codes",
+      "point1": "Zero apps, just your Companya pass with QR codes",
       "point2": "Your Compa scans it at the start of each visit",
       "point3": "Enjoy the company hassle-free",
       "point4": "Every visit gets logged automatically on-chain"
@@ -27,13 +27,13 @@
     "companion": {
       "title": "For the Compa",
       "point1": "Sign up and get verified",
-      "point2": "Get gigs or pick up available paper wallets",
+      "point2": "Get gigs or pick up available Companya passes",
       "point3": "Scan the QR when you start each session",
       "point4": "Earn NFTs and rewards for your work"
     },
     "payer": {
       "title": "For the payer/donor",
-      "point1": "Buy paper wallets with real traceability",
+      "point1": "Buy Companya passes with real traceability",
       "point2": "Give it to family or donate to someone in need",
       "point3": "Get usage reports and verification",
       "point4": "Everything's recorded on blockchain for transparency"
@@ -53,7 +53,7 @@
       "title": "For Families",
       "peace": "Peace of mind from afar",
       "care": "Verified professional care",
-      "tracking": "Paper wallets recorded on blockchain",
+      "tracking": "Companya passes recorded on blockchain",
       "reports": "Detailed usage reports"
     },
     "seniors": {
@@ -68,8 +68,8 @@
     "title": "Built with trust tech",
     "subtitle": "The care journey for your loved one",
     "flow": {
-      "receive": "Get paper wallet",
-      "receiveDesc": "Printed wallet booklet",
+      "receive": "Get Companya pass",
+      "receiveDesc": "Printed pass booklet",
       "company": "Real companionship",
       "companyDesc": "Verified visits",
       "peace": "Peace of mind",
@@ -111,17 +111,17 @@
     "subtitle": "Companya adapts to different needs",
     "gift": {
       "title": "Meaningful gift",
-      "desc": "Gift real companionship to your loved ones, especially if you live far away. Each paper wallet is loaded with verified visits that truly make a difference.",
-      "cta": "Get a paper wallet"
+      "desc": "Gift real companionship to your loved ones, especially if you live far away. Each Companya pass is loaded with verified visits that truly make a difference.",
+      "cta": "Get a Companya pass"
     },
     "donate": {
       "title": "Donation with impact",
-      "desc": "Donate paper wallets to foundations and social programs. Every visit gets recorded for max transparency.",
+      "desc": "Donate Companya passes to foundations and social programs. Every visit gets recorded for max transparency.",
       "cta": "Donate now"
     },
     "corporate": {
       "title": "Corporate program",
-      "desc": "Integrate Companya paper wallets into your employee or insured benefits program. Wellness with full traceability.",
+      "desc": "Integrate Companya passes into your employee or insured benefits program. Wellness with full traceability.",
       "cta": "Get in touch"
     }
   },
@@ -183,7 +183,7 @@
       "recentSessions": "Recent sessions",
       "recentSessionsDesc": "Your latest recorded sessions",
       "noSessions": "No sessions yet",
-      "noSessionsDesc": "Scan a Companya paper wallet QR to register your first session",
+      "noSessionsDesc": "Scan a Companya pass QR to register your first session",
       "scanNow": "Scan QR now",
       "nftAwarded": "NFT awarded",
       "processingNft": "Processing NFT",
@@ -261,18 +261,18 @@
     },
     "scan": {
       "title": "Register session",
-      "subtitle": "Scan the Companya paper wallet QR to register the session",
+      "subtitle": "Scan the Companya pass QR to register the session",
       "backToDashboard": "Back to Dashboard",
       "scanning": "Scanning...",
       "scanQr": "Scan QR code",
-      "pointToQr": "Point to the paper wallet QR code",
+      "pointToQr": "Point to the Companya pass QR code",
       "simulationNote": "In production, this will activate your device's camera. For now, we'll simulate the scan.",
       "startScan": "Start scan",
-      "passVerified": "Paper wallet verified",
+      "passVerified": "Companya pass verified",
       "completeDetails": "Complete session details",
       "silverName": "Companyer's name",
       "silverNamePlaceholder": "Full name",
-      "autoFromPass": "Auto-obtained from paper wallet",
+      "autoFromPass": "Auto-obtained from Companya pass",
       "activity": "Activity performed",
       "activityPlaceholder": "E.g.: Medical appointment support",
       "duration": "Duration (hours)",
@@ -286,7 +286,7 @@
       "cancel": "Cancel",
       "confirmRegister": "Confirm and register",
       "qrScanned": "QR scanned!",
-      "qrScannedDesc": "Paper wallet verified. Complete session details.",
+      "qrScannedDesc": "Companya pass verified. Complete session details.",
       "sessionRegistered": "Session registered!",
       "nftProcessing": "Your NFT will be processed in the next few minutes."
     },
