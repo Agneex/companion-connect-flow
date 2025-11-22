@@ -18,6 +18,7 @@ import AcompananteDashboard from "./pages/AcompananteDashboard";
 import AcompananteScan from "./pages/AcompananteScan";
 import AcompananteSchedule from "./pages/AcompananteSchedule";
 import AcompananteNFTs from "./pages/AcompananteNFTs";
+import GenerarQRs from "./pages/GenerarQRs";
 import FlowDemo from "./pages/FlowDemo";
 import NotFound from "./pages/NotFound";
 
@@ -42,6 +43,7 @@ const App = () => (
                   <Route path="/acompanante/scan" element={<AcompananteScan />} />
                   <Route path="/acompanante/schedule" element={<AcompananteSchedule />} />
                   <Route path="/acompanante/nfts" element={<AcompananteNFTs />} />
+                  <Route path="/admin/generar-qrs" element={<GenerarQRs />} />
                   <Route path="/demo-flow" element={<FlowDemo />} />
                   <Route path="/validar" element={<ValidarTiquetera />} />
                   <Route path="/comprar" element={<Comprar />} />
