@@ -11,7 +11,7 @@ declare global {
 interface Web3ContextType {
   account: string | null;
   isConnected: boolean;
-  connectWallet: () => Promise<void>;
+  connectWallet: () => Promise<boolean>;
   disconnectWallet: () => void;
   isCompanion: boolean;
 }
@@ -74,7 +74,7 @@ export const Web3Provider = ({ children }: Web3ProviderProps) => {
     checkConnection();
   }, []);
 
-  const connectWallet = async () => {
+  const connectWallet = async (): Promise<boolean> => {
     try {
       // Check if MetaMask is installed
       if (typeof window.ethereum === "undefined") {
@@ -83,7 +83,7 @@ export const Web3Provider = ({ children }: Web3ProviderProps) => {
           description: "Por favor instala MetaMask para continuar.",
           variant: "destructive",
         });
-        return;
+        return false;
       }
 
       // Request account access using the standard method
@@ -137,6 +137,7 @@ export const Web3Provider = ({ children }: Web3ProviderProps) => {
         window.location.reload();
       });
       
+      return true;
     } catch (error: any) {
       console.error("Wallet connection error:", error);
       
@@ -153,6 +154,8 @@ export const Web3Provider = ({ children }: Web3ProviderProps) => {
         description: errorMessage,
         variant: "destructive",
       });
+
+      return false;
     }
   };
 
