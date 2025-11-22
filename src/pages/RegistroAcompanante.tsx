@@ -9,11 +9,12 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { CheckCircle2, Upload, Shield } from "lucide-react";
+import { CheckCircle2, Upload, Shield, Wallet, ArrowRight } from "lucide-react";
 import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
+import { useWeb3 } from "@/contexts/Web3Context";
 
 const formSchema = z.object({
   fullName: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
@@ -30,11 +31,12 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 const RegistroAcompanante = () => {
-  const [step, setStep] = useState<"form" | "worldcoin" | "success">("form");
+  const [step, setStep] = useState<"wallet" | "form" | "worldcoin" | "success">("wallet");
   const [formData, setFormData] = useState<FormData | null>(null);
   const [isVerifying, setIsVerifying] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
+  const { account, isConnected, connectWallet } = useWeb3();
 
 const APP_ID = import.meta.env.VITE_WORLDCOIN_APP_ID || "app_e44c90a11f70d766a711185b9bff6da6";
 const ACTION_ID = "validation-human";
@@ -54,8 +56,33 @@ const ACTION_ID = "validation-human";
   });
 
   const onSubmit = (data: FormData) => {
+    if (!account) {
+      toast({
+        title: "Error",
+        description: "Debes conectar tu wallet primero",
+        variant: "destructive",
+      });
+      return;
+    }
     setFormData(data);
     setStep("worldcoin");
+  };
+
+  const handleConnectWallet = async () => {
+    try {
+      await connectWallet();
+      toast({
+        title: "¡Wallet conectada!",
+        description: "Ahora puedes continuar con tu registro",
+      });
+      setStep("form");
+    } catch (error) {
+      toast({
+        title: "Error",
+        description: "No se pudo conectar la wallet",
+        variant: "destructive",
+      });
+    }
   };
 
   const handleWorldcoinSuccess = async (result: ISuccessResult) => {
@@ -90,11 +117,10 @@ const ACTION_ID = "validation-human";
     try {
       // If IDKit reached onSuccess, we trust the verification and continue the registration flow
       const companions = JSON.parse(localStorage.getItem("companions") || "[]");
-      const walletAddress = localStorage.getItem("web3_account") || `0x${Math.random().toString(16).substr(2, 40)}`;
       
       const newCompanion = {
         id: Date.now().toString(),
-        walletAddress: walletAddress,
+        walletAddress: account!, // Use connected wallet address
         ...formData,
         worldcoinVerified: true,
         nullifierHash: result.nullifier_hash,
@@ -104,7 +130,6 @@ const ACTION_ID = "validation-human";
       
       companions.push(newCompanion);
       localStorage.setItem("companions", JSON.stringify(companions));
-      localStorage.setItem("web3_account", walletAddress);
       localStorage.setItem("is_companion", "true");
       
       console.log("Companion registered successfully after Worldcoin verification");
@@ -141,6 +166,70 @@ const ACTION_ID = "validation-human";
       
       <main className="container mx-auto px-4 py-20">
         <div className="max-w-3xl mx-auto">
+          {step === "wallet" && (
+            <Card>
+              <CardHeader>
+                <CardTitle className="text-3xl text-center">Conecta tu Wallet</CardTitle>
+                <CardDescription className="text-center">
+                  Para comenzar el registro como acompañante, primero debes conectar tu wallet Web3.
+                  Esta será tu identidad única en la plataforma.
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="space-y-6">
+                <div className="bg-primary/10 border border-primary/20 rounded-lg p-6 space-y-3">
+                  <div className="flex items-start gap-3">
+                    <Wallet className="h-6 w-6 text-primary mt-0.5 flex-shrink-0" />
+                    <div>
+                      <p className="font-semibold text-foreground mb-2">¿Por qué necesito una wallet?</p>
+                      <p className="text-sm text-muted-foreground">
+                        Tu wallet es tu identidad en Web3. Te permitirá recibir NFTs de tus sesiones,
+                        gestionar tus recompensas y acceder a tu dashboard de forma segura sin contraseñas.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                <div className="space-y-3">
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
+                    <span>Proceso seguro y encriptado</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
+                    <span>Una wallet por acompañante</span>
+                  </div>
+                  <div className="flex items-center gap-2 text-sm text-muted-foreground">
+                    <CheckCircle2 className="h-4 w-4 text-primary flex-shrink-0" />
+                    <span>Control total de tus activos digitales</span>
+                  </div>
+                </div>
+
+                {isConnected && account ? (
+                  <div className="space-y-4">
+                    <div className="bg-green-500/10 border border-green-500/20 rounded-lg p-4">
+                      <div className="flex items-center gap-2 text-green-600 dark:text-green-400 mb-2">
+                        <CheckCircle2 className="h-5 w-5" />
+                        <span className="font-semibold">Wallet conectada</span>
+                      </div>
+                      <p className="text-sm text-muted-foreground font-mono break-all">
+                        {account}
+                      </p>
+                    </div>
+                    <Button onClick={() => setStep("form")} className="w-full" size="lg">
+                      Continuar con el registro
+                      <ArrowRight className="ml-2 h-4 w-4" />
+                    </Button>
+                  </div>
+                ) : (
+                  <Button onClick={handleConnectWallet} className="w-full" size="lg">
+                    <Wallet className="mr-2 h-5 w-5" />
+                    Conectar Wallet
+                  </Button>
+                )}
+              </CardContent>
+            </Card>
+          )}
+
           {step === "form" && (
             <Card>
               <CardHeader>
