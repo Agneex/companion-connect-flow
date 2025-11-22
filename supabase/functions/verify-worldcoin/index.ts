@@ -20,7 +20,7 @@ serve(async (req) => {
 
   try {
     const appId = Deno.env.get('WORLDCOIN_APP_ID');
-    const actionId = 'register-companion'; // This should match what you configure in Worldcoin dashboard
+    const actionId = 'validation-human'; // This should match what you configure in Worldcoin dashboard
     
     if (!appId) {
       throw new Error('WORLDCOIN_APP_ID not configured');
@@ -31,7 +31,7 @@ serve(async (req) => {
     console.log('Verifying Worldcoin proof:', { nullifier_hash, merkle_root });
 
     // Verify the proof with Worldcoin's API
-    const verifyResponse = await fetch('https://developer.worldcoin.org/api/v1/verify/app_' + appId, {
+    const verifyResponse = await fetch(`https://developer.worldcoin.org/api/v1/verify/${appId}`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
