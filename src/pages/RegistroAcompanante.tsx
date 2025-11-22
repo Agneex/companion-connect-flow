@@ -332,7 +332,7 @@ const ACTION_ID = "validation-human";
                   signal={formData?.documentId || ''}
                   onSuccess={handleWorldcoinSuccess}
                   onError={handleWorldcoinError}
-                  verification_level={VerificationLevel.Orb}
+                  verification_level={VerificationLevel.Device}
                 >
                   {({ open }) => (
                     <Button 
