@@ -228,21 +228,23 @@ const AcompananteScan = () => {
             <CardContent className="space-y-6">
               {!scanned ? (
                 <div className="flex flex-col items-center space-y-6 py-8">
-                  <div className="relative w-full max-w-md">
-                    {scanning ? (
                       <div>
-                        <div id="qr-reader" className="rounded-2xl overflow-hidden border-4 border-primary"></div>
-                        <div className="text-center mt-4">
-                          <p className="text-sm font-medium">{t("companion.scan.scanning")}</p>
-                          <p className="text-xs text-muted-foreground mt-2">Apunta la cámara al código QR</p>
-                        </div>
+                        <div
+                          id="qr-reader"
+                          className={`rounded-2xl overflow-hidden border-4 border-primary ${scanning ? "block" : "hidden"}`}
+                        ></div>
+                        {!scanning && (
+                          <div className="w-full aspect-square bg-muted/50 rounded-2xl flex items-center justify-center border-4 border-border">
+                            <QrCode className="w-20 h-20 text-muted-foreground" />
+                          </div>
+                        )}
+                        {scanning && (
+                          <div className="text-center mt-4">
+                            <p className="text-sm font-medium">{t("companion.scan.scanning")}</p>
+                            <p className="text-xs text-muted-foreground mt-2">Apunta la cámara al código QR</p>
+                          </div>
+                        )}
                       </div>
-                    ) : (
-                      <div className="w-full aspect-square bg-muted/50 rounded-2xl flex items-center justify-center border-4 border-border">
-                        <QrCode className="w-20 h-20 text-muted-foreground" />
-                      </div>
-                    )}
-                  </div>
 
                   <div className="text-center space-y-3">
                     <h3 className="text-lg font-semibold">
