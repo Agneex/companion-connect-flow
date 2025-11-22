@@ -19,6 +19,7 @@
     "title": "How Companya works",
     "silver": {
       "title": "For the Companyer",
+      "subtitle": "Simple and hassle-free",
       "point1": "Zero apps, just your Companya pass with QR codes",
       "point2": "Your Compa scans it at the start of each visit",
       "point3": "Enjoy the company hassle-free",
@@ -26,13 +27,15 @@
     },
     "companion": {
       "title": "For the Compa",
+      "subtitle": "Your work, verified and valued",
       "point1": "Sign up and get verified",
       "point2": "Get gigs or pick up available Companya passes",
-      "point3": "Scan the QR when you start each session",
+      "point3": "Scan the QR when you finish each session",
       "point4": "Earn NFTs and rewards for your work"
     },
     "payer": {
       "title": "For the payer/donor",
+      "subtitle": "Peace of mind with full traceability",
       "point1": "Buy Companya passes with real traceability",
       "point2": "Give it to family or donate to someone in need",
       "point3": "Get usage reports and verification",
