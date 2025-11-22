@@ -37,7 +37,7 @@ const RegistroAcompanante = () => {
   const [isVerifying, setIsVerifying] = useState(false);
   const navigate = useNavigate();
   const { toast } = useToast();
-  const { account, isConnected, connectWallet } = useWeb3();
+  const { account, isConnected, connectWallet, disconnectWallet } = useWeb3();
 
 const APP_ID = import.meta.env.VITE_WORLDCOIN_APP_ID || "app_e44c90a11f70d766a711185b9bff6da6";
 const ACTION_ID = "validation-human";
@@ -242,9 +242,23 @@ const ACTION_ID = "validation-human";
                   <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
                     {/* Wallet Address Field - Read Only */}
                     <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
-                      <label className="text-sm font-medium text-foreground mb-2 block">
-                        Dirección de Wallet
-                      </label>
+                      <div className="flex items-center justify-between mb-2">
+                        <label className="text-sm font-medium text-foreground">
+                          Dirección de Wallet
+                        </label>
+                        <Button
+                          type="button"
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => {
+                            disconnectWallet();
+                            setStep("wallet");
+                          }}
+                          className="h-8 text-xs"
+                        >
+                          Desconectar
+                        </Button>
+                      </div>
                       <div className="font-mono text-sm text-muted-foreground break-all">
                         {account}
                       </div>
