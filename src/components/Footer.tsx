@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { Mail, Twitter, Linkedin } from "lucide-react";
 import { useTranslation } from "react-i18next";
+import companyaLogo from "@/assets/companya-logo.png";
 
 const Footer = () => {
   const { t } = useTranslation();
@@ -11,10 +12,12 @@ const Footer = () => {
         <div className="max-w-6xl mx-auto">
           {/* Brand and Social */}
           <div className="flex flex-col items-center text-center space-y-6 mb-8">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 bg-gradient-secondary rounded-xl flex items-center justify-center">
-                <span className="text-xl font-bold text-primary-foreground">C</span>
-              </div>
+            <div className="flex items-center space-x-3">
+              <img 
+                src={companyaLogo} 
+                alt="Companya Logo" 
+                className="w-12 h-12 object-contain"
+              />
               <span className="text-2xl font-bold text-foreground">Companya</span>
             </div>
             
