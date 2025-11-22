@@ -165,9 +165,9 @@ const AcompananteNFTs = () => {
                   <Award className="w-7 h-7 text-primary-foreground" />
                 </div>
                 <div>
-                  <h1 className="text-3xl font-bold mb-1">Mi Colección de NFTs</h1>
+                  <h1 className="text-3xl font-bold mb-1">{t("companion.nfts.title")}</h1>
                   <p className="text-muted-foreground text-sm">
-                    {stats.total} arte{stats.total !== 1 ? 's' : ''} digital{stats.total !== 1 ? 'es' : ''} que represent{stats.total !== 1 ? 'an' : 'a'} el impacto de tu trabajo
+                    {t("companion.nfts.subtitle")}
                   </p>
                 </div>
               </div>
@@ -189,7 +189,7 @@ const AcompananteNFTs = () => {
                   </div>
                   <div>
                     <p className="text-2xl font-bold">{stats.total}</p>
-                    <p className="text-xs text-muted-foreground">Total</p>
+                    <p className="text-xs text-muted-foreground">{t("companion.nfts.totalNfts")}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -227,7 +227,7 @@ const AcompananteNFTs = () => {
                 size="sm"
                 onClick={() => setFilter("all")}
               >
-                Todos ({stats.total})
+                {t("companion.nfts.filterAll")} ({stats.total})
               </Button>
               {Object.entries(impactCategories).map(([key, cat]) => {
                 const Icon = cat.icon;
@@ -253,7 +253,7 @@ const AcompananteNFTs = () => {
             <Card>
               <CardContent className="py-16 text-center">
                 <Loader2 className="w-12 h-12 text-primary mx-auto mb-4 animate-spin" />
-                <h3 className="text-lg font-semibold mb-2">Cargando NFTs desde Arbitrum Sepolia...</h3>
+                <h3 className="text-lg font-semibold mb-2">{t("companion.nfts.loadingNfts")}</h3>
                 <p className="text-sm text-muted-foreground">
                   Conectando con el contrato inteligente
                 </p>
@@ -263,13 +263,9 @@ const AcompananteNFTs = () => {
             <Card className="border-dashed">
               <CardContent className="py-16 text-center">
                 <Award className="w-20 h-20 text-muted-foreground mx-auto mb-4 opacity-30" />
-                <h3 className="text-lg font-semibold mb-2">No hay NFTs en esta categoría</h3>
+                <h3 className="text-lg font-semibold mb-2">{t("companion.nfts.noNfts")}</h3>
                 <p className="text-sm text-muted-foreground">
-                  {!isConnected 
-                    ? "Conecta tu wallet para ver tus NFTs"
-                    : filter === "all" 
-                      ? "Completa sesiones de acompañamiento para ganar NFTs" 
-                      : `Completa sesiones de ${impactCategories[filter as keyof typeof impactCategories].name.toLowerCase()} para ganar NFTs`}
+                  {t("companion.nfts.noNftsDesc")}
                 </p>
               </CardContent>
             </Card>
