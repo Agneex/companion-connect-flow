@@ -42,11 +42,26 @@ serve(async (req) => {
       );
     }
 
-    const privateKey = Deno.env.get('ADMIN_WALLET_PRIVATE_KEY');
-    if (!privateKey) {
+    const privateKeyFromEnv = Deno.env.get('ADMIN_WALLET_PRIVATE_KEY');
+    if (!privateKeyFromEnv) {
       console.error('ADMIN_WALLET_PRIVATE_KEY not configured');
       return new Response(
-        JSON.stringify({ error: 'Server configuration error' }),
+        JSON.stringify({ error: 'Server configuration error: admin wallet key missing' }),
+        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+      );
+    }
+
+    const privateKey = privateKeyFromEnv.trim();
+
+    // Validate private key format: must be 0x + 64 hex chars
+    if (!/^0x[0-9a-fA-F]{64}$/.test(privateKey)) {
+      console.error('ADMIN_WALLET_PRIVATE_KEY has invalid format. Length:', privateKey.length);
+      return new Response(
+        JSON.stringify({
+          error: 'Server configuration error: invalid admin wallet key format',
+          hint: 'Debe ser 0x seguido de 64 caracteres hexadecimales',
+          length: privateKey.length,
+        }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
       );
     }
