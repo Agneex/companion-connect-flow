@@ -33,13 +33,21 @@ export const Web3ContextProvider = ({ children }: Web3ContextProviderProps) => {
   // Check companion status when wallet connects or address changes
   useEffect(() => {
     if (address) {
+      // MODO PROTOTIPO: Permitir cualquier wallet conectada como acompañante
+      // Para producción, descomentar la validación contra localStorage:
+      /*
       const companions = JSON.parse(localStorage.getItem('companions') || '[]');
       const isRegistered = companions.some(
         (c: any) => c.walletAddress?.toLowerCase() === address.toLowerCase()
       );
       setIsCompanion(isRegistered);
-      localStorage.setItem('web3_account', address);
       localStorage.setItem('is_companion', String(isRegistered));
+      */
+      
+      // Modo prototipo: Aceptar cualquier wallet
+      setIsCompanion(true);
+      localStorage.setItem('web3_account', address);
+      localStorage.setItem('is_companion', 'true');
     } else {
       setIsCompanion(false);
       localStorage.removeItem('web3_account');
