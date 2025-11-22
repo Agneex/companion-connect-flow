@@ -19,7 +19,6 @@ import AcompananteScan from "./pages/AcompananteScan";
 import AcompananteSchedule from "./pages/AcompananteSchedule";
 import AcompananteNFTs from "./pages/AcompananteNFTs";
 import FlowDemo from "./pages/FlowDemo";
-import GenerarTickets from "./pages/GenerarTickets";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -46,7 +45,6 @@ const App = () => (
                   <Route path="/demo-flow" element={<FlowDemo />} />
                   <Route path="/validar" element={<ValidarTiquetera />} />
                   <Route path="/comprar" element={<Comprar />} />
-                  <Route path="/generar-tickets" element={<GenerarTickets />} />
                   {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
                   <Route path="*" element={<NotFound />} />
                 </Routes>

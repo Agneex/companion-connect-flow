@@ -11,20 +11,15 @@ import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Provider";
 import { useToast } from "@/hooks/use-toast";
 import { useTranslation } from "react-i18next";
-import { useServiceContract } from "@/hooks/useServiceContract";
-import { QRScanner } from "@/components/QRScanner";
 
 const AcompananteScan = () => {
   const { isConnected, isCompanion, disconnectWallet } = useWeb3();
   const navigate = useNavigate();
   const { toast } = useToast();
   const { t } = useTranslation();
-  const { completeService, verifyToken, loading: contractLoading } = useServiceContract();
-  const [showScanner, setShowScanner] = useState(false);
+  const [scanning, setScanning] = useState(false);
   const [scanned, setScanned] = useState(false);
-  const [verifying, setVerifying] = useState(false);
   const [sessionData, setSessionData] = useState({
-    tokenId: "",
     silverName: "",
     activity: "",
     duration: "",
@@ -42,124 +37,53 @@ const AcompananteScan = () => {
   }
 
   const handleStartScan = () => {
-    setShowScanner(true);
-  };
-
-  const handleQRScanSuccess = async (decodedText: string) => {
-    setShowScanner(false);
-    setVerifying(true);
+    setScanning(true);
     
-    try {
-      // El QR debería contener el tokenId
-      // Formato esperado: "COMPANYA-TOKEN-{tokenId}" o simplemente el tokenId
-      let tokenId = decodedText;
-      
-      // Si el QR tiene un formato específico, extraer el tokenId
-      if (decodedText.includes("COMPANYA-TOKEN-")) {
-        tokenId = decodedText.replace("COMPANYA-TOKEN-", "");
-      }
-      
-      // Verificar que sea un número válido
-      if (isNaN(Number(tokenId))) {
-        toast({
-          title: "QR inválido",
-          description: "El código QR no tiene el formato correcto",
-          variant: "destructive",
-        });
-        setVerifying(false);
-        return;
-      }
-      
-      // Verificar que el token existe en el contrato
-      const verification = await verifyToken(tokenId);
-      
-      if (!verification.exists) {
-        toast({
-          title: "Token inválido",
-          description: "El código QR no corresponde a un ticket válido",
-          variant: "destructive",
-        });
-        setVerifying(false);
-        return;
-      }
-      
-      // Token válido - proceder con los datos
+    // Simulate QR scan after 2 seconds
+    setTimeout(() => {
+      setScanning(false);
       setScanned(true);
+      // Simulate scanned data
       setSessionData({
         ...sessionData,
-        tokenId: tokenId,
-        silverName: "María González", // TODO: obtener del metadata del token
+        silverName: "María González",
       });
-      
       toast({
         title: t("companion.scan.qrScanned"),
-        description: `Token #${tokenId} verificado correctamente`,
+        description: t("companion.scan.qrScannedDesc"),
       });
-    } catch (error: any) {
-      toast({
-        title: "Error al verificar",
-        description: error.message || "No se pudo verificar el ticket",
-        variant: "destructive",
-      });
-    } finally {
-      setVerifying(false);
-    }
+    }, 2000);
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
-    try {
-      // Llamar al contrato para completar el servicio
-      const result = await completeService(
-        sessionData.tokenId,
-        sessionData.activity,
-        parseFloat(sessionData.duration)
-      );
-      
-      // Guardar sesión localmente con información de blockchain
-      const sessions = JSON.parse(localStorage.getItem("companion_sessions") || "[]");
-      const newSession = {
-        id: Date.now().toString(),
-        date: new Date().toISOString(),
-        tokenId: sessionData.tokenId,
-        silverName: sessionData.silverName,
-        activity: sessionData.activity,
-        duration: parseFloat(sessionData.duration),
-        notes: sessionData.notes,
-        nftAwarded: true,
-        txHash: result.txHash,
-      };
-      
-      sessions.unshift(newSession);
-      localStorage.setItem("companion_sessions", JSON.stringify(sessions));
-      
-      toast({
-        title: "✅ " + t("companion.scan.sessionRegistered"),
-        description: `NFT transferido exitosamente. TX: ${result.txHash.slice(0, 10)}...`,
-      });
-      
-      navigate("/acompanante/dashboard");
-    } catch (error: any) {
-      toast({
-        title: "Error al registrar sesión",
-        description: error.message || "No se pudo completar la transacción",
-        variant: "destructive",
-      });
-    }
+    // Save session to localStorage
+    const sessions = JSON.parse(localStorage.getItem("companion_sessions") || "[]");
+    const newSession = {
+      id: Date.now().toString(),
+      date: new Date().toISOString(),
+      silverName: sessionData.silverName,
+      activity: sessionData.activity,
+      duration: parseFloat(sessionData.duration),
+      notes: sessionData.notes,
+      nftAwarded: true, // Simulate NFT awarding
+    };
+    
+    sessions.unshift(newSession);
+    localStorage.setItem("companion_sessions", JSON.stringify(sessions));
+    
+    toast({
+      title: t("companion.scan.sessionRegistered"),
+      description: t("companion.scan.nftProcessing"),
+    });
+    
+    navigate("/acompanante/dashboard");
   };
 
   return (
     <div className="min-h-screen bg-background">
       <DashboardNav onLogout={handleLogout} />
-      
-      {/* QR Scanner Modal */}
-      {showScanner && (
-        <QRScanner
-          onScanSuccess={handleQRScanSuccess}
-          onClose={() => setShowScanner(false)}
-        />
-      )}
       
       <main className="pt-[120px]">
         <div className="container mx-auto px-4 py-8 lg:py-12 max-w-2xl">
@@ -184,53 +108,48 @@ const AcompananteScan = () => {
             <CardContent className="space-y-6">
               {!scanned ? (
                 <div className="flex flex-col items-center space-y-6 py-8">
-                  {verifying ? (
-                    <div className="text-center space-y-4">
-                      <div className="w-64 h-64 bg-muted/50 rounded-2xl flex items-center justify-center border-4 border-primary animate-pulse">
-                        <Camera className="w-16 h-16 text-primary animate-pulse" />
-                      </div>
-                      <div>
-                        <p className="text-lg font-semibold mb-2">Verificando ticket...</p>
-                        <div className="flex justify-center gap-1">
-                          <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0s" }} />
-                          <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.2s" }} />
-                          <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.4s" }} />
+                  <div className="relative">
+                    <div className={`w-64 h-64 bg-muted/50 rounded-2xl flex items-center justify-center border-4 ${
+                      scanning ? "border-primary animate-pulse" : "border-border"
+                    }`}>
+                      {scanning ? (
+                        <div className="text-center">
+                          <Camera className="w-16 h-16 text-primary mx-auto mb-4 animate-pulse" />
+                          <p className="text-sm font-medium">{t("companion.scan.scanning")}</p>
+                          <div className="mt-4 flex justify-center gap-1">
+                            <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0s" }} />
+                            <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.2s" }} />
+                            <div className="w-2 h-2 bg-primary rounded-full animate-bounce" style={{ animationDelay: "0.4s" }} />
+                          </div>
                         </div>
-                      </div>
+                      ) : (
+                        <QrCode className="w-20 h-20 text-muted-foreground" />
+                      )}
                     </div>
-                  ) : (
-                    <>
-                      <div className="relative">
-                        <div className="w-64 h-64 bg-muted/50 rounded-2xl flex items-center justify-center border-4 border-border hover:border-primary transition-colors">
-                          <QrCode className="w-20 h-20 text-muted-foreground" />
-                        </div>
-                      </div>
+                    
+                    {scanning && (
+                      <div className="absolute inset-0 border-4 border-primary rounded-2xl animate-ping opacity-75" />
+                    )}
+                  </div>
 
-                      <div className="text-center space-y-3">
-                        <h3 className="text-lg font-semibold">
-                          {t("companion.scan.scanQr")}
-                        </h3>
-                        <p className="text-sm text-muted-foreground max-w-md">
-                          Usa la cámara de tu dispositivo para escanear el código QR del ticket físico
-                        </p>
-                      </div>
+                  <div className="text-center space-y-3">
+                    <h3 className="text-lg font-semibold">
+                      {scanning ? t("companion.scan.pointToQr") : t("companion.scan.scanQr")}
+                    </h3>
+                    <p className="text-sm text-muted-foreground max-w-md">
+                      {t("companion.scan.simulationNote")}
+                    </p>
+                  </div>
 
-                      <Button 
-                        onClick={handleStartScan}
-                        size="lg"
-                        className="shadow-glow-primary"
-                      >
-                        <Camera className="w-5 h-5 mr-2" />
-                        {t("companion.scan.startScan")}
-                      </Button>
-                      
-                      <div className="mt-4 p-4 bg-muted/50 rounded-lg max-w-md">
-                        <p className="text-xs text-muted-foreground text-center">
-                          💡 El QR debe contener el ID del token del servicio. Formato: COMPANYA-TOKEN-[ID]
-                        </p>
-                      </div>
-                    </>
-                  )}
+                  <Button 
+                    onClick={handleStartScan}
+                    disabled={scanning}
+                    size="lg"
+                    className="shadow-glow-primary"
+                  >
+                    <Camera className="w-5 h-5 mr-2" />
+                    {scanning ? t("companion.scan.scanning") : t("companion.scan.startScan")}
+                  </Button>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-6">
@@ -308,7 +227,6 @@ const AcompananteScan = () => {
                       variant="outline"
                       onClick={() => navigate("/acompanante/dashboard")}
                       className="flex-1"
-                      disabled={contractLoading}
                     >
                       <ArrowLeft className="w-4 h-4 mr-2" />
                       {t("companion.scan.cancel")}
@@ -316,9 +234,8 @@ const AcompananteScan = () => {
                     <Button 
                       type="submit"
                       className="flex-1 shadow-glow-primary"
-                      disabled={contractLoading}
                     >
-                      {contractLoading ? "Procesando..." : t("companion.scan.confirmRegister")}
+                      {t("companion.scan.confirmRegister")}
                     </Button>
                   </div>
                 </form>
