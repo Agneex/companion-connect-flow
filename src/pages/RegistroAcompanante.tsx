@@ -67,6 +67,14 @@ const ACTION_ID = "validation-human";
     }
   }, [isConnected, account, step, toast]);
 
+  // Auto-return to wallet step when wallet is disconnected
+  useEffect(() => {
+    if (!isConnected && !account && (step === "form" || step === "worldcoin")) {
+      setStep("wallet");
+      form.reset();
+    }
+  }, [isConnected, account, step, form]);
+
   const onSubmit = (data: FormData) => {
     if (!account) {
       toast({
@@ -250,11 +258,7 @@ const ACTION_ID = "validation-human";
                           type="button"
                           variant="ghost"
                           size="sm"
-                          onClick={() => {
-                            form.reset();
-                            disconnectWallet();
-                            setStep("wallet");
-                          }}
+                          onClick={disconnectWallet}
                           className="h-8 text-xs"
                         >
                           Desconectar
