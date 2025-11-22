@@ -67,7 +67,7 @@ const impactCategories = {
     image: nftSocial,
   },
   health: {
-    name: "Apoyo en Salud",
+    name: "Acompañamiento en Salud",
     color: "from-teal-400 to-green-500",
     bgColor: "bg-teal-500/10",
     borderColor: "border-teal-500/20",
@@ -76,7 +76,7 @@ const impactCategories = {
     image: nftHealth,
   },
   mobility: {
-    name: "Movilidad",
+    name: "Apoyo Digital",
     color: "from-cyan-400 to-blue-500",
     bgColor: "bg-cyan-500/10",
     borderColor: "border-cyan-500/20",
@@ -85,7 +85,7 @@ const impactCategories = {
     image: nftMobility,
   },
   emotional: {
-    name: "Apoyo Emocional",
+    name: "Gestiones del día a día",
     color: "from-pink-400 to-rose-500",
     bgColor: "bg-pink-500/10",
     borderColor: "border-pink-500/20",
