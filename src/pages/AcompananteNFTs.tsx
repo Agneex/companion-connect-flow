@@ -152,30 +152,30 @@ const AcompananteNFTs = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background overflow-x-hidden">
       <DashboardNav onLogout={handleLogout} />
       
-      <main className="pt-[120px] overflow-x-hidden">
-        <div className="container mx-auto px-4 py-8 max-w-7xl">
+      <main className="pt-[120px]">
+        <div className="container mx-auto px-3 sm:px-4 py-8 max-w-7xl">
           {/* Header */}
           <div className="mb-8">
-            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
-              <div className="flex items-center gap-3 min-w-0 flex-1">
+            <div className="flex flex-col gap-4 mb-6">
+              <div className="flex items-center gap-3 min-w-0">
                 <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-secondary rounded-2xl flex items-center justify-center shadow-glow-primary flex-shrink-0">
                   <Award className="w-6 h-6 sm:w-7 sm:h-7 text-primary-foreground" />
                 </div>
-                <div className="min-w-0">
-                  <h1 className="text-2xl sm:text-3xl font-bold mb-1">{t("companion.nfts.title")}</h1>
+                <div className="min-w-0 flex-1">
+                  <h1 className="text-xl sm:text-3xl font-bold mb-1">{t("companion.nfts.title")}</h1>
                   <p className="text-muted-foreground text-xs sm:text-sm">
                     {t("companion.nfts.subtitle")}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2 w-full sm:w-auto">
-                <Button variant="outline" size="sm" className="flex-1 sm:flex-initial">
-                  <Download className="w-4 h-4 sm:mr-2" />
-                  <span className="hidden sm:inline">Exportar Todo</span>
+              <div className="hidden sm:flex items-center gap-2">
+                <Button variant="outline" size="sm">
+                  <Download className="w-4 h-4 mr-2" />
+                  Exportar Todo
                 </Button>
               </div>
             </div>
@@ -203,9 +203,9 @@ const AcompananteNFTs = () => {
                       <div className={cn("w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0", cat.bgColor)}>
                         <Icon className={cn("w-4 h-4 sm:w-5 sm:h-5", cat.textColor)} />
                       </div>
-                      <div className="min-w-0">
+                      <div className="min-w-0 overflow-hidden">
                         <p className="text-xl sm:text-2xl font-bold">{count}</p>
-                        <p className="text-xs text-muted-foreground truncate">{cat.name}</p>
+                        <p className="text-[10px] sm:text-xs text-muted-foreground truncate w-full">{cat.name}</p>
                       </div>
                     </CardContent>
                   </Card>
