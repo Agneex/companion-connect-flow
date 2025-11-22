@@ -69,19 +69,14 @@ const ACTION_ID = "validation-human";
   };
 
   const handleConnectWallet = async () => {
-    try {
-      await connectWallet();
+    const success = await connectWallet();
+
+    if (success) {
       toast({
         title: "¡Wallet conectada!",
         description: "Ahora puedes continuar con tu registro",
       });
       setStep("form");
-    } catch (error) {
-      toast({
-        title: "Error",
-        description: "No se pudo conectar la wallet",
-        variant: "destructive",
-      });
     }
   };
 
