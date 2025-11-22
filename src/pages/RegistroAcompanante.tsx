@@ -347,11 +347,6 @@ const ACTION_ID = "validation-human";
                     </Button>
                   )}
                 </IDKitWidget>
-                
-                <div className="text-xs text-muted-foreground text-center max-w-md">
-                  <p>App ID: {APP_ID}</p>
-                  <p>Action: {ACTION_ID}</p>
-                </div>
               </CardContent>
             </Card>
           )}
