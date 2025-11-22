@@ -6,6 +6,7 @@ import { useWeb3 } from "@/contexts/Web3Provider";
 import { useState } from "react";
 import DashboardBreadcrumbs from "./DashboardBreadcrumbs";
 import companyaLogo from "@/assets/companya-logo.png";
+import { useTranslation } from "react-i18next";
 
 interface DashboardNavProps {
   onLogout: () => void;
@@ -15,25 +16,26 @@ const DashboardNav = ({ onLogout }: DashboardNavProps) => {
   const location = useLocation();
   const { account } = useWeb3();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const { t } = useTranslation();
 
   const navItems = [
     {
-      label: "Dashboard",
+      label: t("companion.nav.dashboard"),
       href: "/acompanante/dashboard",
       icon: Home,
     },
     {
-      label: "Mi Agenda",
+      label: t("companion.nav.schedule"),
       href: "/acompanante/schedule",
       icon: Calendar,
     },
     {
-      label: "Escanear QR",
+      label: t("companion.nav.scanQr"),
       href: "/acompanante/scan",
       icon: QrCode,
     },
     {
-      label: "Mis NFTs",
+      label: t("companion.nav.nfts"),
       href: "/acompanante/nfts",
       icon: Award,
     },
@@ -83,12 +85,12 @@ const DashboardNav = ({ onLogout }: DashboardNavProps) => {
         {/* Desktop Actions */}
         <div className="hidden lg:flex items-center gap-3">
           <div className="text-xs text-right">
-            <p className="text-muted-foreground">Wallet</p>
+            <p className="text-muted-foreground">{t("companion.nav.wallet")}</p>
             <p className="font-mono font-semibold">{account?.slice(0, 6)}...{account?.slice(-4)}</p>
           </div>
           <Button variant="outline" size="sm" onClick={onLogout}>
             <LogOut className="w-4 h-4 mr-2" />
-            Salir
+            {t("companion.nav.logout")}
           </Button>
         </div>
 
@@ -128,7 +130,7 @@ const DashboardNav = ({ onLogout }: DashboardNavProps) => {
             })}
             <div className="pt-4 border-t border-border space-y-2">
               <div className="px-4 py-2 text-xs">
-                <p className="text-muted-foreground mb-1">Wallet conectada</p>
+                <p className="text-muted-foreground mb-1">{t("companion.nav.connectedWallet")}</p>
                 <p className="font-mono font-semibold">{account?.slice(0, 10)}...{account?.slice(-6)}</p>
               </div>
               <Button
@@ -141,7 +143,7 @@ const DashboardNav = ({ onLogout }: DashboardNavProps) => {
                 className="w-full justify-start"
               >
                 <LogOut className="w-4 h-4 mr-2" />
-                Desconectar Wallet
+                {t("companion.nav.disconnectWallet")}
               </Button>
             </div>
           </nav>

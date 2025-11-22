@@ -11,6 +11,7 @@ import { Link } from "react-router-dom";
 import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { Separator } from "@/components/ui/separator";
 import { toast } from "sonner";
+import { useTranslation } from "react-i18next";
 
 interface Session {
   id: string;
@@ -24,6 +25,7 @@ interface Session {
 const AcompananteDashboard = () => {
   const { account, isConnected, isCompanion, disconnectWallet } = useWeb3();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [sessions, setSessions] = useState<Session[]>([]);
   const [stats, setStats] = useState({
     totalSessions: 0,
@@ -146,8 +148,8 @@ const AcompananteDashboard = () => {
         setTransactionStep("success");
         setIsProcessing(false);
         
-        toast.success("Retiro exitoso", {
-          description: `$${stats.monthlyEarnings} transferidos a tu wallet`,
+        toast.success(t("companion.dashboard.withdrawSuccess"), {
+          description: t("companion.dashboard.withdrawSuccessDesc", { amount: `$${stats.monthlyEarnings}` }),
         });
 
         setTimeout(() => {
@@ -171,8 +173,8 @@ const AcompananteDashboard = () => {
         setTransactionStep("success");
         setIsProcessing(false);
         
-        toast.success("Fondos utilizados", {
-          description: "Transacción completada exitosamente",
+        toast.success(t("companion.dashboard.fundsUsed"), {
+          description: t("companion.dashboard.fundsUsedDesc"),
         });
 
         setTimeout(() => {
@@ -195,10 +197,10 @@ const AcompananteDashboard = () => {
           {/* Welcome Section */}
           <div>
             <h1 className="text-4xl font-bold text-foreground mb-2">
-              Dashboard de Acompañante
+              {t("companion.dashboard.title")}
             </h1>
             <p className="text-muted-foreground">
-              Gestiona tus sesiones, escanea QR y revisa tus recompensas NFT
+              {t("companion.dashboard.subtitle")}
             </p>
           </div>
 
@@ -211,8 +213,8 @@ const AcompananteDashboard = () => {
                     <QrCode className="w-7 h-7 text-primary-foreground" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg">Escanear QR</h3>
-                    <p className="text-sm text-muted-foreground">Registrar nueva sesión</p>
+                    <h3 className="font-semibold text-lg">{t("companion.dashboard.scanQr")}</h3>
+                    <p className="text-sm text-muted-foreground">{t("companion.dashboard.registerSession")}</p>
                   </div>
                 </CardContent>
               </Link>
@@ -225,8 +227,8 @@ const AcompananteDashboard = () => {
                     <Calendar className="w-7 h-7 text-foreground" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg">Mi Agenda</h3>
-                    <p className="text-sm text-muted-foreground">Ver próximas sesiones</p>
+                    <h3 className="font-semibold text-lg">{t("companion.dashboard.mySchedule")}</h3>
+                    <p className="text-sm text-muted-foreground">{t("companion.dashboard.viewSessions")}</p>
                   </div>
                 </CardContent>
               </Link>
@@ -239,8 +241,8 @@ const AcompananteDashboard = () => {
                     <Award className="w-7 h-7 text-foreground" />
                   </div>
                   <div>
-                    <h3 className="font-semibold text-lg">Mis NFTs</h3>
-                    <p className="text-sm text-muted-foreground">Ver colección</p>
+                    <h3 className="font-semibold text-lg">{t("companion.dashboard.myNfts")}</h3>
+                    <p className="text-sm text-muted-foreground">{t("companion.dashboard.viewCollection")}</p>
                   </div>
                 </CardContent>
               </Link>
@@ -256,7 +258,7 @@ const AcompananteDashboard = () => {
                   <TrendingUp className="w-4 h-4 text-green-500" />
                 </div>
                 <p className="text-3xl font-bold text-foreground mb-1">{stats.totalSessions}</p>
-                <p className="text-sm text-muted-foreground">Sesiones completadas</p>
+                <p className="text-sm text-muted-foreground">{t("companion.dashboard.completedSessions")}</p>
               </CardContent>
             </Card>
 
@@ -266,7 +268,7 @@ const AcompananteDashboard = () => {
                   <Award className="w-8 h-8 text-primary" />
                 </div>
                 <p className="text-3xl font-bold text-foreground mb-1">{stats.totalNFTs}</p>
-                <p className="text-sm text-muted-foreground">NFTs ganados</p>
+                <p className="text-sm text-muted-foreground">{t("companion.dashboard.nftsEarned")}</p>
               </CardContent>
             </Card>
 
@@ -276,7 +278,7 @@ const AcompananteDashboard = () => {
                   <Clock className="w-8 h-8 text-blue-500" />
                 </div>
                 <p className="text-3xl font-bold text-foreground mb-1">{stats.totalHours}h</p>
-                <p className="text-sm text-muted-foreground">Horas de compañía</p>
+                <p className="text-sm text-muted-foreground">{t("companion.dashboard.companionHours")}</p>
               </CardContent>
             </Card>
 
@@ -296,11 +298,11 @@ const AcompananteDashboard = () => {
                       setShowFundsDialog(true);
                     }}
                   >
-                    Ver fondos
+                    {t("companion.dashboard.viewFunds")}
                   </Button>
                 </div>
                 <p className="text-3xl font-bold text-foreground mb-1">${stats.monthlyEarnings}</p>
-                <p className="text-sm text-muted-foreground">Fondos disponibles</p>
+                <p className="text-sm text-muted-foreground">{t("companion.dashboard.availableFunds")}</p>
               </CardContent>
             </Card>
           </div>
@@ -308,23 +310,23 @@ const AcompananteDashboard = () => {
           {/* Recent Sessions */}
           <Card className="glass-effect">
             <CardHeader>
-              <CardTitle>Sesiones recientes</CardTitle>
+              <CardTitle>{t("companion.dashboard.recentSessions")}</CardTitle>
               <CardDescription>
-                Tus últimas sesiones de acompañamiento registradas
+                {t("companion.dashboard.recentSessionsDesc")}
               </CardDescription>
             </CardHeader>
             <CardContent>
               {sessions.length === 0 ? (
                 <div className="text-center py-12">
                   <QrCode className="w-16 h-16 text-muted-foreground mx-auto mb-4" />
-                  <h3 className="text-lg font-semibold mb-2">No hay sesiones aún</h3>
+                  <h3 className="text-lg font-semibold mb-2">{t("companion.dashboard.noSessions")}</h3>
                   <p className="text-sm text-muted-foreground mb-6">
-                    Escanea el QR de un pase Companya para registrar tu primera sesión
+                    {t("companion.dashboard.noSessionsDesc")}
                   </p>
                   <Button asChild>
                     <Link to="/acompanante/scan">
                       <QrCode className="w-4 h-4 mr-2" />
-                      Escanear QR ahora
+                      {t("companion.dashboard.scanNow")}
                     </Link>
                   </Button>
                 </div>
@@ -360,10 +362,10 @@ const AcompananteDashboard = () => {
                         {session.nftAwarded ? (
                           <Badge className="bg-gradient-secondary">
                             <Award className="w-3 h-3 mr-1" />
-                            NFT otorgado
+                            {t("companion.dashboard.nftAwarded")}
                           </Badge>
                         ) : (
-                          <Badge variant="outline">Procesando NFT</Badge>
+                          <Badge variant="outline">{t("companion.dashboard.processingNft")}</Badge>
                         )}
                       </div>
                     </div>
@@ -371,7 +373,7 @@ const AcompananteDashboard = () => {
                   
                   {sessions.length > 5 && (
                     <Button variant="outline" className="w-full" asChild>
-                      <Link to="/acompanante/history">Ver todas las sesiones</Link>
+                      <Link to="/acompanante/history">{t("companion.dashboard.viewAllSessions")}</Link>
                     </Button>
                   )}
                 </div>
@@ -390,17 +392,17 @@ const AcompananteDashboard = () => {
           <DialogHeader>
             <DialogTitle className="flex items-center gap-2">
               <Wallet className="w-5 h-5 text-primary" />
-              Gestionar Fondos
+              {t("companion.dashboard.manageFunds")}
             </DialogTitle>
             <DialogDescription>
-              Retira tus ganancias a tu wallet o utilízalas en la plataforma
+              {t("companion.dashboard.manageFundsDesc")}
             </DialogDescription>
           </DialogHeader>
 
           <div className="space-y-6 py-4">
             {/* Balance Display */}
             <div className="bg-gradient-secondary rounded-lg p-6 text-center">
-              <p className="text-sm text-primary-foreground/70 mb-2">Balance disponible</p>
+              <p className="text-sm text-primary-foreground/70 mb-2">{t("companion.dashboard.availableBalance")}</p>
               <p className="text-4xl font-bold text-primary-foreground">${stats.monthlyEarnings}</p>
               <p className="text-xs text-primary-foreground/60 mt-2">≈ {(stats.monthlyEarnings * 0.0003).toFixed(4)} ETH</p>
             </div>
@@ -411,11 +413,11 @@ const AcompananteDashboard = () => {
                 <div className="grid grid-cols-2 gap-4">
                   <div className="text-center p-3 bg-muted rounded-lg">
                     <p className="text-2xl font-bold text-foreground">{stats.totalSessions}</p>
-                    <p className="text-xs text-muted-foreground">Sesiones</p>
+                    <p className="text-xs text-muted-foreground">{t("companion.dashboard.sessions")}</p>
                   </div>
                   <div className="text-center p-3 bg-muted rounded-lg">
                     <p className="text-2xl font-bold text-foreground">{stats.totalHours}h</p>
-                    <p className="text-xs text-muted-foreground">Horas totales</p>
+                    <p className="text-xs text-muted-foreground">{t("companion.dashboard.totalHours")}</p>
                   </div>
                 </div>
 
@@ -430,7 +432,7 @@ const AcompananteDashboard = () => {
                     disabled={stats.monthlyEarnings === 0}
                   >
                     <ArrowDownToLine className="w-5 h-5 mr-2" />
-                    Retirar a Wallet
+                    {t("companion.dashboard.withdrawToWallet")}
                   </Button>
                   
                   <Button 
@@ -441,16 +443,14 @@ const AcompananteDashboard = () => {
                     disabled={stats.monthlyEarnings === 0}
                   >
                     <CreditCard className="w-5 h-5 mr-2" />
-                    Utilizar en Plataforma
+                    {t("companion.dashboard.useInPlatform")}
                   </Button>
                 </div>
 
                 {/* Info */}
-                <div className="bg-blue-500/10 border border-blue-500/20 rounded-lg p-3">
-                  <p className="text-xs text-blue-600 dark:text-blue-400">
-                    <strong>Gas estimado:</strong> ~0.0001 ETH (~$0.20)
-                    <br />
-                    <strong>Tiempo estimado:</strong> 30-60 segundos
+                <div className="bg-muted/50 rounded-lg p-3">
+                  <p className="text-xs text-muted-foreground text-center">
+                    {t("companion.dashboard.transactionInfo")}
                   </p>
                 </div>
               </>
@@ -459,9 +459,9 @@ const AcompananteDashboard = () => {
             {transactionStep === "confirming" && (
               <div className="text-center py-8">
                 <Loader2 className="w-12 h-12 text-primary animate-spin mx-auto mb-4" />
-                <p className="font-semibold text-lg mb-2">Confirma en tu wallet</p>
+                <p className="font-semibold text-lg mb-2">{t("companion.dashboard.confirmingTransaction")}</p>
                 <p className="text-sm text-muted-foreground">
-                  Revisa los detalles de la transacción en tu wallet y confirma
+                  {t("companion.dashboard.confirmingDesc")}
                 </p>
               </div>
             )}
@@ -474,9 +474,9 @@ const AcompananteDashboard = () => {
                     <div className="w-8 h-8 bg-primary/20 rounded-full animate-pulse" />
                   </div>
                 </div>
-                <p className="font-semibold text-lg mb-2">Procesando transacción</p>
+                <p className="font-semibold text-lg mb-2">{t("companion.dashboard.processingTransaction")}</p>
                 <p className="text-sm text-muted-foreground mb-4">
-                  Tu transacción está siendo confirmada en la blockchain
+                  {t("companion.dashboard.processingDesc")}
                 </p>
                 <div className="bg-muted rounded-lg p-3">
                   <p className="text-xs text-muted-foreground font-mono">
@@ -491,9 +491,9 @@ const AcompananteDashboard = () => {
                 <div className="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
                   <CheckCircle2 className="w-10 h-10 text-green-500" />
                 </div>
-                <p className="font-semibold text-lg mb-2">¡Transacción exitosa!</p>
+                <p className="font-semibold text-lg mb-2">{t("companion.dashboard.transactionSuccess")}</p>
                 <p className="text-sm text-muted-foreground">
-                  Tu operación ha sido completada con éxito
+                  {t("companion.dashboard.successDesc")}
                 </p>
               </div>
             )}
