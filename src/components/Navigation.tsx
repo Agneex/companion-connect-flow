@@ -23,13 +23,13 @@ const Navigation = () => {
       <div className="container mx-auto px-3 sm:px-4 lg:px-6">
         <div className="flex items-center justify-between h-16 md:h-18 lg:h-20 gap-2">
           {/* Logo */}
-          <Link to="/" className="flex items-center space-x-2 md:space-x-3 hover:opacity-80 transition-opacity group">
+          <Link to="/" className="flex items-center space-x-3 md:space-x-4 hover:opacity-80 transition-opacity group">
             <img 
               src={companyaLogo} 
               alt="Companya Logo" 
-              className="w-8 h-8 md:w-10 md:h-10 lg:w-12 lg:h-12 object-contain group-hover:scale-105 transition-transform"
+              className="w-12 h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 object-contain group-hover:scale-105 transition-transform"
             />
-            <span className="text-xl md:text-2xl font-bold text-foreground">Companya</span>
+            <span className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground">Companya</span>
           </Link>
 
           {/* Desktop Menu */}

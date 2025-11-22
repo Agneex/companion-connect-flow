@@ -50,7 +50,7 @@ const DashboardNav = ({ onLogout }: DashboardNavProps) => {
           <img 
             src={companyaLogo} 
             alt="Companya Logo" 
-            className="w-10 h-10 object-contain"
+            className="w-12 h-12 md:w-14 md:h-14 object-contain"
           />
           <div>
             <span className="text-xl font-bold text-foreground">Companya</span>
