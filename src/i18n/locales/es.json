@@ -18,14 +18,14 @@
   "howItWorks": {
     "title": "Cómo funciona Companya",
     "silver": {
-      "title": "Para el Silver (adulto mayor)",
+      "title": "Para el Companyer",
       "point1": "Cero apps, solo tu pase Companya en papel",
-      "point2": "El acompañante escanea el QR al inicio",
+      "point2": "El Compa escanea el QR al inicio",
       "point3": "Disfruta de la compañía sin complicaciones",
       "point4": "Cada visita queda registrada automáticamente"
     },
     "companion": {
-      "title": "Para el acompañante",
+      "title": "Para el Compa",
       "point1": "Regístrate y verifica tu perfil",
       "point2": "Recibe asignaciones o atiende pases disponibles",
       "point3": "Escanea el QR al iniciar cada sesión",
@@ -43,7 +43,7 @@
     "title": "Beneficios para todos",
     "subtitle": "Un ecosistema donde todos ganan",
     "companions": {
-      "title": "Para Acompañantes",
+      "title": "Para Compas",
       "income": "Ingresos claros y trazables",
       "reputation": "Reputación on-chain verificable",
       "training": "Capacitación y certificaciones",
@@ -78,8 +78,8 @@
     },
     "cards": {
       "verified": {
-        "title": "Acompañantes verificados",
-        "desc": "Cada acompañante pasa por un proceso de verificación riguroso antes de poder ofrecer servicios."
+        "title": "Compas verificados",
+        "desc": "Cada Compa pasa por un proceso de verificación riguroso antes de poder ofrecer servicios."
       },
       "traceability": {
         "title": "Trazabilidad total",
@@ -98,11 +98,11 @@
       },
       "nft": {
         "title": "NFTs como Certificados",
-        "desc": "Los acompañantes reciben NFTs únicos que certifican su trabajo, creando una reputación on-chain transferible y verificable."
+        "desc": "Los Compas reciben NFTs únicos que certifican su trabajo, creando una reputación on-chain transferible y verificable."
       },
       "identity": {
         "title": "Verificación de Identidad",
-        "desc": "Utilizamos tecnología de proof-of-personhood para garantizar que cada acompañante es una persona real y única en la plataforma."
+        "desc": "Utilizamos tecnología de proof-of-personhood para garantizar que cada Compa es una persona real y única en la plataforma."
       }
     }
   },
@@ -116,7 +116,7 @@
     },
     "donate": {
       "title": "Donación con impacto",
-      "desc": "Dona pases de acompañamiento a fundaciones y programas sociales. Cada visita queda registrada para máxima transparencia.",
+      "desc": "Dona pases a fundaciones y programas sociales. Cada visita queda registrada para máxima transparencia.",
       "cta": "Donar ahora"
     },
     "corporate": {
@@ -129,7 +129,7 @@
     "tagline": "Compañía verificada con tecnología blockchain",
     "product": "Producto",
     "howWorks": "Cómo funciona",
-    "forCompanions": "Para acompañantes",
+    "forCompanions": "Para Compas",
     "forFamilies": "Para familias",
     "forCompanies": "Para empresas",
     "company": "Empresa",
@@ -145,7 +145,7 @@
   },
   "companion": {
     "login": {
-      "title": "Acceso de Acompañantes",
+      "title": "Acceso de Compas",
       "subtitle": "Conecta tu wallet Web3 para acceder a tu dashboard",
       "firstTime": "¿Primera vez?",
       "firstTimeDesc": "Si aún no te has registrado, completa el proceso de verificación KYC primero.",
@@ -154,7 +154,7 @@
       "compatible": "Compatible con MetaMask, WalletConnect y más",
       "simulation": "Simulación: En esta demo, se generará una wallet temporal. En producción, se conectará a tu wallet real.",
       "notAuthorized": "No autorizado",
-      "notAuthorizedDesc": "Esta wallet no está registrada como acompañante verificado.",
+      "notAuthorizedDesc": "Esta wallet no está registrada como Compa verificado.",
       "completeRegistration": "Completar registro",
       "yourWork": "Tu trabajo,",
       "verified": "verificado en blockchain",
@@ -167,7 +167,7 @@
       "immutableHistoryDesc": "Todo tu trabajo queda registrado en blockchain"
     },
     "dashboard": {
-      "title": "Dashboard de Acompañante",
+      "title": "Dashboard de Compa",
       "subtitle": "Gestiona tus sesiones, escanea QR y revisa tus recompensas NFT",
       "scanQr": "Escanear QR",
       "registerSession": "Registrar nueva sesión",
@@ -181,7 +181,7 @@
       "availableFunds": "Fondos disponibles",
       "viewFunds": "Ver fondos",
       "recentSessions": "Sesiones recientes",
-      "recentSessionsDesc": "Tus últimas sesiones de acompañamiento registradas",
+      "recentSessionsDesc": "Tus últimas sesiones registradas",
       "noSessions": "No hay sesiones aún",
       "noSessionsDesc": "Escanea el QR de un pase Companya para registrar tu primera sesión",
       "scanNow": "Escanear QR ahora",
@@ -219,7 +219,7 @@
     },
     "schedule": {
       "title": "Mi Agenda",
-      "subtitle": "Gestiona tus sesiones de acompañamiento",
+      "subtitle": "Gestiona tus sesiones",
       "newSession": "Nueva Sesión",
       "todaySessions": "Hoy tienes {{count}} sesión(es) programada(s)",
       "firstSessionAt": "Primera sesión a las {{time}} con {{name}}",
@@ -238,18 +238,18 @@
       "statusCompleted": "Completada"
     },
     "nfts": {
-      "title": "Mis NFTs de Acompañamiento",
+      "title": "Mis NFTs de Compa",
       "subtitle": "Colección de certificados digitales que demuestran tu impacto",
       "totalNfts": "Total NFTs",
       "filterAll": "Todos",
       "loadingNfts": "Cargando NFTs desde Arbitrum Sepolia...",
       "noNfts": "Aún no has ganado NFTs",
-      "noNftsDesc": "Los NFTs se otorgan al completar sesiones de acompañamiento verificadas",
+      "noNftsDesc": "Los NFTs se otorgan al completar sesiones verificadas",
       "startEarning": "Comienza a ganar NFTs",
       "viewOnExplorer": "Ver en Block Explorer",
       "activity": "Actividad",
       "user": "Usuario",
-      "companion": "Acompañante",
+      "companion": "Compa",
       "time": "Tiempo",
       "txHash": "Hash de Transacción",
       "categories": {
@@ -261,7 +261,7 @@
     },
     "scan": {
       "title": "Registrar sesión",
-      "subtitle": "Escanea el QR del pase Companya para registrar la sesión de acompañamiento",
+      "subtitle": "Escanea el QR del pase Companya para registrar la sesión",
       "backToDashboard": "Volver al Dashboard",
       "scanning": "Escaneando...",
       "scanQr": "Escanear código QR",
@@ -270,7 +270,7 @@
       "startScan": "Iniciar escaneo",
       "passVerified": "Pase verificado",
       "completeDetails": "Completa los datos de la sesión",
-      "silverName": "Nombre del adulto mayor",
+      "silverName": "Nombre del Companyer",
       "silverNamePlaceholder": "Nombre completo",
       "autoFromPass": "Obtenido automáticamente del pase",
       "activity": "Actividad realizada",
@@ -292,15 +292,15 @@
     },
     "registration": {
       "connectWallet": "Conecta tu Wallet",
-      "connectWalletDesc": "Para comenzar el registro como acompañante, primero debes conectar tu wallet Web3. Esta será tu identidad única en la plataforma.",
+      "connectWalletDesc": "Para comenzar el registro como Compa, primero debes conectar tu wallet Web3. Esta será tu identidad única en la plataforma.",
       "whyWallet": "¿Por qué necesito una wallet?",
       "whyWalletDesc": "Tu wallet es tu identidad en Web3. Te permitirá recibir NFTs de tus sesiones, gestionar tus recompensas y acceder a tu dashboard de forma segura sin contraseñas.",
       "secureProcess": "Proceso seguro y encriptado",
-      "oneWallet": "Una wallet por acompañante",
+      "oneWallet": "Una wallet por Compa",
       "fullControl": "Control total de tus activos digitales",
       "walletConnected": "Wallet conectada",
       "continueRegistration": "Continuar con el registro",
-      "title": "Registro de Acompañante",
+      "title": "Registro de Compa",
       "kycDesc": "Completa el formulario KYC para comenzar tu proceso de verificación",
       "walletAddress": "Dirección de Wallet",
       "disconnect": "Desconectar",
@@ -313,8 +313,8 @@
       "addressPlaceholder": "Calle 123 #45-67",
       "phone": "Teléfono",
       "phonePlaceholder": "+57 300 123 4567",
-      "aboutYou": "Háblanos de ti / ¿Por qué quieres acompañar?",
-      "aboutYouPlaceholder": "Cuéntanos tu motivación para ser acompañante...",
+      "aboutYou": "Háblanos de ti / ¿Por qué quieres ser Compa?",
+      "aboutYouPlaceholder": "Cuéntanos tu motivación para ser Compa...",
       "interests": "Áreas de interés",
       "interestsPlaceholder": "Ej: acompañamiento médico, conversación, paseos...",
       "experience": "Experiencia",
@@ -330,7 +330,7 @@
       "pleaseWait": "Por favor espera mientras verificamos tu identidad con Worldcoin",
       "verifyWithWorldcoin": "Verificar con Worldcoin",
       "registrationComplete": "¡Registro completado!",
-      "welcomeMessage": "Bienvenido a Companya. Tu registro ha sido aprobado y ya puedes comenzar a acompañar.",
+      "welcomeMessage": "Bienvenido a Companya. Tu registro ha sido aprobado y ya puedes comenzar como Compa.",
       "nextSteps": "Próximos pasos:",
       "reviewProfile": "Revisaremos tu perfil (1-2 días hábiles)",
       "receiveNotification": "Recibirás una notificación cuando seas aprobado",
