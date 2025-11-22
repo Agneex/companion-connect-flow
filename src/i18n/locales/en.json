@@ -18,14 +18,14 @@
   "howItWorks": {
     "title": "How Companya works",
     "silver": {
-      "title": "For the Silver (senior)",
+      "title": "For the Companyer",
       "point1": "Zero apps, just your paper wallet with QR codes",
-      "point2": "Your companion scans it at the start of each visit",
+      "point2": "Your Compa scans it at the start of each visit",
       "point3": "Enjoy the company hassle-free",
       "point4": "Every visit gets logged automatically on-chain"
     },
     "companion": {
-      "title": "For the companion",
+      "title": "For the Compa",
       "point1": "Sign up and get verified",
       "point2": "Get gigs or pick up available paper wallets",
       "point3": "Scan the QR when you start each session",
@@ -43,7 +43,7 @@
     "title": "Benefits for everyone",
     "subtitle": "An ecosystem where everyone wins",
     "companions": {
-      "title": "For Companions",
+      "title": "For Compas",
       "income": "Clear and traceable income",
       "reputation": "Verifiable on-chain rep",
       "training": "Training and certifications",
@@ -78,8 +78,8 @@
     },
     "cards": {
       "verified": {
-        "title": "Verified companions",
-        "desc": "Every companion goes through a rigorous vetting process before they can offer services."
+        "title": "Verified Compas",
+        "desc": "Every Compa goes through a rigorous vetting process before they can offer services."
       },
       "traceability": {
         "title": "Total traceability",
@@ -98,11 +98,11 @@
       },
       "nft": {
         "title": "NFTs as Certificates",
-        "desc": "Companions receive unique NFTs that certify their work, creating a transferable and verifiable on-chain reputation."
+        "desc": "Compas receive unique NFTs that certify their work, creating a transferable and verifiable on-chain reputation."
       },
       "identity": {
         "title": "Identity Verification",
-        "desc": "We use proof-of-personhood tech to ensure every companion is a real and unique person on the platform."
+        "desc": "We use proof-of-personhood tech to ensure every Compa is a real and unique person on the platform."
       }
     }
   },
@@ -116,7 +116,7 @@
     },
     "donate": {
       "title": "Donation with impact",
-      "desc": "Donate paper wallets to foundations and social programs. Every visit gets recorded on-chain for max transparency.",
+      "desc": "Donate paper wallets to foundations and social programs. Every visit gets recorded for max transparency.",
       "cta": "Donate now"
     },
     "corporate": {
@@ -129,7 +129,7 @@
     "tagline": "Verified companionship with blockchain tech",
     "product": "Product",
     "howWorks": "How it works",
-    "forCompanions": "For companions",
+    "forCompanions": "For Compas",
     "forFamilies": "For families",
     "forCompanies": "For companies",
     "company": "Company",
@@ -145,7 +145,7 @@
   },
   "companion": {
     "login": {
-      "title": "Companion Access",
+      "title": "Compa Access",
       "subtitle": "Connect your Web3 wallet to access your dashboard",
       "firstTime": "First time here?",
       "firstTimeDesc": "If you haven't registered yet, complete the KYC verification process first.",
@@ -154,7 +154,7 @@
       "compatible": "Compatible with MetaMask, WalletConnect and more",
       "simulation": "Simulation: In this demo, a temporary wallet will be generated. In production, it'll connect to your real wallet.",
       "notAuthorized": "Not authorized",
-      "notAuthorizedDesc": "This wallet is not registered as a verified companion.",
+      "notAuthorizedDesc": "This wallet is not registered as a verified Compa.",
       "completeRegistration": "Complete registration",
       "yourWork": "Your work,",
       "verified": "verified on blockchain",
@@ -167,7 +167,7 @@
       "immutableHistoryDesc": "All your work is recorded on blockchain"
     },
     "dashboard": {
-      "title": "Companion Dashboard",
+      "title": "Compa Dashboard",
       "subtitle": "Manage your sessions, scan QR codes and check your NFT rewards",
       "scanQr": "Scan QR",
       "registerSession": "Register new session",
@@ -177,11 +177,11 @@
       "viewCollection": "View collection",
       "completedSessions": "Completed sessions",
       "nftsEarned": "NFTs earned",
-      "companionHours": "Companion hours",
+      "companionHours": "Compa hours",
       "availableFunds": "Available funds",
       "viewFunds": "View funds",
       "recentSessions": "Recent sessions",
-      "recentSessionsDesc": "Your latest recorded companion sessions",
+      "recentSessionsDesc": "Your latest recorded sessions",
       "noSessions": "No sessions yet",
       "noSessionsDesc": "Scan a Companya paper wallet QR to register your first session",
       "scanNow": "Scan QR now",
@@ -219,7 +219,7 @@
     },
     "schedule": {
       "title": "My Schedule",
-      "subtitle": "Manage your companion sessions",
+      "subtitle": "Manage your sessions",
       "newSession": "New Session",
       "todaySessions": "You have {{count}} session(s) scheduled today",
       "firstSessionAt": "First session at {{time}} with {{name}}",
@@ -238,18 +238,18 @@
       "statusCompleted": "Completed"
     },
     "nfts": {
-      "title": "My Companion NFTs",
+      "title": "My Compa NFTs",
       "subtitle": "Collection of digital certificates that prove your impact",
       "totalNfts": "Total NFTs",
       "filterAll": "All",
       "loadingNfts": "Loading NFTs from Arbitrum Sepolia...",
       "noNfts": "You haven't earned NFTs yet",
-      "noNftsDesc": "NFTs are awarded upon completing verified companion sessions",
+      "noNftsDesc": "NFTs are awarded upon completing verified sessions",
       "startEarning": "Start earning NFTs",
       "viewOnExplorer": "View on Block Explorer",
       "activity": "Activity",
       "user": "User",
-      "companion": "Companion",
+      "companion": "Compa",
       "time": "Time",
       "txHash": "Transaction Hash",
       "categories": {
@@ -261,7 +261,7 @@
     },
     "scan": {
       "title": "Register session",
-      "subtitle": "Scan the Companya paper wallet QR to register the companion session",
+      "subtitle": "Scan the Companya paper wallet QR to register the session",
       "backToDashboard": "Back to Dashboard",
       "scanning": "Scanning...",
       "scanQr": "Scan QR code",
@@ -270,7 +270,7 @@
       "startScan": "Start scan",
       "passVerified": "Paper wallet verified",
       "completeDetails": "Complete session details",
-      "silverName": "Senior's name",
+      "silverName": "Companyer's name",
       "silverNamePlaceholder": "Full name",
       "autoFromPass": "Auto-obtained from paper wallet",
       "activity": "Activity performed",
@@ -292,15 +292,15 @@
     },
     "registration": {
       "connectWallet": "Connect Your Wallet",
-      "connectWalletDesc": "To start registering as a companion, you must first connect your Web3 wallet. This will be your unique identity on the platform.",
+      "connectWalletDesc": "To start registering as a Compa, you must first connect your Web3 wallet. This will be your unique identity on the platform.",
       "whyWallet": "Why do I need a wallet?",
       "whyWalletDesc": "Your wallet is your Web3 identity. It'll let you receive NFTs from your sessions, manage your rewards, and securely access your dashboard without passwords.",
       "secureProcess": "Secure and encrypted process",
-      "oneWallet": "One wallet per companion",
+      "oneWallet": "One wallet per Compa",
       "fullControl": "Full control of your digital assets",
       "walletConnected": "Wallet connected",
       "continueRegistration": "Continue with registration",
-      "title": "Companion Registration",
+      "title": "Compa Registration",
       "kycDesc": "Complete the KYC form to start your verification process",
       "walletAddress": "Wallet Address",
       "disconnect": "Disconnect",
@@ -313,8 +313,8 @@
       "addressPlaceholder": "123 Main St",
       "phone": "Phone",
       "phonePlaceholder": "+1 555 123 4567",
-      "aboutYou": "Tell us about yourself / Why do you want to be a companion?",
-      "aboutYouPlaceholder": "Tell us your motivation to be a companion...",
+      "aboutYou": "Tell us about yourself / Why do you want to be a Compa?",
+      "aboutYouPlaceholder": "Tell us your motivation to be a Compa...",
       "interests": "Areas of interest",
       "interestsPlaceholder": "E.g.: medical support, conversation, walks...",
       "experience": "Experience",
@@ -330,7 +330,7 @@
       "pleaseWait": "Please wait while we verify your identity with Worldcoin",
       "verifyWithWorldcoin": "Verify with Worldcoin",
       "registrationComplete": "Registration complete!",
-      "welcomeMessage": "Welcome to Companya. Your registration has been approved and you can now start companioning.",
+      "welcomeMessage": "Welcome to Companya. Your registration has been approved and you can now start as a Compa.",
       "nextSteps": "Next steps:",
       "reviewProfile": "We'll review your profile (1-2 business days)",
       "receiveNotification": "You'll get a notification when approved",
