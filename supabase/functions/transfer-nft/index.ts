@@ -51,24 +51,36 @@ serve(async (req) => {
       );
     }
 
-    const privateKey = privateKeyFromEnv.trim();
+    // Normalizar clave privada desde entorno
+    // 1) Eliminar todos los espacios y saltos de línea
+    let normalizedKey = privateKeyFromEnv.replace(/\s+/g, "");
 
-    // Validate private key format: must be 0x + 64 hex chars
-    const hexPart = privateKey.slice(2);
-    const invalidCharMatch = hexPart.match(/[^0-9a-fA-F]/);
+    // 2) Asegurar prefijo 0x
+    if (!normalizedKey.startsWith("0x")) {
+      normalizedKey = "0x" + normalizedKey;
+    }
 
-    if (!/^0x[0-9a-fA-F]{64}$/.test(privateKey) || invalidCharMatch) {
-      console.error('ADMIN_WALLET_PRIVATE_KEY has invalid format. Length:', privateKey.length);
-      if (invalidCharMatch) {
-        console.error('First invalid character in ADMIN_WALLET_PRIVATE_KEY at position (0-based from hex start):', hexPart.indexOf(invalidCharMatch[0]));
-      }
+    // 3) Ajustar longitud del tramo hexadecimal (después de 0x)
+    let hexPart = normalizedKey.slice(2);
+
+    // Si viene con 63 caracteres (caso que comentas), anteponemos un 0
+    if (hexPart.length === 63) {
+      hexPart = "0" + hexPart;
+    }
+
+    // Reconstruimos la clave normalizada definitiva
+    const privateKey = "0x" + hexPart;
+
+    // 4) Validar formato final: debe ser 0x + 64 hex
+    if (!/^0x[0-9a-fA-F]{64}$/.test(privateKey)) {
+      console.error("ADMIN_WALLET_PRIVATE_KEY has invalid format after normalization. Length:", privateKey.length);
       return new Response(
         JSON.stringify({
-          error: 'Server configuration error: invalid admin wallet key format',
-          hint: 'Debe ser 0x seguido de 64 caracteres hexadecimales (0-9, a-f), sin espacios',
+          error: "Server configuration error: invalid admin wallet key format",
+          hint: "La clave privada debe ser 64 caracteres hexadecimales (0-9, a-f) con prefijo 0x; se han eliminado espacios y, si venía con 63 chars, se ha completado con un 0 al inicio.",
           length: privateKey.length,
         }),
-        { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
+        { status: 500, headers: { ...corsHeaders, "Content-Type": "application/json" } }
       );
     }
 
