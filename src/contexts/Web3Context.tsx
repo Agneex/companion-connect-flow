@@ -36,14 +36,42 @@ export const Web3Provider = ({ children }: Web3ProviderProps) => {
   const { toast } = useToast();
 
   useEffect(() => {
-    // Check if already connected
-    const savedAccount = localStorage.getItem("web3_account");
-    const companionStatus = localStorage.getItem("is_companion");
+    // Check if MetaMask is available and if there's a real connection
+    const checkConnection = async () => {
+      if (typeof window.ethereum !== "undefined") {
+        try {
+          const provider = new BrowserProvider(window.ethereum);
+          const accounts = await provider.listAccounts();
+          
+          if (accounts.length > 0) {
+            const walletAddress = accounts[0].address;
+            const companions = JSON.parse(localStorage.getItem("companions") || "[]");
+            const isRegistered = companions.some(
+              (c: any) => c.walletAddress?.toLowerCase() === walletAddress.toLowerCase()
+            );
+            
+            setAccount(walletAddress);
+            setIsCompanion(isRegistered);
+            localStorage.setItem("web3_account", walletAddress);
+            localStorage.setItem("is_companion", String(isRegistered));
+          } else {
+            // Clean up old mock data
+            localStorage.removeItem("web3_account");
+            localStorage.removeItem("is_companion");
+          }
+        } catch (error) {
+          // Clean up if there's an error
+          localStorage.removeItem("web3_account");
+          localStorage.removeItem("is_companion");
+        }
+      } else {
+        // Clean up if MetaMask is not available
+        localStorage.removeItem("web3_account");
+        localStorage.removeItem("is_companion");
+      }
+    };
     
-    if (savedAccount) {
-      setAccount(savedAccount);
-      setIsCompanion(companionStatus === "true");
-    }
+    checkConnection();
   }, []);
 
   const connectWallet = async () => {
