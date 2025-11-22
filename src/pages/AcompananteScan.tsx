@@ -24,6 +24,7 @@ const AcompananteScan = () => {
   const [scanning, setScanning] = useState(false);
   const [scanned, setScanned] = useState(false);
   const [transferring, setTransferring] = useState(false);
+  const [isInIframe, setIsInIframe] = useState(false);
   const [sessionData, setSessionData] = useState({
     tokenId: "",
     silverName: "",
@@ -34,6 +35,11 @@ const AcompananteScan = () => {
   });
   const scannerRef = useRef<Html5Qrcode | null>(null);
   const qrRegionRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    // Check if running in iframe
+    setIsInIframe(window.self !== window.top);
+  }, []);
 
   const handleLogout = () => {
     disconnectWallet();
@@ -54,6 +60,17 @@ const AcompananteScan = () => {
   }, []);
 
   const handleStartScan = async () => {
+    // If in iframe, open in new window instead
+    if (isInIframe) {
+      const currentUrl = window.location.href;
+      window.open(currentUrl, '_blank');
+      toast({
+        title: "Abriendo scanner",
+        description: "El scanner se abrirá en una nueva pestaña con acceso a la cámara",
+      });
+      return;
+    }
+
     setScanning(true);
     
     try {
@@ -99,9 +116,13 @@ const AcompananteScan = () => {
       );
     } catch (error) {
       console.error("Error starting scanner:", error);
+      const errorMsg = error instanceof Error ? error.message : "Unknown error";
+      
       toast({
-        title: "Error",
-        description: "No se pudo acceder a la cámara",
+        title: "Error al acceder a la cámara",
+        description: isInIframe 
+          ? "Abre esta página en una nueva pestaña para usar la cámara" 
+          : "Verifica los permisos de cámara en tu navegador",
         variant: "destructive",
       });
       setScanning(false);
@@ -232,6 +253,13 @@ const AcompananteScan = () => {
                         ? "Coloca el QR del ticket frente a la cámara" 
                         : "Escanea el código QR del ticket de acompañamiento"}
                     </p>
+                    {isInIframe && (
+                      <div className="bg-amber-500/10 border border-amber-500/20 rounded-lg p-3 mt-2">
+                        <p className="text-xs text-amber-600 dark:text-amber-400">
+                          ℹ️ Para usar la cámara, se abrirá en una nueva pestaña
+                        </p>
+                      </div>
+                    )}
                   </div>
 
                   {scanning ? (
