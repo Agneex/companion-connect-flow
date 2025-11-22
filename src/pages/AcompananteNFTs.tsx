@@ -25,7 +25,7 @@ import {
 } from "lucide-react";
 import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
-import { useWeb3 } from "@/contexts/Web3Context";
+import { useWeb3 } from "@/contexts/Web3Provider";
 import { cn } from "@/lib/utils";
 
 // Import NFT Art

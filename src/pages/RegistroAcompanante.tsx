@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,7 +14,8 @@ import Navigation from "@/components/Navigation";
 import Footer from "@/components/Footer";
 import { useToast } from "@/hooks/use-toast";
 import { supabase } from "@/integrations/supabase/client";
-import { useWeb3 } from "@/contexts/Web3Context";
+import { useWeb3 } from "@/contexts/Web3Provider";
+import { ConnectButton } from '@rainbow-me/rainbowkit';
 
 const formSchema = z.object({
   fullName: z.string().min(2, "El nombre debe tener al menos 2 caracteres"),
@@ -55,6 +56,17 @@ const ACTION_ID = "validation-human";
     },
   });
 
+  // Auto-advance to form step when wallet is connected
+  useEffect(() => {
+    if (isConnected && account && step === "wallet") {
+      setStep("form");
+      toast({
+        title: "¡Wallet conectada!",
+        description: "Ahora puedes continuar con tu registro",
+      });
+    }
+  }, [isConnected, account, step, toast]);
+
   const onSubmit = (data: FormData) => {
     if (!account) {
       toast({
@@ -66,18 +78,6 @@ const ACTION_ID = "validation-human";
     }
     setFormData(data);
     setStep("worldcoin");
-  };
-
-  const handleConnectWallet = async () => {
-    const success = await connectWallet();
-
-    if (success) {
-      toast({
-        title: "¡Wallet conectada!",
-        description: "Ahora puedes continuar con tu registro",
-      });
-      setStep("form");
-    }
   };
 
   const handleWorldcoinSuccess = async (result: ISuccessResult) => {
@@ -216,10 +216,14 @@ const ACTION_ID = "validation-human";
                     </Button>
                   </div>
                 ) : (
-                  <Button onClick={handleConnectWallet} className="w-full" size="lg">
-                    <Wallet className="mr-2 h-5 w-5" />
-                    Conectar Wallet
-                  </Button>
+                  <ConnectButton.Custom>
+                    {({ openConnectModal }) => (
+                      <Button onClick={openConnectModal} className="w-full" size="lg">
+                        <Wallet className="mr-2 h-5 w-5" />
+                        Conectar Wallet
+                      </Button>
+                    )}
+                  </ConnectButton.Custom>
                 )}
               </CardContent>
             </Card>

@@ -8,7 +8,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { QrCode, Camera, CheckCircle2, ArrowLeft } from "lucide-react";
 import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
-import { useWeb3 } from "@/contexts/Web3Context";
+import { useWeb3 } from "@/contexts/Web3Provider";
 import { useToast } from "@/hooks/use-toast";
 
 const AcompananteScan = () => {
