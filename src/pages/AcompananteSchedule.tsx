@@ -1,12 +1,11 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { format, isSameDay, addDays, isToday, startOfMonth, endOfMonth, eachDayOfInterval, isSameMonth } from "date-fns";
+import { format, addDays, isToday } from "date-fns";
 import { es } from "date-fns/locale";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Calendar as CalendarIcon, Clock, MapPin, User, Phone, Plus, List, CalendarDays, ArrowRight, CheckCircle2 } from "lucide-react";
+import { CalendarDays, Clock, MapPin, Phone, Plus, List, ArrowRight, CheckCircle2 } from "lucide-react";
 import DashboardNav from "@/components/DashboardNav";
 import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Provider";
@@ -29,9 +28,7 @@ interface ScheduledSession {
 const AcompananteSchedule = () => {
   const { isConnected, isCompanion, disconnectWallet } = useWeb3();
   const navigate = useNavigate();
-  const [selectedDate, setSelectedDate] = useState<Date>(new Date());
   const [scheduledSessions, setScheduledSessions] = useState<ScheduledSession[]>([]);
-  const [viewMode, setViewMode] = useState<"calendar" | "list">("calendar");
 
   const handleLogout = () => {
     disconnectWallet();
@@ -107,10 +104,6 @@ const AcompananteSchedule = () => {
     }
   }, [isConnected, isCompanion, navigate]);
 
-  const sessionsForSelectedDate = scheduledSessions.filter((session) =>
-    isSameDay(session.date, selectedDate)
-  );
-
   const upcomingSessions = scheduledSessions
     .filter((s) => s.date >= new Date() && s.status !== "completed")
     .sort((a, b) => a.date.getTime() - b.date.getTime());
@@ -130,14 +123,6 @@ const AcompananteSchedule = () => {
     }
   };
 
-  // Get calendar days for current month view
-  const monthStart = startOfMonth(selectedDate);
-  const monthEnd = endOfMonth(selectedDate);
-  const calendarDays = eachDayOfInterval({ start: monthStart, end: monthEnd });
-
-  const getSessionsForDay = (day: Date) => {
-    return scheduledSessions.filter((s) => isSameDay(s.date, day));
-  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -195,7 +180,7 @@ const AcompananteSchedule = () => {
                       <p className="text-3xl font-bold">{scheduledSessions.length}</p>
                     </div>
                     <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
-                      <CalendarIcon className="w-6 h-6 text-primary" />
+                      <CalendarDays className="w-6 h-6 text-primary" />
                     </div>
                   </div>
                 </CardContent>
@@ -235,131 +220,8 @@ const AcompananteSchedule = () => {
             </div>
           </div>
 
-          {/* View toggle */}
-          <Tabs value={viewMode} onValueChange={(v) => setViewMode(v as "calendar" | "list")} className="space-y-6">
-            <TabsList className="grid w-full max-w-md grid-cols-2">
-              <TabsTrigger value="calendar" className="flex items-center gap-2">
-                <CalendarDays className="w-4 h-4" />
-                Vista Calendario
-              </TabsTrigger>
-              <TabsTrigger value="list" className="flex items-center gap-2">
-                <List className="w-4 h-4" />
-                Vista Lista
-              </TabsTrigger>
-            </TabsList>
-
-            {/* Calendar View */}
-            <TabsContent value="calendar" className="space-y-6 animate-fade-in">
-              <div className="grid lg:grid-cols-3 gap-6">
-                {/* Custom Calendar */}
-                <Card className="lg:col-span-2">
-                  <CardHeader>
-                    <CardTitle>{format(selectedDate, "MMMM yyyy", { locale: es })}</CardTitle>
-                    <CardDescription>Haz clic en un día para ver las sesiones</CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="grid grid-cols-7 gap-2">
-                      {/* Day headers */}
-                      {["Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb"].map((day) => (
-                        <div key={day} className="text-center text-sm font-semibold text-muted-foreground py-2">
-                          {day}
-                        </div>
-                      ))}
-                      
-                      {/* Calendar days */}
-                      {calendarDays.map((day, idx) => {
-                        const sessionsCount = getSessionsForDay(day).length;
-                        const isSelected = isSameDay(day, selectedDate);
-                        const isCurrentDay = isToday(day);
-
-                        return (
-                          <button
-                            key={idx}
-                            onClick={() => setSelectedDate(day)}
-                            className={cn(
-                              "aspect-square p-2 rounded-lg text-sm font-medium transition-all relative",
-                              "hover:bg-muted hover:scale-105",
-                              isSelected && "bg-primary text-primary-foreground shadow-glow-primary",
-                              !isSelected && isCurrentDay && "border-2 border-primary",
-                              !isSameMonth(day, selectedDate) && "text-muted-foreground/50"
-                            )}
-                          >
-                            <span>{format(day, "d")}</span>
-                            {sessionsCount > 0 && (
-                              <div className={cn(
-                                "absolute bottom-1 left-1/2 -translate-x-1/2 flex gap-0.5",
-                              )}>
-                                {Array.from({ length: Math.min(sessionsCount, 3) }).map((_, i) => (
-                                  <div
-                                    key={i}
-                                    className={cn(
-                                      "w-1 h-1 rounded-full",
-                                      isSelected ? "bg-primary-foreground" : "bg-primary"
-                                    )}
-                                  />
-                                ))}
-                              </div>
-                            )}
-                          </button>
-                        );
-                      })}
-                    </div>
-                  </CardContent>
-                </Card>
-
-                {/* Selected day sessions */}
-                <Card>
-                  <CardHeader>
-                    <CardTitle className="text-lg">
-                      {isToday(selectedDate) ? "Hoy" : format(selectedDate, "d MMM", { locale: es })}
-                    </CardTitle>
-                    <CardDescription>
-                      {sessionsForSelectedDate.length} sesión(es)
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    {sessionsForSelectedDate.length === 0 ? (
-                      <div className="text-center py-8">
-                        <CalendarIcon className="w-12 h-12 text-muted-foreground mx-auto mb-3 opacity-50" />
-                        <p className="text-sm text-muted-foreground">Sin sesiones</p>
-                      </div>
-                    ) : (
-                      <div className="space-y-3">
-                        {sessionsForSelectedDate.map((session, idx) => (
-                          <div
-                            key={session.id}
-                            className="relative pl-6 pb-4 border-l-2 border-border last:pb-0 last:border-l-0 animate-fade-in"
-                            style={{ animationDelay: `${idx * 50}ms` }}
-                          >
-                            <div className="absolute -left-[9px] top-0 w-4 h-4 rounded-full bg-primary border-4 border-background" />
-                            
-                            <div className="space-y-2">
-                              <div className="flex items-center gap-2">
-                                <span className="text-sm font-semibold">{session.time}</span>
-                                {getStatusBadge(session.status)}
-                              </div>
-                              <p className="font-medium">{session.silverName}</p>
-                              <p className="text-sm text-muted-foreground">{session.activity}</p>
-                              
-                              {session.status === "confirmed" && isToday(session.date) && (
-                                <Button asChild size="sm" className="w-full mt-2">
-                                  <Link to="/acompanante/scan">
-                                    Iniciar sesión
-                                  </Link>
-                                </Button>
-                              )}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </CardContent>
-                </Card>
-              </div>
-            </TabsContent>
-
-            {/* List View */}
-            <TabsContent value="list" className="space-y-4 animate-fade-in">
+          {/* List View */}
+          <div className="space-y-4 animate-fade-in">
               <Card>
                 <CardHeader>
                   <CardTitle>Próximas Sesiones</CardTitle>
@@ -445,8 +307,7 @@ const AcompananteSchedule = () => {
                   )}
                 </CardContent>
               </Card>
-            </TabsContent>
-          </Tabs>
+          </div>
         </div>
       </main>
 
