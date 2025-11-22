@@ -86,12 +86,13 @@ export const Web3Provider = ({ children }: Web3ProviderProps) => {
         return;
       }
 
-      // Request account access
-      const provider = new BrowserProvider(window.ethereum);
-      const accounts = await provider.send("eth_requestAccounts", []);
+      // Request account access using the standard method
+      const accounts = await window.ethereum.request({ 
+        method: "eth_requestAccounts" 
+      });
       
-      if (accounts.length === 0) {
-        throw new Error("No accounts found");
+      if (!accounts || accounts.length === 0) {
+        throw new Error("No se encontraron cuentas");
       }
 
       const walletAddress = accounts[0];
@@ -138,9 +139,18 @@ export const Web3Provider = ({ children }: Web3ProviderProps) => {
       
     } catch (error: any) {
       console.error("Wallet connection error:", error);
+      
+      let errorMessage = "No se pudo conectar la wallet. Por favor intenta de nuevo.";
+      
+      if (error.code === 4001) {
+        errorMessage = "Conexión rechazada. Por favor acepta la solicitud en MetaMask.";
+      } else if (error.code === -32002) {
+        errorMessage = "Ya hay una solicitud de conexión pendiente. Por favor revisa MetaMask.";
+      }
+      
       toast({
         title: "Error al conectar",
-        description: error.message || "No se pudo conectar la wallet. Por favor intenta de nuevo.",
+        description: errorMessage,
         variant: "destructive",
       });
     }
