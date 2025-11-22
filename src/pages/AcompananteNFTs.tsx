@@ -155,41 +155,41 @@ const AcompananteNFTs = () => {
     <div className="min-h-screen bg-background">
       <DashboardNav onLogout={handleLogout} />
       
-      <main className="pt-[120px]">
+      <main className="pt-[120px] overflow-x-hidden">
         <div className="container mx-auto px-4 py-8 max-w-7xl">
           {/* Header */}
           <div className="mb-8">
-            <div className="flex items-center justify-between mb-6">
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 bg-gradient-secondary rounded-2xl flex items-center justify-center shadow-glow-primary">
-                  <Award className="w-7 h-7 text-primary-foreground" />
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 mb-6">
+              <div className="flex items-center gap-3 min-w-0 flex-1">
+                <div className="w-12 h-12 sm:w-14 sm:h-14 bg-gradient-secondary rounded-2xl flex items-center justify-center shadow-glow-primary flex-shrink-0">
+                  <Award className="w-6 h-6 sm:w-7 sm:h-7 text-primary-foreground" />
                 </div>
-                <div>
-                  <h1 className="text-3xl font-bold mb-1">{t("companion.nfts.title")}</h1>
-                  <p className="text-muted-foreground text-sm">
+                <div className="min-w-0">
+                  <h1 className="text-2xl sm:text-3xl font-bold mb-1">{t("companion.nfts.title")}</h1>
+                  <p className="text-muted-foreground text-xs sm:text-sm">
                     {t("companion.nfts.subtitle")}
                   </p>
                 </div>
               </div>
 
-              <div className="flex items-center gap-2">
-                <Button variant="outline" size="sm">
-                  <Download className="w-4 h-4 mr-2" />
-                  Exportar Todo
+              <div className="flex items-center gap-2 w-full sm:w-auto">
+                <Button variant="outline" size="sm" className="flex-1 sm:flex-initial">
+                  <Download className="w-4 h-4 sm:mr-2" />
+                  <span className="hidden sm:inline">Exportar Todo</span>
                 </Button>
               </div>
             </div>
 
             {/* Stats Summary */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-2 sm:gap-3">
               <Card className="hover-scale border-primary/20">
-                <CardContent className="p-4 flex items-center gap-3">
-                  <div className="w-10 h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
-                    <Sparkles className="w-5 h-5 text-primary" />
+                <CardContent className="p-3 sm:p-4 flex items-center gap-2 sm:gap-3 min-w-0">
+                  <div className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-primary/10 flex items-center justify-center flex-shrink-0">
+                    <Sparkles className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                   </div>
-                  <div>
-                    <p className="text-2xl font-bold">{stats.total}</p>
-                    <p className="text-xs text-muted-foreground">{t("companion.nfts.totalNfts")}</p>
+                  <div className="min-w-0">
+                    <p className="text-xl sm:text-2xl font-bold">{stats.total}</p>
+                    <p className="text-xs text-muted-foreground truncate">{t("companion.nfts.totalNfts")}</p>
                   </div>
                 </CardContent>
               </Card>
@@ -199,12 +199,12 @@ const AcompananteNFTs = () => {
                 const count = stats[key as keyof typeof stats];
                 return (
                   <Card key={key} className="hover-scale">
-                    <CardContent className="p-4 flex items-center gap-3">
-                      <div className={cn("w-10 h-10 rounded-lg flex items-center justify-center flex-shrink-0", cat.bgColor)}>
-                        <Icon className={cn("w-5 h-5", cat.textColor)} />
+                    <CardContent className="p-3 sm:p-4 flex items-center gap-2 sm:gap-3 min-w-0">
+                      <div className={cn("w-8 h-8 sm:w-10 sm:h-10 rounded-lg flex items-center justify-center flex-shrink-0", cat.bgColor)}>
+                        <Icon className={cn("w-4 h-4 sm:w-5 sm:h-5", cat.textColor)} />
                       </div>
-                      <div>
-                        <p className="text-2xl font-bold">{count}</p>
+                      <div className="min-w-0">
+                        <p className="text-xl sm:text-2xl font-bold">{count}</p>
                         <p className="text-xs text-muted-foreground truncate">{cat.name}</p>
                       </div>
                     </CardContent>
@@ -215,9 +215,9 @@ const AcompananteNFTs = () => {
           </div>
 
           {/* Filter Bar */}
-          <div className="flex items-center gap-3 mb-6 flex-wrap">
+          <div className="mb-6 space-y-3">
             <div className="flex items-center gap-2 text-sm text-muted-foreground">
-              <Filter className="w-4 h-4" />
+              <Filter className="w-4 h-4 flex-shrink-0" />
               <span className="font-medium">Filtrar por categoría:</span>
             </div>
             
@@ -226,6 +226,7 @@ const AcompananteNFTs = () => {
                 variant={filter === "all" ? "default" : "outline"}
                 size="sm"
                 onClick={() => setFilter("all")}
+                className="flex-shrink-0"
               >
                 {t("companion.nfts.filterAll")} ({stats.total})
               </Button>
@@ -238,10 +239,12 @@ const AcompananteNFTs = () => {
                     variant={filter === key ? "default" : "outline"}
                     size="sm"
                     onClick={() => setFilter(key as typeof filter)}
-                    className={filter === key ? cn(cat.bgColor, cat.textColor, "border-0") : ""}
+                    className={cn("flex-shrink-0", filter === key ? cn(cat.bgColor, cat.textColor, "border-0") : "")}
                   >
-                    <Icon className="w-4 h-4 mr-1.5" />
-                    {cat.name} ({count})
+                    <Icon className="w-4 h-4 mr-1.5 flex-shrink-0" />
+                    <span className="hidden sm:inline">{cat.name}</span>
+                    <span className="sm:hidden">{cat.name.split(' ')[0]}</span>
+                    <span className="ml-1">({count})</span>
                   </Button>
                 );
               })}
@@ -270,7 +273,7 @@ const AcompananteNFTs = () => {
               </CardContent>
             </Card>
           ) : (
-            <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-5">
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 sm:gap-5">
               {filteredNFTs.map((nft, idx) => (
                 <Card 
                   key={nft.id}
