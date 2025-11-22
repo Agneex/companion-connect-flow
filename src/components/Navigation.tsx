@@ -15,6 +15,7 @@ const Navigation = () => {
     { label: t("nav.howItWorks"), href: "#como-funciona" },
     { label: t("nav.companion"), href: "/acompanante" },
     { label: t("nav.security"), href: "#seguridad" },
+    { label: "Generar Tickets", href: "/generar-tickets" },
   ];
 
   return (
