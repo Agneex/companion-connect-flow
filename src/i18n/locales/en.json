@@ -1,18 +1,18 @@
 {
   "nav": {
     "howItWorks": "How it works",
-    "companion": "I'm a companion",
+    "companion": "I'm a Compa",
     "validate": "Validate Pass",
     "companies": "For companies & organizations",
     "security": "Security & Traceability",
     "faq": "FAQ",
-    "companionAccess": "Companion login",
+    "companionAccess": "Compa Access",
     "validateTicket": "Validate Pass"
   },
   "hero": {
     "title": "Real companionship for the ones who matter most",
     "subtitle": "Connect your loved ones with verified companions for day-to-day activities. Every visit gets recorded on blockchain for total transparency.",
-    "ctaCompanion": "Start as a companion",
+    "ctaCompanion": "Start as a Compa",
     "ctaBuy": "Get a Companya pass"
   },
   "howItWorks": {
