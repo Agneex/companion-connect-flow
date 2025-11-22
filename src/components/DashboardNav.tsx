@@ -5,6 +5,7 @@ import { cn } from "@/lib/utils";
 import { useWeb3 } from "@/contexts/Web3Provider";
 import { useState } from "react";
 import DashboardBreadcrumbs from "./DashboardBreadcrumbs";
+import companyaLogo from "@/assets/companya-logo.png";
 
 interface DashboardNavProps {
   onLogout: () => void;
@@ -46,9 +47,11 @@ const DashboardNav = ({ onLogout }: DashboardNavProps) => {
         <div className="container mx-auto px-4 h-16 flex items-center justify-between">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
-          <div className="w-10 h-10 bg-gradient-secondary rounded-xl flex items-center justify-center shadow-glow-primary">
-            <span className="text-xl font-bold text-primary-foreground">C</span>
-          </div>
+          <img 
+            src={companyaLogo} 
+            alt="Companya Logo" 
+            className="w-10 h-10 object-contain"
+          />
           <div>
             <span className="text-xl font-bold text-foreground">Companya</span>
             <span className="hidden sm:inline text-xs text-muted-foreground ml-2">Dashboard</span>
