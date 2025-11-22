@@ -11,6 +11,7 @@ import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Provider";
 import { cn } from "@/lib/utils";
 import { Link } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 interface ScheduledSession {
   id: string;
@@ -28,6 +29,7 @@ interface ScheduledSession {
 const AcompananteSchedule = () => {
   const { isConnected, isCompanion, disconnectWallet } = useWeb3();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const [scheduledSessions, setScheduledSessions] = useState<ScheduledSession[]>([]);
 
   const handleLogout = () => {
@@ -113,11 +115,11 @@ const AcompananteSchedule = () => {
   const getStatusBadge = (status: string) => {
     switch (status) {
       case "confirmed":
-        return <Badge variant="default" className="bg-green-500/10 text-green-600 border-green-500/20 hover:bg-green-500/20">Confirmada</Badge>;
+        return <Badge variant="default" className="bg-green-500/10 text-green-600 border-green-500/20 hover:bg-green-500/20">{t("companion.schedule.statusConfirmed")}</Badge>;
       case "pending":
-        return <Badge variant="default" className="bg-yellow-500/10 text-yellow-600 border-yellow-500/20 hover:bg-yellow-500/20">Pendiente</Badge>;
+        return <Badge variant="default" className="bg-yellow-500/10 text-yellow-600 border-yellow-500/20 hover:bg-yellow-500/20">{t("companion.schedule.statusPending")}</Badge>;
       case "completed":
-        return <Badge variant="default" className="bg-blue-500/10 text-blue-600 border-blue-500/20 hover:bg-blue-500/20">Completada</Badge>;
+        return <Badge variant="default" className="bg-blue-500/10 text-blue-600 border-blue-500/20 hover:bg-blue-500/20">{t("companion.schedule.statusCompleted")}</Badge>;
       default:
         return <Badge variant="outline">{status}</Badge>;
     }
@@ -134,13 +136,13 @@ const AcompananteSchedule = () => {
           <div className="mb-8 space-y-4">
             <div className="flex items-center justify-between">
               <div>
-                <h1 className="text-3xl font-bold mb-2">Mi Agenda</h1>
-                <p className="text-muted-foreground">Gestiona tus sesiones de acompañamiento</p>
+                <h1 className="text-3xl font-bold mb-2">{t("companion.schedule.title")}</h1>
+                <p className="text-muted-foreground">{t("companion.schedule.subtitle")}</p>
               </div>
               <Button asChild className="shadow-glow-primary">
                 <Link to="/acompanante/scan">
                   <Plus className="w-4 h-4 mr-2" />
-                  Nueva Sesión
+                  {t("companion.schedule.newSession")}
                 </Link>
               </Button>
             </div>
@@ -154,14 +156,14 @@ const AcompananteSchedule = () => {
                       <CalendarDays className="w-6 h-6 text-primary-foreground" />
                     </div>
                     <div className="flex-1">
-                      <h3 className="font-semibold text-lg">Hoy tienes {todaySessions.length} sesión(es) programada(s)</h3>
+                      <h3 className="font-semibold text-lg">{t("companion.schedule.todaySessions", { count: todaySessions.length })}</h3>
                       <p className="text-sm text-muted-foreground">
-                        Primera sesión a las {todaySessions[0].time} con {todaySessions[0].silverName}
+                        {t("companion.schedule.firstSessionAt", { time: todaySessions[0].time, name: todaySessions[0].silverName })}
                       </p>
                     </div>
                     <Button asChild variant="outline">
                       <Link to="/acompanante/scan">
-                        Ver detalles
+                        {t("companion.schedule.viewDetails")}
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Link>
                     </Button>
@@ -176,7 +178,7 @@ const AcompananteSchedule = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">Total Sesiones</p>
+                      <p className="text-sm text-muted-foreground mb-1">{t("companion.schedule.totalSessions")}</p>
                       <p className="text-3xl font-bold">{scheduledSessions.length}</p>
                     </div>
                     <div className="w-12 h-12 bg-primary/10 rounded-xl flex items-center justify-center">
@@ -190,7 +192,7 @@ const AcompananteSchedule = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">Confirmadas</p>
+                      <p className="text-sm text-muted-foreground mb-1">{t("companion.schedule.confirmed")}</p>
                       <p className="text-3xl font-bold text-green-600">
                         {scheduledSessions.filter((s) => s.status === "confirmed").length}
                       </p>
@@ -206,7 +208,7 @@ const AcompananteSchedule = () => {
                 <CardContent className="p-6">
                   <div className="flex items-center justify-between">
                     <div>
-                      <p className="text-sm text-muted-foreground mb-1">Pendientes</p>
+                      <p className="text-sm text-muted-foreground mb-1">{t("companion.schedule.pending")}</p>
                       <p className="text-3xl font-bold text-yellow-600">
                         {scheduledSessions.filter((s) => s.status === "pending").length}
                       </p>
@@ -224,14 +226,14 @@ const AcompananteSchedule = () => {
           <div className="space-y-4 animate-fade-in">
               <Card>
                 <CardHeader>
-                  <CardTitle>Próximas Sesiones</CardTitle>
-                  <CardDescription>Todas tus sesiones ordenadas cronológicamente</CardDescription>
+                  <CardTitle>{t("companion.schedule.upcomingSessions")}</CardTitle>
+                  <CardDescription>{t("companion.schedule.allSessions")}</CardDescription>
                 </CardHeader>
                 <CardContent>
                   {upcomingSessions.length === 0 ? (
                     <div className="text-center py-12">
                       <List className="w-16 h-16 text-muted-foreground mx-auto mb-4 opacity-50" />
-                      <p className="text-muted-foreground">No tienes sesiones programadas</p>
+                      <p className="text-muted-foreground">{t("companion.schedule.noScheduled")}</p>
                     </div>
                   ) : (
                     <div className="space-y-4">
@@ -273,7 +275,7 @@ const AcompananteSchedule = () => {
                               <div className="grid sm:grid-cols-2 gap-2 text-sm">
                                 <div className="flex items-center gap-2 text-muted-foreground">
                                   <Clock className="w-4 h-4 flex-shrink-0" />
-                                  <span>{session.duration}h de duración</span>
+                                  <span>{t("companion.schedule.duration", { hours: session.duration })}</span>
                                 </div>
                                 <div className="flex items-center gap-2 text-muted-foreground">
                                   <Phone className="w-4 h-4 flex-shrink-0" />
@@ -287,7 +289,7 @@ const AcompananteSchedule = () => {
 
                               {session.notes && (
                                 <div className="bg-muted/50 p-3 rounded-md mt-2">
-                                  <p className="text-xs font-semibold mb-1">Notas:</p>
+                                  <p className="text-xs font-semibold mb-1">{t("companion.schedule.notes")}</p>
                                   <p className="text-sm">{session.notes}</p>
                                 </div>
                               )}
@@ -295,7 +297,7 @@ const AcompananteSchedule = () => {
                               {session.status === "confirmed" && isToday(session.date) && (
                                 <Button asChild className="w-full sm:w-auto mt-2">
                                   <Link to="/acompanante/scan">
-                                    Iniciar sesión y escanear QR
+                                    {t("companion.schedule.startSession")}
                                   </Link>
                                 </Button>
                               )}

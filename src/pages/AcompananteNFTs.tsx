@@ -29,6 +29,7 @@ import Footer from "@/components/Footer";
 import { useWeb3 } from "@/contexts/Web3Provider";
 import { cn } from "@/lib/utils";
 import { useCompanionNFTs } from "@/hooks/useCompanionNFTs";
+import { useTranslation } from "react-i18next";
 
 // Import NFT Art
 import nftSocial from "@/assets/nft-social.png";
@@ -98,6 +99,7 @@ const impactCategories = {
 const AcompananteNFTs = () => {
   const { isConnected, isCompanion, disconnectWallet } = useWeb3();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const { nfts: contractNFTs, loading } = useCompanionNFTs();
   const [selectedNFT, setSelectedNFT] = useState<any | null>(null);
   const [filter, setFilter] = useState<"all" | "social" | "health" | "mobility" | "emotional">("all");
