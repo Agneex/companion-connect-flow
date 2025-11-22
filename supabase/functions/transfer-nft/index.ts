@@ -54,12 +54,18 @@ serve(async (req) => {
     const privateKey = privateKeyFromEnv.trim();
 
     // Validate private key format: must be 0x + 64 hex chars
-    if (!/^0x[0-9a-fA-F]{64}$/.test(privateKey)) {
+    const hexPart = privateKey.slice(2);
+    const invalidCharMatch = hexPart.match(/[^0-9a-fA-F]/);
+
+    if (!/^0x[0-9a-fA-F]{64}$/.test(privateKey) || invalidCharMatch) {
       console.error('ADMIN_WALLET_PRIVATE_KEY has invalid format. Length:', privateKey.length);
+      if (invalidCharMatch) {
+        console.error('First invalid character in ADMIN_WALLET_PRIVATE_KEY at position (0-based from hex start):', hexPart.indexOf(invalidCharMatch[0]));
+      }
       return new Response(
         JSON.stringify({
           error: 'Server configuration error: invalid admin wallet key format',
-          hint: 'Debe ser 0x seguido de 64 caracteres hexadecimales',
+          hint: 'Debe ser 0x seguido de 64 caracteres hexadecimales (0-9, a-f), sin espacios',
           length: privateKey.length,
         }),
         { status: 500, headers: { ...corsHeaders, 'Content-Type': 'application/json' } }
