@@ -348,6 +348,56 @@
       "worldcoinError": "Error de Worldcoin",
       "saveError": "Error al guardar tus datos",
       "saveErrorDesc": "Tu verificación Worldcoin fue exitosa, pero hubo un problema guardando tu registro: {{error}}"
+    },
+    "page": {
+      "hero": {
+        "title": "Convierte tu vocación de acompañar en una",
+        "titleHighlight": "red de impacto real",
+        "subtitle": "Con Companya, cada sesión que brindas se registra, se reconoce y se recompensa. Una plataforma web3 que respalda tu trabajo con personas mayores.",
+        "ctaStart": "Comenzar como Compa",
+        "ctaHow": "Ver cómo funciona"
+      },
+      "timeline": {
+        "title": "Tu día a día con Companya",
+        "subtitle": "4 pasos simples para comenzar a generar impacto",
+        "step1Title": "Te registras y verificas tu perfil",
+        "step1Desc": "Subes tus datos básicos y documentos. Nuestro equipo y la tecnología de verificación se encargan del resto.",
+        "step2Title": "Recibes asignaciones o atiendes a quienes traen pases",
+        "step2Desc": "Puedes ser parte de programas específicos o atender a quienes presenten su pase Companya.",
+        "step3Title": "Escaneas el QR en cada sesión",
+        "step3Desc": "Desde tu app, escaneas el QR del pase del Companyer. Eso marca el ticket como usado y registra la sesión.",
+        "step4Title": "Recibes NFTs/recompensas por tu acompañamiento",
+        "step4Desc": "Por cada sesión, recibes un NFT asociado. Es la prueba digital de tu trabajo, con valor económico y reputación verificable."
+      },
+      "benefits": {
+        "title": "Por qué a ti te conviene",
+        "benefit1Title": "Ingresos claros y programables",
+        "benefit1Desc": "Sabes exactamente cuántas sesiones has hecho, cuánto valen y cómo se pagan.",
+        "benefit2Title": "Reputación que te acompaña",
+        "benefit2Desc": "Tus NFTs demuestran tu experiencia y profesionalismo en la red, más allá de Companya.",
+        "benefit3Title": "Cuidado mutuo",
+        "benefit3Desc": "Trabajar con personas mayores puede ser emocionalmente intenso. Companya te ofrece recursos, comunidad y soporte."
+      },
+      "portal": {
+        "title": "Cómo se ve tu portal",
+        "subtitle": "Una interfaz simple y clara para gestionar tu trabajo",
+        "dashboardTitle": "Dashboard Compa",
+        "scanButton": "Escanear QR ahora",
+        "sessionsMonth": "Sesiones este mes",
+        "rewards": "Recompensas",
+        "nfts": "NFTs",
+        "nextVisit": "Próxima visita",
+        "today": "Hoy",
+        "tomorrow": "Mañana",
+        "upcomingSessions": "Próximas sesiones",
+        "conversation": "Conversación",
+        "hour": "hora"
+      },
+      "cta": {
+        "title": "Comienza a generar impacto hoy",
+        "subtitle": "Únete a nuestra red de Compas verificados y empieza a construir tu reputación",
+        "button": "Registrarme como Compa"
+      }
     }
   }
 }
