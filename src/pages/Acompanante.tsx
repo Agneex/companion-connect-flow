@@ -4,46 +4,49 @@ import Footer from "@/components/Footer";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Shield, Calendar, Smartphone, Award, TrendingUp, Users, CheckCircle } from "lucide-react";
+import { useTranslation } from "react-i18next";
 
 const Acompanante = () => {
+  const { t } = useTranslation();
+  
   const steps = [
     {
       icon: Shield,
-      title: "Te registras y verificas tu perfil",
-      description: "Subes tus datos básicos y documentos. Nuestro equipo y la tecnología de verificación se encargan del resto."
+      title: t("companion.page.timeline.step1Title"),
+      description: t("companion.page.timeline.step1Desc")
     },
     {
       icon: Calendar,
-      title: "Recibes asignaciones o atiendes a quienes traen tiqueteras",
-      description: "Puedes ser parte de programas específicos o atender a quienes presenten su tarjeta Companya."
+      title: t("companion.page.timeline.step2Title"),
+      description: t("companion.page.timeline.step2Desc")
     },
     {
       icon: Smartphone,
-      title: "Escaneas el QR en cada sesión",
-      description: "Desde tu app, escaneas el QR de la tarjeta del adulto mayor. Eso marca el ticket como usado y registra la sesión."
+      title: t("companion.page.timeline.step3Title"),
+      description: t("companion.page.timeline.step3Desc")
     },
     {
       icon: Award,
-      title: "Recibes NFTs/recompensas por tu acompañamiento",
-      description: "Por cada sesión, recibes un NFT asociado. Es la prueba digital de tu trabajo, con valor económico y reputación verificable."
+      title: t("companion.page.timeline.step4Title"),
+      description: t("companion.page.timeline.step4Desc")
     }
   ];
 
   const benefits = [
     {
       icon: TrendingUp,
-      title: "Ingresos claros y programables",
-      description: "Sabes exactamente cuántas sesiones has hecho, cuánto valen y cómo se pagan."
+      title: t("companion.page.benefits.benefit1Title"),
+      description: t("companion.page.benefits.benefit1Desc")
     },
     {
       icon: Award,
-      title: "Reputación que te acompaña",
-      description: "Tus NFTs demuestran tu experiencia y profesionalismo en la red, más allá de Companya."
+      title: t("companion.page.benefits.benefit2Title"),
+      description: t("companion.page.benefits.benefit2Desc")
     },
     {
       icon: Users,
-      title: "Cuidado mutuo",
-      description: "Trabajar con personas mayores puede ser emocionalmente intenso. Companya te ofrece recursos, comunidad y soporte."
+      title: t("companion.page.benefits.benefit3Title"),
+      description: t("companion.page.benefits.benefit3Desc")
     }
   ];
 
@@ -59,26 +62,25 @@ const Acompanante = () => {
         <div className="container mx-auto px-4 py-20 relative z-10">
           <div className="max-w-4xl mx-auto text-center space-y-8 animate-fade-in">
             <h1 className="text-5xl lg:text-6xl xl:text-7xl font-bold text-foreground leading-tight">
-              Convierte tu vocación de acompañar en una{" "}
+              {t("companion.page.hero.title")}{" "}
               <span className="text-transparent bg-clip-text bg-gradient-secondary glow-text">
-                red de impacto real
+                {t("companion.page.hero.titleHighlight")}
               </span>
             </h1>
             
             <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl mx-auto">
-              Con Companya, cada sesión que brindas se registra, se reconoce y se recompensa. 
-              Una plataforma web3 que respalda tu trabajo con personas mayores.
+              {t("companion.page.hero.subtitle")}
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center animate-slide-up" style={{ animationDelay: "0.2s" }}>
               <Button asChild size="lg" className="shadow-glow-primary hover-lift relative overflow-hidden group">
                 <Link to="/acompanante/registro">
-                  <span className="relative z-10">Comenzar como acompañante</span>
+                  <span className="relative z-10">{t("companion.page.hero.ctaStart")}</span>
                   <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </Link>
               </Button>
               <Button size="lg" variant="outline" className="hover-lift glass-effect">
-                Ver cómo funciona
+                {t("companion.page.hero.ctaHow")}
               </Button>
             </div>
           </div>
@@ -90,10 +92,10 @@ const Acompanante = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">
-              Tu día a día con Companya
+              {t("companion.page.timeline.title")}
             </h2>
             <p className="text-xl text-muted-foreground">
-              4 pasos simples para comenzar a generar impacto
+              {t("companion.page.timeline.subtitle")}
             </p>
           </div>
 
@@ -134,7 +136,7 @@ const Acompanante = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">
-              Por qué a ti te conviene
+              {t("companion.page.benefits.title")}
             </h2>
           </div>
 
@@ -167,10 +169,10 @@ const Acompanante = () => {
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold text-foreground mb-4">
-              Cómo se ve tu portal
+              {t("companion.page.portal.title")}
             </h2>
             <p className="text-xl text-muted-foreground">
-              Una interfaz simple y clara para gestionar tu trabajo
+              {t("companion.page.portal.subtitle")}
             </p>
           </div>
 
@@ -179,9 +181,9 @@ const Acompanante = () => {
               <CardContent className="p-8 space-y-6">
                 {/* Header */}
                 <div className="flex items-center justify-between pb-6 border-b border-border">
-                  <h3 className="text-2xl font-bold text-foreground">Dashboard Acompañante</h3>
+                  <h3 className="text-2xl font-bold text-foreground">{t("companion.page.portal.dashboardTitle")}</h3>
                   <Button className="shadow-glow-primary hover-lift relative overflow-hidden group">
-                    <span className="relative z-10">Escanear QR ahora</span>
+                    <span className="relative z-10">{t("companion.page.portal.scanButton")}</span>
                     <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </Button>
                 </div>
@@ -189,22 +191,22 @@ const Acompanante = () => {
                 {/* Stats */}
                 <div className="grid grid-cols-3 gap-4">
                   <div className="glass-effect rounded-lg p-4 hover-lift group cursor-pointer">
-                    <div className="text-sm text-muted-foreground mb-1">Sesiones este mes</div>
+                    <div className="text-sm text-muted-foreground mb-1">{t("companion.page.portal.sessionsMonth")}</div>
                     <div className="text-3xl font-bold text-foreground group-hover:text-primary transition-colors">12</div>
                   </div>
                   <div className="glass-effect rounded-lg p-4 hover-lift group cursor-pointer">
-                    <div className="text-sm text-muted-foreground mb-1">Recompensas</div>
-                    <div className="text-3xl font-bold text-primary group-hover:scale-110 transition-transform">8 NFTs</div>
+                    <div className="text-sm text-muted-foreground mb-1">{t("companion.page.portal.rewards")}</div>
+                    <div className="text-3xl font-bold text-primary group-hover:scale-110 transition-transform">8 {t("companion.page.portal.nfts")}</div>
                   </div>
                   <div className="glass-effect rounded-lg p-4 hover-lift group cursor-pointer">
-                    <div className="text-sm text-muted-foreground mb-1">Próxima visita</div>
-                    <div className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">Hoy 16:00</div>
+                    <div className="text-sm text-muted-foreground mb-1">{t("companion.page.portal.nextVisit")}</div>
+                    <div className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">{t("companion.page.portal.today")} 16:00</div>
                   </div>
                 </div>
 
                 {/* Upcoming sessions */}
                 <div className="space-y-3">
-                  <h4 className="font-semibold text-foreground">Próximas sesiones</h4>
+                  <h4 className="font-semibold text-foreground">{t("companion.page.portal.upcomingSessions")}</h4>
                   {[1, 2].map((_, i) => (
                     <div key={i} className="glass-effect rounded-lg p-4 flex items-center justify-between hover-lift group cursor-pointer">
                       <div className="flex items-center space-x-3">
@@ -213,11 +215,11 @@ const Acompanante = () => {
                         </div>
                         <div>
                           <div className="font-medium text-foreground">María G.</div>
-                          <div className="text-sm text-muted-foreground">Conversación · 1 hora</div>
+                          <div className="text-sm text-muted-foreground">{t("companion.page.portal.conversation")} · 1 {t("companion.page.portal.hour")}</div>
                         </div>
                       </div>
                       <div className="text-sm text-muted-foreground">
-                        {i === 0 ? "Hoy 16:00" : "Mañana 10:00"}
+                        {i === 0 ? `${t("companion.page.portal.today")} 16:00` : `${t("companion.page.portal.tomorrow")} 10:00`}
                       </div>
                     </div>
                   ))}
@@ -237,13 +239,13 @@ const Acompanante = () => {
         <div className="container mx-auto px-4 relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-8 animate-fade-in">
             <h2 className="text-4xl font-bold text-foreground">
-              Comienza a generar impacto hoy
+              {t("companion.page.cta.title")}
             </h2>
             <p className="text-xl text-muted-foreground">
-              Únete a nuestra red de acompañantes verificados y empieza a construir tu reputación
+              {t("companion.page.cta.subtitle")}
             </p>
             <Button size="lg" className="shadow-glow-primary hover-lift relative overflow-hidden group">
-              <span className="relative z-10">Registrarme como acompañante</span>
+              <span className="relative z-10">{t("companion.page.cta.button")}</span>
               <div className="absolute inset-0 bg-gradient-secondary opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </Button>
           </div>
